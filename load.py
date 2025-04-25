@@ -1,7 +1,7 @@
 ############################################################################################################
 # Nicholas Winkelmann
 # Desc: Year Class Code
-# Last Updated: 5 Apr 2025
+# Last Updated: 25 Apr 2025
 ############################################################################################################
 # ==========================================================================================================
 #           Imports
@@ -61,8 +61,6 @@ class Serializer():
             text = ""
             while len(text) < size:
                 text += f.read()
-                position = f.tell()
-                #print(f"Current position in the file{position}")
             return text
 
         except Exception as e:
