@@ -27,6 +27,13 @@ class MonthSelectScreen(QMainWindow):
 
     def gotobudget(self, year):
         print(year)
+        budgetscreen =
+
+class BudgetScreen(QMainWindow):
+    def __init__(self):
+        super(BudgetScreen, self).__init__()
+        loadUi("rsrc/UI/budget.ui", self)
+        
 
 # Main
 app = QApplication(sys.argv)
