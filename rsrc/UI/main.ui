@@ -55,9 +55,9 @@
    <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>30</x>
       <y>300</y>
-      <width>271</width>
+      <width>221</width>
       <height>201</height>
      </rect>
     </property>
@@ -73,7 +73,7 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>252</width>
+       <width>202</width>
        <height>400</height>
       </rect>
      </property>
@@ -83,17 +83,21 @@
        <height>400</height>
       </size>
      </property>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="MMXXV">
       <property name="geometry">
        <rect>
-        <x>90</x>
+        <x>20</x>
         <y>20</y>
-        <width>75</width>
-        <height>24</height>
+        <width>161</width>
+        <height>41</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 0, 0);
+font: 14pt &quot;Arial&quot;;</string>
+      </property>
       <property name="text">
-       <string>PushButton</string>
+       <string>2025</string>
       </property>
      </widget>
     </widget>
