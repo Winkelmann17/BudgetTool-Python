@@ -14,6 +14,8 @@ from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, 
 from objects import *
 from load import *
 from constants import * 
+from helper import *
+
 
 DEBUG = True
 # ==========================================================================================================
@@ -38,8 +40,12 @@ class MainWindow(QMainWindow):
         """Function that loads the `newyear.ui` file and takes
         input from the user to create the new year object."""
         newyear = PopUp(CREATE_YEAR)
-        newyear.exec()
-        
+        valid = False
+        while not valid:
+            newyear.exec()
+            if newyear.response_code == CANCEL:
+                break
+            valid = IsNum(newyear.response_text)
         
 
 
@@ -60,16 +66,30 @@ class PopUp(QDialog):
     def __init__(self, ui):
         super(PopUp, self).__init__()
         self.ui = ui
+        self.response_code = 0
+        self.response_text = ""
         loadUi(self.ui, self)
 
         # Ok button custom binding
         self.ok = self.buttonBox.button(QtWidgets.QDialogButtonBox.StandardButton.Ok)
         self.ok.clicked.connect(self.handle_ok)
+        self.cancel = self.buttonBox.button(QtWidgets.QDialogButtonBox.StandardButton.Cancel)
+        self.cancel.clicked.connect(self.handle_cancel)
 
     def handle_ok(self):
-        self.response = self.lineEdit.text()
+        """Function that handles ok button press. Pulls text and sets 
+        response code."""
+        self.response_text = self.lineEdit.text()
+        self.response_code = OK
         if DEBUG:
-            print(self.response)
+            print(self.response_text)
+            print(self.response_code)
+
+    def handle_cancel(self):
+        """Function that handles cancel button press. Sets response code."""
+        self.response_code = CANCEL
+        if DEBUG:
+            print(self.response_code)
 # ----------------------------------------------------------------------------------------------------------
 
 class MonthSelectScreen(QMainWindow):
@@ -139,6 +159,7 @@ def gohome():
     """Function that implements the home feature."""
     print("Home!")
     widget.setCurrentIndex(widget.currentIndex() - 2)
+
 
 # ==========================================================================================================
 #           Main
