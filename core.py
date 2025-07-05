@@ -10,7 +10,7 @@ import sys
 from time import sleep
 from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget
+from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, QDialog
 from objects import *
 from load import *
 
@@ -26,15 +26,15 @@ class MainWindow(QMainWindow):
         loadUi("rsrc/UI/main.ui", self)
         
         # NewYear Button
-        self.NewYear.clicked.connect()
+        self.NewYear.clicked.connect(self.gotocreatenewyear)
 
         # Year Buttons
         self.MMXXV.clicked.connect(lambda: self.gotoyear(2025))
 
-    def createnewyear(self):
+    def gotocreatenewyear(self):
         """Function that loads the `newyear.ui` file and takes
         input from the user to create the new year object."""
-        
+        newyear = PopUp("")
 
 
     def gotoyear(self, year):
@@ -47,14 +47,24 @@ class MainWindow(QMainWindow):
 
 
 # ----------------------------------------------------------------------------------------------------------
+class PopUp(QDialog):
+    """Class that implements the various PopUp objects. Loads in a specified
+    ui file in order to be as generic as possible. Takes in the proper UI file
+    as a parameter."""
+    def __init__(self, ui):
+        super(PopUp, self).__init__()
+        self.ui = ui
+        loadUi(ui)
+
+# ----------------------------------------------------------------------------------------------------------
 
 class MonthSelectScreen(QMainWindow):
     """Class that implements the Month Selection Screen. Loads in
     the 'months.ui' file. Allows user to select what month of budget
     data they want to access."""
     def __init__(self, year):
-        self.year = year
         super(MonthSelectScreen, self).__init__()
+        self.year = year
         loadUi("rsrc/UI/months.ui", self)
 
         # Connect Action menu items to respective functions
