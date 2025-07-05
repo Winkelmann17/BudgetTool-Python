@@ -11,6 +11,8 @@ from time import sleep
 from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget
+from objects import *
+from load import *
 
 # ==========================================================================================================
 #           Classes
@@ -31,6 +33,9 @@ class MainWindow(QMainWindow):
         monthscreen = MonthSelectScreen(year)
         widget.addWidget(monthscreen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
+
+
+# ----------------------------------------------------------------------------------------------------------
 
 class MonthSelectScreen(QMainWindow):
     """Class that implements the Month Selection Screen. Loads in
@@ -67,6 +72,9 @@ class MonthSelectScreen(QMainWindow):
         widget.addWidget(budgetscreen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
+
+# ----------------------------------------------------------------------------------------------------------
+
 class BudgetScreen(QMainWindow):
     """Class that implements the Budget Screen. Loads in the 'budget.ui'
     file. This is the most important screen that allows the user to 
@@ -84,6 +92,9 @@ class BudgetScreen(QMainWindow):
         """Function that implements the save and update feature."""
         print("SAVE!")
 
+# ==========================================================================================================
+#         Functions
+# ==========================================================================================================
 def goback():
     """Function that implements the back feature."""
     print("Back!")
