@@ -40,7 +40,7 @@ class Month():
         self.name = name
         self.categories = self.new_category_dict()
         self.totals = self.new_category_dict() # Planned is index 0, actual is 1
-        self.notes = self.new_notes_dict()
+        #self.notes = self.new_notes_dict()
         self.income_total = 0
         self.expense_total = 0
 
@@ -83,8 +83,8 @@ class Month():
 class Year():
     """Implements the Year object that holds the array of months."""
     def __init__(self, year="0000"):
-        self.months = self.populate_months()
         self.year = year
+        self.months = self.populate_months()
 
     def populate_months(self):
         """Function that populates months for the year."""
@@ -94,7 +94,3 @@ class Year():
         return temp
 
 # -------------------------------------------------------------------
-from load import *
-serial = Serializer()
-apples = Year("2025")
-serial.serialize(apples)

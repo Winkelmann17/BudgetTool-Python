@@ -19,10 +19,10 @@ class Serializer():
     process as well."""
 
     year_keys = "data/yeardictkeys.dat"
-    copy = "\\data\\data_copy.dat"
+    copy = "data/data_copy.dat"
     backup = "\\data\\backup\\data_storage"
 
-    keys = dict()
+    keys = {}
 
 
     def serialize(self, obj):

@@ -45,7 +45,7 @@ class MainWindow(QMainWindow):
             if newyear.response_code == CANCEL:
                 break
             valid = IsNum(newyear.response_text)
-
+        data[newyear.response] = Year(newyear.response_text)
         
 
     def gotoyear(self, year):
@@ -182,3 +182,5 @@ try:
     sys.exit(app.exec())
 except:
     print("Exiting")
+
+data.close_out()
