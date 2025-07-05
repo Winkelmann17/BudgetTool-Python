@@ -255,14 +255,32 @@ font: 14pt &quot;Arial&quot;;</string>
      <height>22</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuHome">
+   <widget class="QMenu" name="menuActions">
     <property name="title">
-     <string>Home</string>
+     <string>Actions</string>
     </property>
+    <addaction name="actionHome"/>
+    <addaction name="actionBack"/>
    </widget>
-   <addaction name="menuHome"/>
+   <addaction name="menuActions"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionHome">
+   <property name="text">
+    <string>Home</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="actionBack">
+   <property name="text">
+    <string>Back to Home</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

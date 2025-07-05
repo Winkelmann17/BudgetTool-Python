@@ -264,7 +264,7 @@ border-color: rgb(85, 255, 255);</string>
      <string>Actions</string>
     </property>
     <addaction name="actionHome"/>
-    <addaction name="actionMonths"/>
+    <addaction name="actionBack"/>
     <addaction name="actionSave"/>
    </widget>
    <addaction name="menuHome"/>
@@ -274,15 +274,24 @@ border-color: rgb(85, 255, 255);</string>
    <property name="text">
     <string>Go to Home</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
   </action>
-  <action name="actionMonths">
+  <action name="actionBack">
    <property name="text">
     <string>Back to Months</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
    </property>
   </action>
   <action name="actionSave">
    <property name="text">
     <string>Save and Update Budget</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>

@@ -4,6 +4,7 @@ from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget
 
+# Contants
 
 class MainWindow(QMainWindow):
     """Function that implements the Main Menu screen. Loads in the
@@ -13,7 +14,6 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__()
         loadUi("rsrc/UI/main.ui", self)
         self.MMXXV.clicked.connect(lambda: self.gotoyear(2025))
-        # TODO: Add about 5 months to choose from. 
 
     def gotoyear(self, year):
         """Function that loads the month select screen for 
@@ -31,6 +31,10 @@ class MonthSelectScreen(QMainWindow):
         self.year = year
         super(MonthSelectScreen, self).__init__()
         loadUi("rsrc/UI/months.ui", self)
+
+        # Connect Action menu items to respective functions
+        self.actionBack.triggered.connect(goback)
+        self.actionHome.triggered.connect(goback)
 
         # Connect all months to load respective budget UI
         self.jan.clicked.connect(lambda: self.gotobudget(self.year, "jan"))
@@ -64,20 +68,22 @@ class BudgetScreen(QMainWindow):
 
         # Connect Action menu items to respective functions
         self.actionSave.triggered.connect(self.gosave)
-        self.actionMonths.triggered.connect(self.goback)
-        self.actionHome.triggered.connect(self.gohome)
+        self.actionBack.triggered.connect(goback)
+        self.actionHome.triggered.connect(lambda: gohome())
 
     def gosave(self):
         """Function that implements the save and update feature."""
         print("SAVE!")
 
-    def goback(self):
-        """Function that implements the back feature."""
-        print("Back!")
+def goback():
+    """Function that implements the back feature."""
+    print("Back!")
+    widget.setCurrentIndex(widget.currentIndex() - 1)
 
-    def gohome(self):
-        """Function that implements the home feature."""
-        print("Home!")
+def gohome():
+    """Function that implements the home feature."""
+    print("Home!")
+    widget.setCurrentIndex(widget.currentIndex() - 2)
 
 # Main
 app = QApplication(sys.argv)

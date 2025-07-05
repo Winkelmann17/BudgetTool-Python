@@ -130,7 +130,7 @@ font: 14pt &quot;Arial&quot;;</string>
    </property>
    <widget class="QMenu" name="menuHome">
     <property name="title">
-     <string>Home</string>
+     <string>Actions</string>
     </property>
    </widget>
    <addaction name="menuHome"/>
