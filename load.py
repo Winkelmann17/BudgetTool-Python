@@ -18,9 +18,11 @@ class Serializer():
     year objects which is the way all the information is stored. Handles the filewriting and backup
     process as well."""
 
-    file = "\\data\\data_storage.dat"
+    year_keys = "data/yeardictkeys.dat"
     copy = "\\data\\data_copy.dat"
     backup = "\\data\\backup\\data_storage"
+
+    keys = dict()
 
 
     def serialize(self, obj):
@@ -36,11 +38,11 @@ class Serializer():
         return bytes_written
 
 
-    def deserialize(self):
+    def deserialize(self, file):
         """Loads the pickled object and calls the print_list LL function 
         to show proper. Handles partial reads from the storage file. """
         # Read contents of the file
-        contents = self.open_read_close(self.file)
+        contents = self.open_read_close(file)
         # Load and print the data
         try:
             loaded_target = pickle.loads(contents)
@@ -102,6 +104,18 @@ class Serializer():
             print(f"{e}: Error renaming file to proper name.")
 
 
+    def startup(self):
+        """Function that loads the list of named years stored on the system."""
+        buffer = self.open_read_close(self.year_keys)
+        array = buffer.split(",")
+        print(array)
+        for key in array:
+            try:
+                data = self.deserialize(f"data/years/{key}.dat")
+                self.keys[key] = data
+            except Exception as e:
+                print(f"Error occurred: {e}")
+        
 # ==========================================================================================================
 #           Main
 # ==========================================================================================================

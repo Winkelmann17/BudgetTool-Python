@@ -7,7 +7,6 @@
 #           Imports and Globals
 # ==========================================================================================================
 
-
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 CATEGORIES = ["Savings", "Giving", "Housing", "Transportation", "Food", "Personal", "Insurance", "Other"]
 PLANNED = 0
@@ -83,7 +82,7 @@ class Month():
 
 class Year():
     """Implements the Year object that holds the array of months."""
-    def __init__(self, year=0000):
+    def __init__(self, year="0000"):
         self.months = self.populate_months()
         self.year = year
 
@@ -94,4 +93,8 @@ class Year():
             temp[month] = Month(month)
         return temp
 
-
+# -------------------------------------------------------------------
+from load import *
+serial = Serializer()
+apples = Year("2025")
+serial.serialize(apples)

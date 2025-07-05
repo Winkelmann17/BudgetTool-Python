@@ -35,7 +35,6 @@ class MainWindow(QMainWindow):
         # Year Buttons
         self.MMXXV.clicked.connect(lambda: self.gotoyear(2025))
 
-
     def showpopup(self):
         """Function that loads the `newyear.ui` file and takes
         input from the user to create the new year object."""
@@ -46,8 +45,8 @@ class MainWindow(QMainWindow):
             if newyear.response_code == CANCEL:
                 break
             valid = IsNum(newyear.response_text)
-        
 
+        
 
     def gotoyear(self, year):
         """Function that loads the month select screen for 
@@ -57,8 +56,8 @@ class MainWindow(QMainWindow):
         widget.addWidget(monthscreen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
-
 # ----------------------------------------------------------------------------------------------------------
+
 class PopUp(QDialog):
     """Class that implements the various PopUp objects. Loads in a specified
     ui file in order to be as generic as possible. Takes in the proper UI file
@@ -90,6 +89,7 @@ class PopUp(QDialog):
         self.response_code = CANCEL
         if DEBUG:
             print(self.response_code)
+
 # ----------------------------------------------------------------------------------------------------------
 
 class MonthSelectScreen(QMainWindow):
@@ -127,7 +127,6 @@ class MonthSelectScreen(QMainWindow):
         widget.addWidget(budgetscreen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
-
 # ----------------------------------------------------------------------------------------------------------
 
 class BudgetScreen(QMainWindow):
@@ -164,6 +163,14 @@ def gohome():
 # ==========================================================================================================
 #           Main
 # ==========================================================================================================
+# Setup Code
+data = Serializer()
+data.startup()
+if DEBUG:
+    print("Startup complete.")
+    print(data.keys)
+
+# Application Run Code
 app = QApplication(sys.argv)
 welcome=MainWindow()
 widget = QStackedWidget()
