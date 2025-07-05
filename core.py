@@ -24,7 +24,18 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi("rsrc/UI/main.ui", self)
+        
+        # NewYear Button
+        self.NewYear.clicked.connect()
+
+        # Year Buttons
         self.MMXXV.clicked.connect(lambda: self.gotoyear(2025))
+
+    def createnewyear(self):
+        """Function that loads the `newyear.ui` file and takes
+        input from the user to create the new year object."""
+        
+
 
     def gotoyear(self, year):
         """Function that loads the month select screen for 
