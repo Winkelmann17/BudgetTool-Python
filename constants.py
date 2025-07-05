@@ -1,1 +1,2 @@
-CREATE_YEAR = "/rsrc/UI/newYear.ui"
+MAIN = "rsrc/UI/main.ui"
+CREATE_YEAR = "rsrc/UI/newYear.ui"

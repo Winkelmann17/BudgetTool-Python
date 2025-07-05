@@ -13,7 +13,9 @@ from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, QDialog
 from objects import *
 from load import *
+from constants import * 
 
+DEBUG = True
 # ==========================================================================================================
 #           Classes
 # ==========================================================================================================
@@ -23,18 +25,22 @@ class MainWindow(QMainWindow):
     they want to access."""
     def __init__(self):
         super(MainWindow, self).__init__()
-        loadUi("rsrc/UI/main.ui", self)
+        loadUi(MAIN, self)
         
         # NewYear Button
-        self.NewYear.clicked.connect(self.gotocreatenewyear)
+        self.NewYear.clicked.connect(self.showpopup)
 
         # Year Buttons
         self.MMXXV.clicked.connect(lambda: self.gotoyear(2025))
 
-    def gotocreatenewyear(self):
+
+    def showpopup(self):
         """Function that loads the `newyear.ui` file and takes
         input from the user to create the new year object."""
-        newyear = PopUp("")
+        newyear = PopUp(CREATE_YEAR)
+        newyear.exec()
+        
+        
 
 
     def gotoyear(self, year):
@@ -54,8 +60,16 @@ class PopUp(QDialog):
     def __init__(self, ui):
         super(PopUp, self).__init__()
         self.ui = ui
-        loadUi(ui)
+        loadUi(self.ui, self)
 
+        # Ok button custom binding
+        self.ok = self.buttonBox.button(QtWidgets.QDialogButtonBox.StandardButton.Ok)
+        self.ok.clicked.connect(self.handle_ok)
+
+    def handle_ok(self):
+        self.response = self.lineEdit.text()
+        if DEBUG:
+            print(self.response)
 # ----------------------------------------------------------------------------------------------------------
 
 class MonthSelectScreen(QMainWindow):
@@ -139,4 +153,4 @@ widget.show()
 try:
     sys.exit(app.exec())
 except:
-    print("exiting")
+    print("Exiting")
