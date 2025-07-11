@@ -12,7 +12,7 @@ from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, QDialog
 from objects import *
-from load import *
+from serializer import *
 from constants import * 
 from helper import *
 
