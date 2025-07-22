@@ -1,7 +1,7 @@
 ############################################################################################################
 # Nicholas Winkelmann
 # Desc: Backend UI Code
-# Last Updated: 5 Jul 2025
+# Last Updated: 10 Jul 2025
 ############################################################################################################
 # ==========================================================================================================
 #           Imports
@@ -28,6 +28,7 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super(MainWindow, self).__init__()
         loadUi(MAIN, self)
+        self.years = {}
         
         # NewYear Button
         self.NewYear.clicked.connect(self.showpopup)
@@ -45,8 +46,8 @@ class MainWindow(QMainWindow):
             if newyear.response_code == CANCEL:
                 break
             valid = IsNum(newyear.response_text)
-        data[newyear.response] = Year(newyear.response_text)
-        
+        self.years[newyear.response_text] = Year(newyear.response_text)
+        # TODO: When a new year is created, add a new button
 
     def gotoyear(self, year):
         """Function that loads the month select screen for 
@@ -55,6 +56,7 @@ class MainWindow(QMainWindow):
         monthscreen = MonthSelectScreen(year)
         widget.addWidget(monthscreen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
+
 
 # ----------------------------------------------------------------------------------------------------------
 
@@ -100,6 +102,7 @@ class MonthSelectScreen(QMainWindow):
         super(MonthSelectScreen, self).__init__()
         self.year = year
         loadUi("rsrc/UI/months.ui", self)
+        self.serializer = Serializer(year)
 
         # Connect Action menu items to respective functions
         self.actionBack.triggered.connect(goback)
@@ -164,11 +167,6 @@ def gohome():
 #           Main
 # ==========================================================================================================
 # Setup Code
-data = Serializer()
-data.startup()
-if DEBUG:
-    print("Startup complete.")
-    print(data.keys)
 
 # Application Run Code
 app = QApplication(sys.argv)
@@ -183,4 +181,3 @@ try:
 except:
     print("Exiting")
 
-data.close_out()
