@@ -126,7 +126,7 @@ class MonthSelectScreen(QMainWindow):
         """Function that loads the budget screen. Takes in the respective
         year and month values to load the correct budget."""
         print(f"{year}, {month}")
-        budgetscreen = BudgetScreen()
+        budgetscreen = BudgetScreen(self.serializer, year, month)
         widget.addWidget(budgetscreen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
@@ -136,10 +136,13 @@ class BudgetScreen(QMainWindow):
     """Class that implements the Budget Screen. Loads in the 'budget.ui'
     file. This is the most important screen that allows the user to 
     actually budget and update real files."""
-    def __init__(self):
+    def __init__(self, serializer, year, month):
         super(BudgetScreen, self).__init__()
         loadUi("rsrc/UI/budget.ui", self)
-
+        self.serializer = serializer
+        self.year = year
+        self.month = month
+        print(f"Serializer: {self.serializer}. Year: {self.year}. Month: {self.month}")
         # Connect Action menu items to respective functions
         self.actionSave.triggered.connect(self.gosave)
         self.actionBack.triggered.connect(goback)

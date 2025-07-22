@@ -22,7 +22,7 @@
      <rect>
       <x>9</x>
       <y>19</y>
-      <width>391</width>
+      <width>411</width>
       <height>531</height>
      </rect>
     </property>
@@ -34,7 +34,7 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>372</width>
+       <width>392</width>
        <height>3000</height>
       </rect>
      </property>
@@ -49,49 +49,49 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>371</width>
-        <height>6002</height>
+        <width>391</width>
+        <height>6011</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>0</width>
+        <width>50</width>
         <height>3000</height>
        </size>
       </property>
       <row>
        <property name="text">
-        <string>New Row</string>
+        <string>&lt;Placeholder&gt;</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>New Row</string>
+        <string>Paycheck 1</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>New Row</string>
+        <string>Paycheck 2</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>New Row</string>
+        <string>Paycheck 3</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>New Row</string>
+        <string>Paycheck 4</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>New Row</string>
+        <string>Extra</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>New Row</string>
+        <string>&lt;Placeholder&gt;</string>
        </property>
       </row>
       <column>
@@ -109,6 +109,54 @@
         <string>Difference</string>
        </property>
       </column>
+      <item row="0" column="2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="1" column="2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="2" column="2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="3" column="2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="4" column="2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="5" column="2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
      </widget>
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
@@ -126,9 +174,9 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>1</x>
-        <y>25</y>
-        <width>362</width>
+        <x>0</x>
+        <y>20</y>
+        <width>391</width>
         <height>30</height>
        </rect>
       </property>
@@ -155,8 +203,8 @@
      <widget class="QLabel" name="label_2">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>210</y>
+        <x>20</x>
+        <y>200</y>
         <width>362</width>
         <height>30</height>
        </rect>
@@ -165,7 +213,7 @@
        <string notr="true">background-color: rgb(85, 255, 0);</string>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:700;&quot;&gt;Income&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:700;&quot;&gt;Savings&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </widget>
@@ -173,9 +221,9 @@
    <widget class="QTextEdit" name="textEdit">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>440</x>
       <y>310</y>
-      <width>381</width>
+      <width>351</width>
       <height>201</height>
      </rect>
     </property>
@@ -187,9 +235,9 @@ border-color: rgb(85, 255, 255);</string>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>410</x>
+      <x>440</x>
       <y>10</y>
-      <width>381</width>
+      <width>351</width>
       <height>291</height>
      </rect>
     </property>
@@ -221,9 +269,9 @@ border-color: rgb(85, 255, 255);</string>
      <widget class="QListWidget" name="listWidget">
       <property name="geometry">
        <rect>
-        <x>10</x>
+        <x>0</x>
         <y>0</y>
-        <width>361</width>
+        <width>371</width>
         <height>261</height>
        </rect>
       </property>
