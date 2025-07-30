@@ -105,8 +105,8 @@ class MonthSelectScreen(QMainWindow):
         self.serializer = Serializer(year)
 
         # Connect Action menu items to respective functions
-        self.actionBack.triggered.connect(goback)
-        self.actionHome.triggered.connect(goback)
+        self.actionBack.triggered.connect(go_back)
+        self.actionHome.triggered.connect(go_back)
 
         # Connect all months to load respective budget UI
         self.jan.clicked.connect(lambda: self.gotobudget(self.year, "jan"))
@@ -145,56 +145,60 @@ class BudgetScreen(QMainWindow):
         
         print(f"Serializer: {self.serializer}. Year: {self.year}. Month: {self.month}")
         # Connect Action menu items to respective functions
-        self.actionSave.triggered.connect(self.gosave)
-        self.actionBack.triggered.connect(goback)
-        self.actionHome.triggered.connect(lambda: gohome())
-        self.table.cellClicked.connect(self.gocellclick)
+        self.newexpense.clicked.connect(self.go_newexpense)
+        self.actionSave.triggered.connect(self.go_save)
+        self.actionBack.triggered.connect(go_back)
+        self.actionHome.triggered.connect(lambda: go_home())
+        self.table.cellClicked.connect(self.go_cellclick)
 
         # Load table data
-        self.loadtable()
+        self.loadtable_defaults()
 
-    def gocellclick(self, row, col):
+    def go_cellclick(self, row, col):
         """Function implements the cell clicked function."""
         print(f"Cell clicked in {row}, {col}")
         #TODO: Implement handling of updating Expense List Tab
 
-    def gosave(self):
+    def go_save(self):
         """Function that implements the save and update feature."""
         print("SAVE!")
         #TODO: Build the save function which will store the data in its appropriate areas and then 
         self.docellmath()
         self.loadtable()
 
-    def loadtable(self):
+    def loadtable_defaults(self):
         """Function that loads in the initial values."""
         print("LOADING TABLE!")
         #self.table.setItem(row, 0, QtWidgets.QTableWidgetItem(item))
-        item = self.table.item(2,0)
-        print(item.text())
+        # Iterate through the table and set default values.
         for row in range(43):
             for col in range(3):
-                print(f"{row}, {col}")
+                #print(f"{row}, {col}")
                 item = self.table.item(row, col)
-                
                 if item.text() == "x":
                     continue
                 item.setText("$ - ")
 
 
             
-    def docellmath(self):
+    def go_cellmath(self):
         """Function that implements the calculations of the budget sheet cells."""
         print("MATH!")
+
+    def go_newexpense(self):
+        """Function that implements the code to perform creating new expense."""
+        print("NEw expense!")
+        
 
 # ==========================================================================================================
 #         Functions
 # ==========================================================================================================
-def goback():
+def go_back():
     """Function that implements the back feature."""
     print("Back!")
     widget.setCurrentIndex(widget.currentIndex() - 1)
 
-def gohome():
+def go_home():
     """Function that implements the home feature."""
     print("Home!")
     widget.setCurrentIndex(widget.currentIndex() - 2)
