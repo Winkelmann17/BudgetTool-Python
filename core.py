@@ -10,7 +10,7 @@ import sys
 from time import sleep
 from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, QDialog
+from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, QDialog, QTableWidget, QTableWidgetItem
 from objects import *
 from serializer import *
 from constants import * 
@@ -142,15 +142,49 @@ class BudgetScreen(QMainWindow):
         self.serializer = serializer
         self.year = year
         self.month = month
+        
         print(f"Serializer: {self.serializer}. Year: {self.year}. Month: {self.month}")
         # Connect Action menu items to respective functions
         self.actionSave.triggered.connect(self.gosave)
         self.actionBack.triggered.connect(goback)
         self.actionHome.triggered.connect(lambda: gohome())
+        self.table.cellClicked.connect(self.gocellclick)
+
+        # Load table data
+        self.loadtable()
+
+    def gocellclick(self, row, col):
+        """Function implements the cell clicked function."""
+        print(f"Cell clicked in {row}, {col}")
+        #TODO: Implement handling of updating Expense List Tab
 
     def gosave(self):
         """Function that implements the save and update feature."""
         print("SAVE!")
+        #TODO: Build the save function which will store the data in its appropriate areas and then 
+        self.docellmath()
+        self.loadtable()
+
+    def loadtable(self):
+        """Function that loads in the initial values."""
+        print("LOADING TABLE!")
+        #self.table.setItem(row, 0, QtWidgets.QTableWidgetItem(item))
+        item = self.table.item(2,0)
+        print(item.text())
+        for row in range(43):
+            for col in range(3):
+                print(f"{row}, {col}")
+                item = self.table.item(row, col)
+                
+                if item.text() == "x":
+                    continue
+                item.setText("$ - ")
+
+
+            
+    def docellmath(self):
+        """Function that implements the calculations of the budget sheet cells."""
+        print("MATH!")
 
 # ==========================================================================================================
 #         Functions
