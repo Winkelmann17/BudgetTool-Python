@@ -6,7 +6,6 @@
 # ==========================================================================================================
 #           Imports and Globals
 # ==========================================================================================================
-
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 CATEGORIES = ["Income", "Savings", "Giving", "Housing", "Transportation", "Food", "Personal", "Insurance", "Other"]
 TYPE_DICT = {
@@ -32,7 +31,8 @@ class Cost():
         self.name = name
         self.cost = cost
         self.date = date
-
+        print(f"{self.name}, {self.cost}, {self.date}")
+        
 class Expense_Type():
     """Implements the Expense object that holds its name, planned 
     expense, and actual expense."""
@@ -49,8 +49,9 @@ class Expense_Type():
     def set_actual(self, new_actual):
         self.actual = new_actual
 
-    def add_cost(self):
-        pass
+    def add_cost(self, name, cost, date):
+        self.costs.append(Cost(name, cost, date))
+        print(f"Cost named {name} added!")
 
 # -------------------------------------------------------------------
 

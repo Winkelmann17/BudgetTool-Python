@@ -11,4 +11,4 @@ OK = 0
 CANCEL = 1
 
 # Regex
-AMOUNT = r"((?:\d+)?\.\d{2})"
+AMOUNT = r"(-?(?:\d+\.\d{1,2}|\d+\.|\.\d{1,2}|\d+))"

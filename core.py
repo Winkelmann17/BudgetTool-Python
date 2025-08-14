@@ -102,6 +102,7 @@ class MonthSelectScreen(QMainWindow):
         super(MonthSelectScreen, self).__init__()
         self.year = year
         loadUi("rsrc/UI/months.ui", self)
+
         self.serializer = Serializer(year)
 
         # Connect Action menu items to respective functions
@@ -109,18 +110,18 @@ class MonthSelectScreen(QMainWindow):
         self.actionHome.triggered.connect(go_back)
 
         # Connect all months to load respective budget UI
-        self.jan.clicked.connect(lambda: self.gotobudget(self.year, "jan"))
-        self.feb.clicked.connect(lambda: self.gotobudget(self.year, "feb"))
-        self.mar.clicked.connect(lambda: self.gotobudget(self.year, "mar"))
-        self.apr.clicked.connect(lambda: self.gotobudget(self.year, "apr"))
-        self.may.clicked.connect(lambda: self.gotobudget(self.year, "may"))
-        self.jun.clicked.connect(lambda: self.gotobudget(self.year, "jun"))
-        self.jul.clicked.connect(lambda: self.gotobudget(self.year, "jul"))
-        self.aug.clicked.connect(lambda: self.gotobudget(self.year, "aug"))
-        self.sep.clicked.connect(lambda: self.gotobudget(self.year, "sep"))
-        self.oct.clicked.connect(lambda: self.gotobudget(self.year, "oct"))
-        self.nov.clicked.connect(lambda: self.gotobudget(self.year, "nov"))
-        self.dec.clicked.connect(lambda: self.gotobudget(self.year, "dec"))
+        self.jan.clicked.connect(lambda: self.gotobudget(self.year, "Jan"))
+        self.feb.clicked.connect(lambda: self.gotobudget(self.year, "Feb"))
+        self.mar.clicked.connect(lambda: self.gotobudget(self.year, "Mar"))
+        self.apr.clicked.connect(lambda: self.gotobudget(self.year, "Apr"))
+        self.may.clicked.connect(lambda: self.gotobudget(self.year, "May"))
+        self.jun.clicked.connect(lambda: self.gotobudget(self.year, "Jun"))
+        self.jul.clicked.connect(lambda: self.gotobudget(self.year, "Jul"))
+        self.aug.clicked.connect(lambda: self.gotobudget(self.year, "Aug"))
+        self.sep.clicked.connect(lambda: self.gotobudget(self.year, "Sep"))
+        self.oct.clicked.connect(lambda: self.gotobudget(self.year, "Oct"))
+        self.nov.clicked.connect(lambda: self.gotobudget(self.year, "Nov"))
+        self.dec.clicked.connect(lambda: self.gotobudget(self.year, "Dec"))
 
     def gotobudget(self, year, month):
         """Function that loads the budget screen. Takes in the respective
@@ -140,8 +141,10 @@ class BudgetScreen(QMainWindow):
         super(BudgetScreen, self).__init__()
         loadUi("rsrc/UI/budget.ui", self)
         self.serializer = serializer
-        self.year = year
-        self.month = month
+        self.year = self.serializer.deserialize()
+        if self.year == None:
+            self.year = Year(year)
+        self.month = self.year.months[month]
         
         print(f"Serializer: {self.serializer}. Year: {self.year}. Month: {self.month}")
         # Connect Action menu items to respective functions
@@ -205,11 +208,14 @@ class BudgetScreen(QMainWindow):
                 continue
             date = newexpense.dateBox.text()
             break
-        cat = newexpense.catBox.text()
-        exp_type = newexpense.typeBox.text()
-        self.month.categories[cat].add_expense()
+        cat = newexpense.catBox.currentText()
+        # exp = newexpense.typeBox.currentText()
+        exp = "Paycheck1"
+        self.month.categories[cat].expenses[exp].add_cost(exp, cost, date)
         
-            
+
+    def go_update_expense_list(self):
+        pass 
             
 
         
@@ -232,7 +238,7 @@ def go_home():
 #           Main
 # ==========================================================================================================
 # Setup Code
-y = Month("Jan")
+
 # Application Run Code
 app = QApplication(sys.argv)
 welcome=MainWindow()

@@ -10,6 +10,7 @@ import pickle
 import os
 import datetime as dt
 
+FAIL = -1
 # ==========================================================================================================
 #           Classes
 # ==========================================================================================================
@@ -29,6 +30,8 @@ class Serializer():
         Handles partial writes to the storage file."""
         # Load pickled contents
         contents = pickle.dumps(obj)
+        if None == contents:
+            return None
         bytes_written = 0
         # store in copy file
         with open(self.file, "w") as f:
@@ -61,12 +64,12 @@ class Serializer():
             text = ""
             while len(text) < size:
                 text += f.read()
+            f.close()
             return text
-
+            
         except Exception as e:
             print(f"Exception occurred in file opening. {e}")
-        finally:
-            f.close()
+            return None
 
 
     def file_size(self, name):
