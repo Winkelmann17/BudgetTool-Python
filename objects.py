@@ -9,20 +9,38 @@
 
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 CATEGORIES = ["Income", "Savings", "Giving", "Housing", "Transportation", "Food", "Personal", "Insurance", "Other"]
+TYPE_DICT = {
+    "Income"            : ["Paycheck1", "Paycheck2", "Paycheck3", "Paycheck4", "Extra"],
+    "Savings"           : ["House", "Car", "ROTHs", "Flights", "Gifts"],
+    "Giving"            : ["Church", "Patrick"],
+    "Housing"           : ["Mortgage", "Rent", "Water", "Natural Gas", "Electricity", "Phone", "Internet"],
+    "Transportation"    : ["Gas", "Maintenance", "Car Loan"],
+    "Food"              : ["Groceries", "Restaruants"],
+    "Personal"          : ["V-Fun", "N-Fun", "Subscriptions", "Hair"],
+    "Insurance"         : ["Auto", "Health", "Dental"],
+    "Other"             : ["Cats", "Misc"] 
+}
 PLANNED = 0
 ACTUAL = 1
 
 # ==========================================================================================================
 #           Classes
 # ==========================================================================================================
-class Expense():
+class Cost():
+    """Implements the Cost object that holds the name, data, and cost amount"""
+    def __init__(self, name, cost, date):
+        self.name = name
+        self.cost = cost
+        self.date = date
+
+class Expense_Type():
     """Implements the Expense object that holds its name, planned 
     expense, and actual expense."""
     def __init__(self, name="<Empty Expense>", planned=0, actual=0, income=False):
         self.name = name
+        self.costs = []
         self.planned = planned
         self.actual = actual
-        self.date = ""
         self.income = income
 
     def set_planned(self, new_planned):
@@ -31,7 +49,7 @@ class Expense():
     def set_actual(self, new_actual):
         self.actual = new_actual
 
-    def set_date(self):
+    def add_cost(self):
         pass
 
 # -------------------------------------------------------------------
@@ -40,11 +58,18 @@ class Category():
     """Implements the Category object that holds the expenses per """
     def __init__(self, name):
         self.name = name
-        self.expenses = []
+        self.expenses = self.initialize_expenses()
         self.planned_total = 0
         self.actual_total = 0
 
-    def add_expense(self):
+    def initialize_expenses(self):
+        temp = {}
+        for expense in TYPE_DICT[self.name]:
+            temp[expense] = Expense_Type(expense)
+        
+        return temp
+
+    def add_expense(self, name):
         pass
 
     def remove_expense(self):
@@ -54,6 +79,12 @@ class Category():
         pass
 
     def sum_actual(self):
+        pass
+
+    def add_exp_type(self, name):
+        pass
+
+    def remove_exp_type(self, name):
         pass
 
 # -------------------------------------------------------------------
@@ -73,8 +104,9 @@ class Month():
         temp = {}
         for cat in CATEGORIES:
             temp[cat] = Category(cat)
+        
         return temp
-
+   
     def sum_income_total(self):
         pass
 
@@ -101,6 +133,7 @@ class Year():
         temp = {}
         for month in MONTHS:
             temp[month] = Month(month)
+        
         return temp
 
 # -------------------------------------------------------------------

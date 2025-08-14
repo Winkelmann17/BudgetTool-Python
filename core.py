@@ -15,7 +15,7 @@ from objects import *
 from serializer import *
 from constants import * 
 from helper import *
-
+import re
 
 DEBUG = True
 # ==========================================================================================================
@@ -80,7 +80,7 @@ class PopUp(QDialog):
     def handle_ok(self):
         """Function that handles ok button press. Pulls text and sets 
         response code."""
-        self.response_text = self.lineEdit.text()
+        # self.response_text = self.lineEdit.text()
         self.response_code = OK
         if DEBUG:
             print(self.response_text)
@@ -163,8 +163,8 @@ class BudgetScreen(QMainWindow):
         """Function that implements the save and update feature."""
         print("SAVE!")
         #TODO: Build the save function which will store the data in its appropriate areas and then 
-        self.docellmath()
-        self.loadtable()
+        self.go_cellmath()
+        #self.loadtable()
 
     def loadtable_defaults(self):
         """Function that loads in the initial values."""
@@ -183,11 +183,35 @@ class BudgetScreen(QMainWindow):
             
     def go_cellmath(self):
         """Function that implements the calculations of the budget sheet cells."""
-        print("MATH!")
+        print("Math")
 
     def go_newexpense(self):
         """Function that implements the code to perform creating new expense."""
         print("NEw expense!")
+
+        newexpense = PopUp(CREATE_EXPENSE)
+        valid = False
+        while not valid:
+            newexpense.exec()
+            if newexpense.response_code == CANCEL:
+                break
+            
+            # TODO: Handle dates differently?
+            cost_text = newexpense.amountBox.text()
+            if cost_text == "":
+                continue
+            cost = float(re.findall(AMOUNT, cost_text)[0])
+            if cost < 0.00:
+                continue
+            date = newexpense.dateBox.text()
+            break
+        cat = newexpense.catBox.text()
+        exp_type = newexpense.typeBox.text()
+        self.month.categories[cat].add_expense()
+        
+            
+            
+
         
 
 # ==========================================================================================================
@@ -208,7 +232,7 @@ def go_home():
 #           Main
 # ==========================================================================================================
 # Setup Code
-
+y = Month("Jan")
 # Application Run Code
 app = QApplication(sys.argv)
 welcome=MainWindow()
