@@ -9,7 +9,7 @@
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
 CATEGORIES = ["Income", "Savings", "Giving", "Housing", "Transportation", "Food", "Personal", "Insurance", "Other"]
 TYPE_DICT = {
-    "Income"            : ["Paycheck1", "Paycheck2", "Paycheck3", "Paycheck4", "Extra"],
+    "Income"            : ["Paycheck 1", "Paycheck 2", "Paycheck 3", "Paycheck 4", "Extra"],
     "Savings"           : ["House", "Car", "ROTHs", "Flights", "Gifts"],
     "Giving"            : ["Church", "Patrick"],
     "Housing"           : ["Mortgage", "Rent", "Water", "Natural Gas", "Electricity", "Phone", "Internet"],

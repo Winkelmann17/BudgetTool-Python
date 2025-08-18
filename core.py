@@ -137,6 +137,9 @@ class BudgetScreen(QMainWindow):
     """Class that implements the Budget Screen. Loads in the 'budget.ui'
     file. This is the most important screen that allows the user to 
     actually budget and update real files."""
+
+    default_text = "$ - "
+
     def __init__(self, serializer, year, month):
         super(BudgetScreen, self).__init__()
         loadUi("rsrc/UI/budget.ui", self)
@@ -145,7 +148,8 @@ class BudgetScreen(QMainWindow):
         if self.year == None:
             self.year = Year(year)
         self.month = self.year.months[month]
-        
+        self.rows = 43
+
         print(f"Serializer: {self.serializer}. Year: {self.year}. Month: {self.month}")
         # Connect Action menu items to respective functions
         self.newexpense.clicked.connect(self.go_newexpense)
@@ -174,29 +178,32 @@ class BudgetScreen(QMainWindow):
         print("LOADING TABLE!")
         #self.table.setItem(row, 0, QtWidgets.QTableWidgetItem(item))
         # Iterate through the table and set default values.
-        for row in range(43):
+        for row in range(self.rows):
             for col in range(3):
                 #print(f"{row}, {col}")
                 item = self.table.item(row, col)
                 if item.text() == "x":
                     continue
-                item.setText("$ - ")
+                item.setText(self.default_text)
 
 
             
     def go_cellmath(self):
         """Function that implements the calculations of the budget sheet cells."""
-        print("Math")
+        print("MATH!")
 
     def go_newexpense(self):
         """Function that implements the code to perform creating new expense."""
-        print("NEw expense!")
+        print("New expense!")
 
         newexpense = PopUp(CREATE_EXPENSE)
+        canceled = False
         valid = False
+        cost = 0
         while not valid:
             newexpense.exec()
             if newexpense.response_code == CANCEL:
+                canceled = True
                 break
             
             # TODO: Handle dates differently?
@@ -208,10 +215,40 @@ class BudgetScreen(QMainWindow):
                 continue
             date = newexpense.dateBox.text()
             break
-        cat = newexpense.catBox.currentText()
-        # exp = newexpense.typeBox.currentText()
-        exp = "Paycheck1"
-        self.month.categories[cat].expenses[exp].add_cost(exp, cost, date)
+
+        if not canceled: 
+            cat = newexpense.catBox.currentText()
+            # exp = newexpense.typeBox.currentText()
+            exp = "Paycheck 1"
+            self.month.categories[cat].expenses[exp].add_cost(exp, cost, date)
+
+            # Add to the associated category and expense tab
+            for row in range(self.rows):
+                name = self.table.verticalHeaderItem(row).text()
+                print(f"Name: {name}")
+                if name == exp:
+                    print("Here!")
+                    actual = self.table.item(row, 1)
+                    print(f"item: {actual}")
+                    if actual.text() == self.default_text:
+                        total_cost = cost
+                    else:
+                        total_cost = float(actual.text()[1:]) + cost
+                    actual.setText(f"${total_cost}")
+
+                    # Update the difference
+                    planned = self.table.item(row, 0).text()
+                    if planned == self.default_text:
+                        planned_cost = 0
+                    else:
+                        planned_cost = float(planned[1:])
+                    difference = self.table.item(row, 2)
+
+                    difference.setText(f"${planned_cost - total_cost}")
+                    break
+
+        
+        
         
 
     def go_update_expense_list(self):
