@@ -52,6 +52,7 @@ class Expense_Type():
     def add_cost(self, name, cost, date):
         self.costs.append(Cost(name, cost, date))
         print(f"Cost named {name} added!")
+        self.actual += cost
 
 # -------------------------------------------------------------------
 
@@ -77,10 +78,17 @@ class Category():
         pass
 
     def sum_planned(self):
-        pass
+        """Sum the planned values in each expense type."""
+        print("PLANNED")
+        for exp in TYPE_DICT[self.name]:
+            self.planned_total += self.expenses[exp].planned
 
     def sum_actual(self):
-        pass
+        """Sum the actual values in each expense type."""
+        print("ACTUAL")
+        for exp in TYPE_DICT[self.name]:
+            for cost in self.expenses[exp].costs:
+                self.actual_total += cost.cost
 
     def add_exp_type(self, name):
         pass

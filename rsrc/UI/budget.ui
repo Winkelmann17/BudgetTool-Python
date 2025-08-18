@@ -64,7 +64,7 @@
       </property>
       <row>
        <property name="text">
-        <string>INCOME</string>
+        <string>Income_</string>
        </property>
       </row>
       <row>
@@ -94,7 +94,12 @@
       </row>
       <row>
        <property name="text">
-        <string>SAVINGS</string>
+        <string>Total</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>Savings_</string>
        </property>
       </row>
       <row>
@@ -124,6 +129,11 @@
       </row>
       <row>
        <property name="text">
+        <string>Total</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
         <string>EXPENSES</string>
        </property>
       </row>
@@ -140,6 +150,11 @@
       <row>
        <property name="text">
         <string>Patrick</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>Total</string>
        </property>
       </row>
       <row>
@@ -184,6 +199,11 @@
       </row>
       <row>
        <property name="text">
+        <string>Total</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
         <string>Transportation_</string>
        </property>
       </row>
@@ -204,7 +224,12 @@
       </row>
       <row>
        <property name="text">
-        <string>_Food_</string>
+        <string>Total</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>Food_</string>
        </property>
       </row>
       <row>
@@ -219,7 +244,12 @@
       </row>
       <row>
        <property name="text">
-        <string>_Personal_</string>
+        <string>Total</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>Personal_</string>
        </property>
       </row>
       <row>
@@ -244,7 +274,12 @@
       </row>
       <row>
        <property name="text">
-        <string>_Insurance_</string>
+        <string>Total</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>Insurance_</string>
        </property>
       </row>
       <row>
@@ -264,7 +299,12 @@
       </row>
       <row>
        <property name="text">
-        <string>_Other_</string>
+        <string>Total</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>Other_</string>
        </property>
       </row>
       <row>
@@ -275,6 +315,11 @@
       <row>
        <property name="text">
         <string>Miscellaneous</string>
+       </property>
+      </row>
+      <row>
+       <property name="text">
+        <string>Total</string>
        </property>
       </row>
       <column>
@@ -419,34 +464,34 @@
        </property>
       </item>
       <item row="6" column="0">
-       <property name="text">
-        <string>x</string>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="6" column="1">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="6" column="2">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="7" column="0">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
       </item>
       <item row="7" column="1">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -454,7 +499,7 @@
       </item>
       <item row="7" column="2">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -546,12 +591,12 @@
       </item>
       <item row="12" column="0">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
       </item>
       <item row="12" column="1">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -559,41 +604,35 @@
       </item>
       <item row="12" column="2">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="13" column="0">
-       <property name="text">
-        <string>x</string>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="13" column="1">
-       <property name="text">
-        <string>x</string>
-       </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="13" column="2">
-       <property name="text">
-        <string>x</string>
-       </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="14" column="0">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
       </item>
       <item row="14" column="1">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -601,7 +640,7 @@
       </item>
       <item row="14" column="2">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -609,12 +648,12 @@
       </item>
       <item row="15" column="0">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
       </item>
       <item row="15" column="1">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -622,7 +661,7 @@
       </item>
       <item row="15" column="2">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -630,12 +669,12 @@
       </item>
       <item row="16" column="0">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
       </item>
       <item row="16" column="1">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -643,7 +682,7 @@
       </item>
       <item row="16" column="2">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -671,34 +710,28 @@
        </property>
       </item>
       <item row="18" column="0">
-       <property name="text">
-        <string/>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="18" column="1">
-       <property name="text">
-        <string/>
-       </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="18" column="2">
-       <property name="text">
-        <string/>
-       </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="19" column="0">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
       </item>
       <item row="19" column="1">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -706,7 +739,7 @@
       </item>
       <item row="19" column="2">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -798,12 +831,12 @@
       </item>
       <item row="24" column="0">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
       </item>
       <item row="24" column="1">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -811,7 +844,7 @@
       </item>
       <item row="24" column="2">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -860,24 +893,18 @@
        </property>
       </item>
       <item row="27" column="0">
-       <property name="text">
-        <string/>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="27" column="1">
-       <property name="text">
-        <string/>
-       </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="27" column="2">
-       <property name="text">
-        <string/>
-       </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="28" column="0">
@@ -945,12 +972,12 @@
       </item>
       <item row="31" column="0">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
       </item>
       <item row="31" column="1">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -958,41 +985,35 @@
       </item>
       <item row="31" column="2">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="32" column="0">
-       <property name="text">
-        <string/>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="32" column="1">
-       <property name="text">
-        <string/>
-       </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="32" column="2">
-       <property name="text">
-        <string/>
-       </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="33" column="0">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
       </item>
       <item row="33" column="1">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -1000,7 +1021,7 @@
       </item>
       <item row="33" column="2">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -1049,34 +1070,28 @@
        </property>
       </item>
       <item row="36" column="0">
-       <property name="text">
-        <string>x</string>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="36" column="1">
-       <property name="text">
-        <string>x</string>
-       </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="36" column="2">
-       <property name="text">
-        <string>x</string>
-       </property>
        <property name="flags">
-        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="37" column="0">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
       </item>
       <item row="37" column="1">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -1084,7 +1099,7 @@
       </item>
       <item row="37" column="2">
        <property name="text">
-        <string/>
+        <string>x</string>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -1134,12 +1149,12 @@
       </item>
       <item row="40" column="0">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
       </item>
       <item row="40" column="1">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -1147,7 +1162,7 @@
       </item>
       <item row="40" column="2">
        <property name="text">
-        <string>x</string>
+        <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
@@ -1175,11 +1190,47 @@
        </property>
       </item>
       <item row="42" column="0">
-       <property name="text">
-        <string/>
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="42" column="1">
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="42" column="2">
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="43" column="0">
+       <property name="text">
+        <string>x</string>
+       </property>
+      </item>
+      <item row="43" column="1">
+       <property name="text">
+        <string>x</string>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="43" column="2">
+       <property name="text">
+        <string>x</string>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="44" column="0">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item row="44" column="1">
        <property name="text">
         <string/>
        </property>
@@ -1187,20 +1238,155 @@
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
-      <item row="42" column="2">
+      <item row="44" column="2">
        <property name="text">
         <string/>
        </property>
        <property name="flags">
         <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="45" column="0">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item row="45" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="45" column="2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="46" column="0">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item row="46" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="46" column="2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="47" column="0">
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="47" column="1">
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="47" column="2">
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="48" column="0">
+       <property name="text">
+        <string>x</string>
+       </property>
+      </item>
+      <item row="48" column="1">
+       <property name="text">
+        <string>x</string>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="48" column="2">
+       <property name="text">
+        <string>x</string>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="49" column="0">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item row="49" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="49" column="2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="50" column="0">
+       <property name="text">
+        <string/>
+       </property>
+      </item>
+      <item row="50" column="1">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="50" column="2">
+       <property name="text">
+        <string/>
+       </property>
+       <property name="flags">
+        <set>ItemIsSelectable|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="51" column="0">
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="51" column="1">
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
+       </property>
+      </item>
+      <item row="51" column="2">
+       <property name="flags">
+        <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
      </widget>
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>90</x>
-        <y>1350</y>
+        <x>80</x>
+        <y>1670</y>
         <width>91</width>
         <height>24</height>
        </rect>
@@ -1228,8 +1414,8 @@
      <widget class="QPushButton" name="pushButton_2">
       <property name="geometry">
        <rect>
-        <x>210</x>
-        <y>1350</y>
+        <x>200</x>
+        <y>1670</y>
         <width>91</width>
         <height>24</height>
        </rect>
@@ -1242,7 +1428,7 @@
       <property name="geometry">
        <rect>
         <x>1</x>
-        <y>205</y>
+        <y>230</y>
         <width>391</width>
         <height>30</height>
        </rect>
@@ -1258,7 +1444,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>385</y>
+        <y>450</y>
         <width>391</width>
         <height>30</height>
        </rect>
@@ -1274,7 +1460,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>415</y>
+        <y>480</y>
         <width>391</width>
         <height>30</height>
        </rect>
@@ -1290,7 +1476,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>505</y>
+        <y>590</y>
         <width>391</width>
         <height>30</height>
        </rect>
@@ -1306,7 +1492,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>745</y>
+        <y>860</y>
         <width>391</width>
         <height>30</height>
        </rect>
@@ -1322,7 +1508,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>865</y>
+        <y>1010</y>
         <width>391</width>
         <height>30</height>
        </rect>
@@ -1338,7 +1524,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>955</y>
+        <y>1130</y>
         <width>391</width>
         <height>30</height>
        </rect>
@@ -1354,7 +1540,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>1105</y>
+        <y>1310</y>
         <width>391</width>
         <height>30</height>
        </rect>
@@ -1370,7 +1556,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>1225</y>
+        <y>1470</y>
         <width>391</width>
         <height>30</height>
        </rect>
@@ -1398,7 +1584,7 @@
 border-color: rgb(85, 255, 255);</string>
     </property>
    </widget>
-   <widget class="QTabWidget" name="tabWidget">
+   <widget class="QTabWidget" name="tabs">
     <property name="geometry">
      <rect>
       <x>440</x>
@@ -1428,11 +1614,11 @@ border-color: rgb(85, 255, 255);</string>
       <string>Spending Histogram</string>
      </attribute>
     </widget>
-    <widget class="QWidget" name="tab_4">
+    <widget class="QWidget" name="expenses">
      <attribute name="title">
       <string>Expense List</string>
      </attribute>
-     <widget class="QListWidget" name="listWidget">
+     <widget class="QListWidget" name="list">
       <property name="geometry">
        <rect>
         <x>0</x>

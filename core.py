@@ -148,7 +148,8 @@ class BudgetScreen(QMainWindow):
         if self.year == None:
             self.year = Year(year)
         self.month = self.year.months[month]
-        self.rows = 43
+        self.rows = 52
+        self.cell_names = self.loadtable_defaults()
 
         print(f"Serializer: {self.serializer}. Year: {self.year}. Month: {self.month}")
         # Connect Action menu items to respective functions
@@ -159,7 +160,7 @@ class BudgetScreen(QMainWindow):
         self.table.cellClicked.connect(self.go_cellclick)
 
         # Load table data
-        self.loadtable_defaults()
+        #self.loadtable_defaults()
 
     def go_cellclick(self, row, col):
         """Function implements the cell clicked function."""
@@ -178,19 +179,43 @@ class BudgetScreen(QMainWindow):
         print("LOADING TABLE!")
         #self.table.setItem(row, 0, QtWidgets.QTableWidgetItem(item))
         # Iterate through the table and set default values.
+        temp = {}
         for row in range(self.rows):
+            temp[self.table.verticalHeaderItem(row).text()] = row
             for col in range(3):
                 #print(f"{row}, {col}")
                 item = self.table.item(row, col)
                 if item.text() == "x":
                     continue
                 item.setText(self.default_text)
-
+        return temp
 
             
     def go_cellmath(self):
         """Function that implements the calculations of the budget sheet cells."""
         print("MATH!")
+
+
+    def go_sumcells(self, cat):
+        """Function that calculates the totals for the category"""
+        category = self.month.categories[cat]
+        category.sum_planned()
+        category.sum_actual()
+        row = self.cell_names[cat + "_"]
+
+        # Find next Total instance
+        while self.table.verticalHeaderItem(row).text() != "Total":
+            row += 1
+            
+        # Now at the Total, set items
+        total_planned = self.table.item(row, 0)
+        total_actual = self.table.item(row, 1)
+        total_difference = self.table.item(row, 2)
+        
+        total_planned.setText(f"${category.planned_total}")
+        total_actual.setText(f"${category.actual_total}")
+        total_difference.setText(f"${category.planned_total - category.actual_total}")
+            
 
     def go_newexpense(self):
         """Function that implements the code to perform creating new expense."""
@@ -203,8 +228,7 @@ class BudgetScreen(QMainWindow):
         while not valid:
             newexpense.exec()
             if newexpense.response_code == CANCEL:
-                canceled = True
-                break
+                return
             
             # TODO: Handle dates differently?
             cost_text = newexpense.amountBox.text()
@@ -216,37 +240,22 @@ class BudgetScreen(QMainWindow):
             date = newexpense.dateBox.text()
             break
 
-        if not canceled: 
-            cat = newexpense.catBox.currentText()
-            # exp = newexpense.typeBox.currentText()
-            exp = "Paycheck 1"
-            self.month.categories[cat].expenses[exp].add_cost(exp, cost, date)
+        cat = newexpense.catBox.currentText()
+        # exp = newexpense.typeBox.currentText()
+        exp = "Paycheck 1"
+        expense_type = self.month.categories[cat].expenses[exp]
+        expense_type.add_cost(exp, cost, date)
 
-            # Add to the associated category and expense tab
-            for row in range(self.rows):
-                name = self.table.verticalHeaderItem(row).text()
-                print(f"Name: {name}")
-                if name == exp:
-                    print("Here!")
-                    actual = self.table.item(row, 1)
-                    print(f"item: {actual}")
-                    if actual.text() == self.default_text:
-                        total_cost = cost
-                    else:
-                        total_cost = float(actual.text()[1:]) + cost
-                    actual.setText(f"${total_cost}")
+        row = self.cell_names[exp]
 
-                    # Update the difference
-                    planned = self.table.item(row, 0).text()
-                    if planned == self.default_text:
-                        planned_cost = 0
-                    else:
-                        planned_cost = float(planned[1:])
-                    difference = self.table.item(row, 2)
+        actual = self.table.item(row, 1)
+        difference = self.table.item(row, 2)
 
-                    difference.setText(f"${planned_cost - total_cost}")
-                    break
+        actual.setText(f"${expense_type.actual}")
+        difference.setText(f"${expense_type.planned -  expense_type.actual}")
 
+        # Update total for the category
+        self.go_sumcells(cat)
         
         
         
