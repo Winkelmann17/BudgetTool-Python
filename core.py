@@ -11,6 +11,7 @@ from time import sleep
 from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, QDialog, QTableWidget, QTableWidgetItem
+from PyQt6.QtGui import QColor, QBrush
 from objects import *
 from serializer import *
 from constants import * 
@@ -211,11 +212,14 @@ class BudgetScreen(QMainWindow):
         total_planned = self.table.item(row, 0)
         total_actual = self.table.item(row, 1)
         total_difference = self.table.item(row, 2)
-        
+        diff_calc = category.planned_total - category.actual_total
         total_planned.setText(f"${category.planned_total}")
         total_actual.setText(f"${category.actual_total}")
-        total_difference.setText(f"${category.planned_total - category.actual_total}")
-            
+        total_difference.setText(f"${diff_calc}")
+        if diff_calc < 0:
+            total_difference.setBackground(QBrush(QColor("red")))
+        else:
+            total_difference.setBackground(QBrush(QColor("green")))
 
     def go_newexpense(self):
         """Function that implements the code to perform creating new expense."""
@@ -250,9 +254,13 @@ class BudgetScreen(QMainWindow):
 
         actual = self.table.item(row, 1)
         difference = self.table.item(row, 2)
-
+        diff_calc = expense_type.planned -  expense_type.actual
         actual.setText(f"${expense_type.actual}")
-        difference.setText(f"${expense_type.planned -  expense_type.actual}")
+        difference.setText(f"${diff_calc}")
+        if diff_calc < 0:
+            difference.setBackground(QBrush(QColor("red")))
+        else:
+            difference.setBackground(QBrush(QColor("green")))
 
         # Update total for the category
         self.go_sumcells(cat)
