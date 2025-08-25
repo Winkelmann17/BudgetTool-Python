@@ -222,12 +222,13 @@ class BudgetScreen(QMainWindow):
         print("New expense!")
 
         newexpense = PopUp(CREATE_EXPENSE)
-        canceled = False
+        newexpense.catBox.currentTextChanged.connect(lambda: self.go_update_type_list(newexpense, newexpense.catBox.currentText()))
+        newexpense.typeBox.addItems(TYPE_DICT["Income"])
         valid = False
         cost = 0
         while not valid:
-            newexpense.exec()
-            if newexpense.response_code == CANCEL:
+            exited = newexpense.exec()
+            if newexpense.response_code == CANCEL or exited == 0:
                 return
             
             # TODO: Handle dates differently?
@@ -241,8 +242,7 @@ class BudgetScreen(QMainWindow):
             break
 
         cat = newexpense.catBox.currentText()
-        # exp = newexpense.typeBox.currentText()
-        exp = "Paycheck 1"
+        exp = newexpense.typeBox.currentText()
         expense_type = self.month.categories[cat].expenses[exp]
         expense_type.add_cost(exp, cost, date)
 
@@ -256,12 +256,18 @@ class BudgetScreen(QMainWindow):
 
         # Update total for the category
         self.go_sumcells(cat)
+    
+
+    def go_update_type_list(self, dialog, cat):
+        """Function that updates the second combo box with the appropriate options, when selected."""
+        type_list = self.month.categories[cat].expenses
+        dialog.typeBox.clear()
+        dialog.typeBox.addItems(type_list.keys())
         
         
         
 
-    def go_update_expense_list(self):
-        pass 
+
             
 
         
