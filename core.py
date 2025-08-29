@@ -101,11 +101,11 @@ class MonthSelectScreen(QMainWindow):
     data they want to access."""
     def __init__(self, year):
         super(MonthSelectScreen, self).__init__()
-        self.year = year
+        
         loadUi("rsrc/UI/months.ui", self)
 
         self.serializer = Serializer(year)
-
+        self.year = self.serializer.deserialize()
         # Connect Action menu items to respective functions
         self.actionBack.triggered.connect(go_back)
         self.actionHome.triggered.connect(go_back)
@@ -131,6 +131,11 @@ class MonthSelectScreen(QMainWindow):
         budgetscreen = BudgetScreen(self.serializer, year, month)
         widget.addWidget(budgetscreen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
+    #     widget.currentChanged.connect(lambda: self.budget_cleanup(budgetscreen))
+
+    # def budget_cleanup(self, screen):
+    #     del screen
+    #     print("deleted screen")
 
 # ----------------------------------------------------------------------------------------------------------
 
@@ -146,11 +151,22 @@ class BudgetScreen(QMainWindow):
         loadUi("rsrc/UI/budget.ui", self)
         self.serializer = serializer
         self.year = self.serializer.deserialize()
+        defaults = False
         if self.year == None:
             self.year = Year(year)
-        self.month = self.year.months[month]
+
         self.rows = 52
-        self.cell_names = self.loadtable_defaults()
+        self.month = self.year.months[month]
+        print(f"Here is the month value {self.month}")
+        if self.month.new:
+            print("Generating new Month")
+            self.year.months[month] = Month(month)
+            self.month = self.year.months[month]
+            defaults = True
+            self.cell_names = self.loadtable_defaults()
+            self.month.new = False
+        else:
+            self.cell_names = self.load_from_file()
 
         print(f"Serializer: {self.serializer}. Year: {self.year}. Month: {self.month}")
         # Connect Action menu items to respective functions
@@ -172,8 +188,14 @@ class BudgetScreen(QMainWindow):
         """Function that implements the save and update feature."""
         print("SAVE!")
         #TODO: Build the save function which will store the data in its appropriate areas and then 
-        self.go_cellmath()
-        #self.loadtable()
+        # self.go_cellmath
+        # self.loadtable()
+
+        val = self.serializer.serialize(self.year)
+        if val <= 0:
+            print("Error")
+        else:
+            print("We saved epicly!")
 
     def loadtable_defaults(self):
         """Function that loads in the initial values."""
@@ -189,8 +211,17 @@ class BudgetScreen(QMainWindow):
                 if item.text() == "x":
                     continue
                 item.setText(self.default_text)
+        self.month.cat_map = temp
         return temp
 
+    def load_from_file(self):
+        """Function that loads the data from the pickled year."""
+        for cat in self.month.categories.keys():
+            category = self.month.categories[cat]
+            for exp in category.expenses.keys():
+                expense = category.expenses[exp]
+                row = self.month.cat_map[exp]
+                self.go_update_row(row, expense)
             
     def go_cellmath(self):
         """Function that implements the calculations of the budget sheet cells."""
@@ -252,6 +283,12 @@ class BudgetScreen(QMainWindow):
 
         row = self.cell_names[exp]
 
+        self.go_update_row(row, expense_type)
+
+        # Update total for the category
+        self.go_sumcells(cat)
+    
+    def go_update_row(self, row, expense_type):
         actual = self.table.item(row, 1)
         difference = self.table.item(row, 2)
         diff_calc = expense_type.planned -  expense_type.actual
@@ -262,9 +299,6 @@ class BudgetScreen(QMainWindow):
         else:
             difference.setBackground(QBrush(QColor("green")))
 
-        # Update total for the category
-        self.go_sumcells(cat)
-    
 
     def go_update_type_list(self, dialog, cat):
         """Function that updates the second combo box with the appropriate options, when selected."""

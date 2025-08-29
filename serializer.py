@@ -20,21 +20,26 @@ class Serializer():
     process as well."""
     def __init__(self, year="0000"):
         self.year = year
-        self.file = f"data/years/{year}.dat"
-        self.copy = f"data/years/{year}_copy.dat"
-        self.backup_location = f"data/backup/{year}"
+        self.file = f"./data/years/{year}.dat"
+        self.copy = f"./data/years/{year}_copy.dat"
+        self.backup_location = f"./data/backup/{year}"
 
 
     def serialize(self, obj):
         """Pickles the associated LL object and stores it into a file.
         Handles partial writes to the storage file."""
+        # Move previous to backups (if present)
+        success = self.move_to_backups()
+        if not success:
+            print("Perhaps no previous file is found.")
+
         # Load pickled contents
         contents = pickle.dumps(obj)
         if None == contents:
             return None
         bytes_written = 0
         # store in copy file
-        with open(self.file, "w") as f:
+        with open(self.file, "wb") as f:
             bytes_written = f.write(contents)
         return bytes_written
 
@@ -46,6 +51,7 @@ class Serializer():
         contents = self.open_read_close(self.file)
         # Load and print the data
         try:
+            print("IN PICKLE LOADS")
             loaded_target = pickle.loads(contents)
         except Exception as e:
             print(f"{e} : error loading or printing data.")
@@ -57,11 +63,12 @@ class Serializer():
         """Function that opens a file, reads, writes, and closes the file.
         Uses try, except, finally to show the open-close process in full."""
         # Open the file, read, and then print the contents, and close.
+        print("IN OPEN READ")
         try:
             size = self.file_size(name)
-            f = open(self, "r")
+            f = open(name, "rb")
             # Account for partial reads
-            text = ""
+            text= bytearray()
             while len(text) < size:
                 text += f.read()
             f.close()
@@ -90,8 +97,11 @@ class Serializer():
         backup_name = f"{self.backup_location}_{date.day}_{date.month}_{date.time()}.dat"
         try:
             os.rename(self.file, backup_name)
+            return True
         except Exception as e:
             print(f"{e}: Error occured when creating backup.")
+            return False
+        
 
 
     def close_out(self):

@@ -33,7 +33,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>-1236</y>
        <width>392</width>
        <height>3000</height>
       </rect>
@@ -254,12 +254,12 @@
       </row>
       <row>
        <property name="text">
-        <string>V - Fun</string>
+        <string>V-Fun</string>
        </property>
       </row>
       <row>
        <property name="text">
-        <string>N - Fun</string>
+        <string>N-Fun</string>
        </property>
       </row>
       <row>
@@ -314,7 +314,7 @@
       </row>
       <row>
        <property name="text">
-        <string>Miscellaneous</string>
+        <string>Misc</string>
        </property>
       </row>
       <row>
@@ -464,6 +464,9 @@
        </property>
       </item>
       <item row="6" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
@@ -611,16 +614,25 @@
        </property>
       </item>
       <item row="13" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="13" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="13" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
@@ -710,16 +722,25 @@
        </property>
       </item>
       <item row="18" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="18" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="18" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
@@ -893,16 +914,25 @@
        </property>
       </item>
       <item row="27" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="27" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="27" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
@@ -992,16 +1022,25 @@
        </property>
       </item>
       <item row="32" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="32" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="32" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
@@ -1070,16 +1109,25 @@
        </property>
       </item>
       <item row="36" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="36" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="36" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
@@ -1190,16 +1238,25 @@
        </property>
       </item>
       <item row="42" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="42" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="42" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
@@ -1289,16 +1346,25 @@
        </property>
       </item>
       <item row="47" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="47" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="47" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
@@ -1367,16 +1433,25 @@
        </property>
       </item>
       <item row="51" column="0">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="51" column="1">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>
       </item>
       <item row="51" column="2">
+       <property name="text">
+        <string/>
+       </property>
        <property name="flags">
         <set>ItemIsDragEnabled|ItemIsDropEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
        </property>

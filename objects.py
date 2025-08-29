@@ -14,7 +14,7 @@ TYPE_DICT = {
     "Giving"            : ["Church", "Patrick"],
     "Housing"           : ["Mortgage", "Rent", "Water", "Natural Gas", "Electricity", "Phone", "Internet"],
     "Transportation"    : ["Gas", "Maintenance", "Car Loan"],
-    "Food"              : ["Groceries", "Restaruants"],
+    "Food"              : ["Groceries", "Restaurants"],
     "Personal"          : ["V-Fun", "N-Fun", "Subscriptions", "Hair"],
     "Insurance"         : ["Auto", "Health", "Dental"],
     "Other"             : ["Cats", "Misc"] 
@@ -108,6 +108,8 @@ class Month():
         self.expense_total = 0
         self.planned_total = 0
         self.categories = self.initialize_cats()
+        self.cat_map = {}
+        self.new = True
 
     def initialize_cats(self):
         temp = {}
