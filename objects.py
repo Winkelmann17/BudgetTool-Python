@@ -80,15 +80,21 @@ class Category():
     def sum_planned(self):
         """Sum the planned values in each expense type."""
         print("PLANNED")
+        temp = 0.00
         for exp in TYPE_DICT[self.name]:
-            self.planned_total += self.expenses[exp].planned
+            print(f"{self.expenses[exp].planned}")
+            temp += self.expenses[exp].planned
+        self.planned_total = temp
 
     def sum_actual(self):
         """Sum the actual values in each expense type."""
         print("ACTUAL")
+        temp = 0.00
         for exp in TYPE_DICT[self.name]:
             for cost in self.expenses[exp].costs:
-                self.actual_total += cost.cost
+                print(f"{cost.cost}")
+                temp += cost.cost
+        self.actual_total = temp
 
     def add_exp_type(self, name):
         pass

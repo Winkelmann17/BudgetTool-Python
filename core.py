@@ -7,7 +7,6 @@
 #           Imports
 # ==========================================================================================================
 import sys
-from time import sleep
 from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, QDialog, QTableWidget, QTableWidgetItem
@@ -16,6 +15,7 @@ from objects import *
 from serializer import *
 from constants import * 
 from helper import *
+from copy import deepcopy
 import re
 
 DEBUG = True
@@ -36,6 +36,8 @@ class MainWindow(QMainWindow):
 
         # Year Buttons
         self.MMXXV.clicked.connect(lambda: self.gotoyear(2025))
+
+# ----------------------------------------------------------------------
 
     def showpopup(self):
         """Function that loads the `newyear.ui` file and takes
@@ -59,7 +61,7 @@ class MainWindow(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
 
-# ----------------------------------------------------------------------------------------------------------
+# ==========================================================================================================
 
 class PopUp(QDialog):
     """Class that implements the various PopUp objects. Loads in a specified
@@ -78,6 +80,8 @@ class PopUp(QDialog):
         self.cancel = self.buttonBox.button(QtWidgets.QDialogButtonBox.StandardButton.Cancel)
         self.cancel.clicked.connect(self.handle_cancel)
 
+# ----------------------------------------------------------------------
+
     def handle_ok(self):
         """Function that handles ok button press. Pulls text and sets 
         response code."""
@@ -93,7 +97,7 @@ class PopUp(QDialog):
         if DEBUG:
             print(self.response_code)
 
-# ----------------------------------------------------------------------------------------------------------
+# ==========================================================================================================
 
 class MonthSelectScreen(QMainWindow):
     """Class that implements the Month Selection Screen. Loads in
@@ -126,6 +130,8 @@ class MonthSelectScreen(QMainWindow):
         self.nov.clicked.connect(lambda: self.gotobudget(self.year, "Nov"))
         self.dec.clicked.connect(lambda: self.gotobudget(self.year, "Dec"))
 
+# ----------------------------------------------------------------------
+
     def gotobudget(self, year, month):
         """Function that loads the budget screen. Takes in the respective
         year and month values to load the correct budget."""
@@ -138,102 +144,172 @@ class MonthSelectScreen(QMainWindow):
         self.old_budget = widget.currentWidget()
 
 
-# ----------------------------------------------------------------------------------------------------------
+# ==========================================================================================================
 
 class BudgetScreen(QMainWindow):
     """Class that implements the Budget Screen. Loads in the 'budget.ui'
     file. This is the most important screen that allows the user to 
     actually budget and update real files."""
 
+    # Class vars
     default_text = "$ - "
+    default_rows = 52
 
-    def __init__(self, serializer, year, month):
+    def __init__(self, serializer, year, month_name):
+        # UI Stuff
         super(BudgetScreen, self).__init__()
         loadUi("rsrc/UI/budget.ui", self)
-        self.serializer = serializer
-        self.year = year
-        defaults = False
 
-
-        self.rows = 52
-        self.month = self.year.months[month]
-        print(f"Here is the month value {self.month}")
-        if self.month.new:
-            print("Generating new Month")
-            self.year.months[month] = Month(month)
-            self.month = self.year.months[month]
-            defaults = True
-            self.cell_names = self.loadtable_defaults()
-            self.month.new = False
-        else:
-            self.cell_names = self.load_from_file()
-
-        print(f"Serializer: {self.serializer}. Year: {self.year}. Month: {self.month}")
         # Connect Action menu items to respective functions
         self.newexpense.clicked.connect(self.go_newexpense)
-        self.actionSave.triggered.connect(self.go_save)
+        self.actionSave.triggered.connect(self.go_save_month_data)
         self.actionBack.triggered.connect(go_back)
-        self.actionHome.triggered.connect(lambda: go_home())
-        self.table.cellClicked.connect(self.go_cellclick)
+        self.actionHome.triggered.connect(go_back)      #TODO: Broken when set to go_home, can't open months
+        # self.table.cellClicked.connect(self.go_cellclick)
 
-        # Load table data
-        #self.loadtable_defaults()
+        # Object Setups
+        self.serializer = serializer
+        self.year = year
+        self.saved_month = self.year.months[month_name]
 
-    def go_cellclick(self, row, col):
-        """Function implements the cell clicked function."""
-        print(f"Cell clicked in {row}, {col}")
-        #TODO: Implement handling of updating Expense List Tab
+        # If the month is completely new
+        if self.saved_month.new:
+            self.working_month = Month(month_name)
+            self.rows = self.default_rows
+            self.loadtable_defaults()
 
-    def go_save(self):
-        """Function that implements the save and update feature."""
-        print("SAVE!")
-        #TODO: Build the save function which will store the data in its appropriate areas and then 
-        # self.go_cellmath
-        # self.loadtable()
-
-        val = self.serializer.serialize(self.year)
-        if val <= 0:
-            print("Error")
+        # Month is not new, and has prior data. Copy to working month
         else:
-            print("We saved epicly!")
+            self.working_month = deepcopy(self.saved_month)
+            self.load_from_file()
+
+# ----------------------------------------------------------------------
 
     def loadtable_defaults(self):
-        """Function that loads in the initial values."""
-        print("LOADING TABLE!")
-        #self.table.setItem(row, 0, QtWidgets.QTableWidgetItem(item))
-        # Iterate through the table and set default values.
+        """Function that loads all boxes with the default text.
+        Creates the months cat_map and returns it."""
+        print("[+] Loading Table Defaults and Creating Cat Map...")
         temp = {}
         for row in range(self.rows):
             temp[self.table.verticalHeaderItem(row).text()] = row
             for col in range(3):
-                #print(f"{row}, {col}")
                 item = self.table.item(row, col)
-                if item.text() == "x":
-                    continue
+                # Put the default text in every single cell
                 item.setText(self.default_text)
-        self.month.cat_map = temp
-        return temp
+        
+        # Return the cat_map
+        self.working_month.cat_map = temp
+    
 
     def load_from_file(self):
-        """Function that loads the data from the pickled year."""
-        for cat in self.month.categories.keys():
-            category = self.month.categories[cat]
+        """Function that loads the data for the saved_month from disk
+        and displays to the table"""
+        print("[+] Loading data from stored year object...")
+
+        # Iterate through data and display it to the table.
+        for cat in self.working_month.categories.keys():
+            category = self.working_month.categories[cat]
             for exp in category.expenses.keys():
                 expense = category.expenses[exp]
-                row = self.month.cat_map[exp]
+                row = self.working_month.cat_map[exp]
                 self.go_update_row(row, expense)
+            self.go_update_totals(cat)
+
+    def go_newexpense(self):
+        """Function that implements the code to perform creating new expense."""
+        print("[+] Opening new expense window...")
+
+        # Create the Window
+        newexpense = PopUp(CREATE_EXPENSE)
+        newexpense.catBox.currentTextChanged.connect(lambda: self.go_update_type_list(newexpense, newexpense.catBox.currentText()))
+        newexpense.typeBox.addItems(TYPE_DICT["Income"])        # Default
+
+        # Loop checking for valid values
+        valid = False
+        cost = 0
+        while not valid:
+            exited = newexpense.exec()
+
+            # Leave the function if cancel or the X is clicked
+            if newexpense.response_code == CANCEL or exited == 0:
+                return
             
-    def go_cellmath(self):
-        """Function that implements the calculations of the budget sheet cells."""
-        print("MATH!")
+            # TODO: Update handling of dates. Date regex?
+            # TODO: Add a way for the user to know that what they are entering sucks eggs
+
+            # OK was clicked, some checks for validity
+            cost_text = newexpense.amountBox.text()
+            if cost_text == "":
+                continue
+            cost = float(re.findall(COST_REGEX, cost_text)[0])
+            if cost < 0.00:
+                continue
+            date = newexpense.dateBox.text()
+
+            # All checks passed, break the loop
+            break
+
+        # Gather the data from what the user entered
+        cat = newexpense.catBox.currentText()
+        exp = newexpense.typeBox.currentText()
+        expense_type = self.working_month.categories[cat].expenses[exp]
+        # Add the cost
+        expense_type.add_cost(exp, cost, date)
+
+        # Get the specific row for the desired expense_type and update it.
+        row = self.working_month.cat_map[exp]
+        self.go_update_row(row, expense_type)
+
+        # Update total for the category
+        self.go_update_totals(cat)
 
 
-    def go_sumcells(self, cat):
-        """Function that calculates the totals for the category"""
-        category = self.month.categories[cat]
+    def go_update_row(self, row, expense_type):
+        """Function that updates the rows and performs the math
+        necessary for proper tracking and display."""
+        planned = self.table.item(row, 0)
+        actual = self.table.item(row, 1)
+        difference = self.table.item(row, 2)
+        diff_calc = expense_type.planned -  expense_type.actual
+
+        # Do the checks for text
+        if expense_type.planned != 0.00:
+            planned.setText(f"${expense_type.planned}")
+        else:
+            planned.setText(self.default_text)
+        if expense_type.actual != 0.00:
+            actual.setText(f"${expense_type.actual}")
+        else:
+            actual.setText(self.default_text)
+        difference.setText(f"${diff_calc}")
+        
+        # TODO: Make the colors nicer to look at
+        # Update the colors of the cells
+        if diff_calc < 0.00:
+            difference.setBackground(QBrush(QColor("red")))
+        elif diff_calc > 0.00:
+            difference.setBackground(QBrush(QColor("green")))
+        else:
+            difference.setBackground(QBrush(QColor("white")))
+            difference.setText(self.default_text)
+
+
+    def go_update_type_list(self, dialog, cat):
+        """Function that updates the second combo box with the appropriate options, when selected."""
+        type_list = self.working_month.categories[cat].expenses
+        dialog.typeBox.clear()
+        dialog.typeBox.addItems(type_list.keys())    
+
+
+    def go_update_totals(self, cat):
+        """Function that calculates the totals for the category."""
+
+        # Get the category and update the totaks.
+        category = self.working_month.categories[cat]
         category.sum_planned()
         category.sum_actual()
-        row = self.cell_names[cat + "_"]
+        print(f"cat_planned_sum: {category.planned_total}, cat_actual_sum: {category.actual_total}")
+        row = self.working_month.cat_map[cat + "_"]
 
         # Find next Total instance
         while self.table.verticalHeaderItem(row).text() != "Total":
@@ -244,78 +320,49 @@ class BudgetScreen(QMainWindow):
         total_actual = self.table.item(row, 1)
         total_difference = self.table.item(row, 2)
         diff_calc = category.planned_total - category.actual_total
-        total_planned.setText(f"${category.planned_total}")
-        total_actual.setText(f"${category.actual_total}")
+        if category.planned_total != 0.0:
+            total_planned.setText(f"${category.planned_total}")
+        else:
+            total_planned.setText(self.default_text)
+        if category.actual_total != 0.00:
+            total_actual.setText(f"${category.actual_total}")
+        else:
+            total_actual.setText(self.default_text)
         total_difference.setText(f"${diff_calc}")
-        if diff_calc < 0:
+
+        # TODO: Make the colors nicer to look at
+        # Update the colors of the cells
+        if diff_calc < 0.00:
             total_difference.setBackground(QBrush(QColor("red")))
-        else:
+        elif diff_calc > 0.00:
             total_difference.setBackground(QBrush(QColor("green")))
-
-    def go_newexpense(self):
-        """Function that implements the code to perform creating new expense."""
-        print("New expense!")
-
-        newexpense = PopUp(CREATE_EXPENSE)
-        newexpense.catBox.currentTextChanged.connect(lambda: self.go_update_type_list(newexpense, newexpense.catBox.currentText()))
-        newexpense.typeBox.addItems(TYPE_DICT["Income"])
-        valid = False
-        cost = 0
-        while not valid:
-            exited = newexpense.exec()
-            if newexpense.response_code == CANCEL or exited == 0:
-                return
-            
-            # TODO: Handle dates differently?
-            cost_text = newexpense.amountBox.text()
-            if cost_text == "":
-                continue
-            cost = float(re.findall(AMOUNT, cost_text)[0])
-            if cost < 0.00:
-                continue
-            date = newexpense.dateBox.text()
-            break
-
-        cat = newexpense.catBox.currentText()
-        exp = newexpense.typeBox.currentText()
-        expense_type = self.month.categories[cat].expenses[exp]
-        expense_type.add_cost(exp, cost, date)
-
-        row = self.cell_names[exp]
-
-        self.go_update_row(row, expense_type)
-
-        # Update total for the category
-        self.go_sumcells(cat)
-    
-    def go_update_row(self, row, expense_type):
-        actual = self.table.item(row, 1)
-        difference = self.table.item(row, 2)
-        diff_calc = expense_type.planned -  expense_type.actual
-        actual.setText(f"${expense_type.actual}")
-        difference.setText(f"${diff_calc}")
-        if diff_calc < 0:
-            difference.setBackground(QBrush(QColor("red")))
         else:
-            difference.setBackground(QBrush(QColor("green")))
-
-
-    def go_update_type_list(self, dialog, cat):
-        """Function that updates the second combo box with the appropriate options, when selected."""
-        type_list = self.month.categories[cat].expenses
-        dialog.typeBox.clear()
-        dialog.typeBox.addItems(type_list.keys())
-        
-        
-        
-
-
-            
+            total_difference.setBackground(QBrush(QColor("white")))
+            total_difference.setText(self.default_text)
 
         
+    def go_save_month_data(self):
+        """Function that writes the working month to the current year object, 
+        and then writes that year object to disk. Also updates the saved_month
+        to allow for continued work."""
+        print("[+] Attempting to save...")
+
+        # Update working month to year object and then save it to disk.
+        self.working_month.new = False
+        self.year.months[self.saved_month.name] = self.working_month
+        val = self.serializer.serialize(self.year)
+
+        # Check for Errors
+        if val <= 0:
+            print("[-] Error occurred while saving.")
+            self.year.months[self.saved_month.name] = self.saved_month  # Restore old data
+        else:
+            print(f"[+] Save complete. {val} bytes written to disk at {self.serializer.file}.")
+            self.saved_month = self.working_month
+
 
 # ==========================================================================================================
-#         Functions
+#         Generic Functions
 # ==========================================================================================================
 def go_back():
     """Function that implements the back feature."""
