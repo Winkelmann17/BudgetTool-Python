@@ -37,6 +37,8 @@ class MainWindow(QMainWindow):
         # Year Buttons
         self.MMXXV.clicked.connect(lambda: self.gotoyear(2025))
 
+# ----------------------------------------------------------------------
+
     def showpopup(self):
         """Function that loads the `newyear.ui` file and takes
         input from the user to create the new year object."""
@@ -59,7 +61,7 @@ class MainWindow(QMainWindow):
         widget.setCurrentIndex(widget.currentIndex() + 1)
 
 
-# ----------------------------------------------------------------------------------------------------------
+# ==========================================================================================================
 
 class PopUp(QDialog):
     """Class that implements the various PopUp objects. Loads in a specified
@@ -78,6 +80,8 @@ class PopUp(QDialog):
         self.cancel = self.buttonBox.button(QtWidgets.QDialogButtonBox.StandardButton.Cancel)
         self.cancel.clicked.connect(self.handle_cancel)
 
+# ----------------------------------------------------------------------
+
     def handle_ok(self):
         """Function that handles ok button press. Pulls text and sets 
         response code."""
@@ -93,7 +97,7 @@ class PopUp(QDialog):
         if DEBUG:
             print(self.response_code)
 
-# ----------------------------------------------------------------------------------------------------------
+# ==========================================================================================================
 
 class MonthSelectScreen(QMainWindow):
     """Class that implements the Month Selection Screen. Loads in
@@ -126,6 +130,8 @@ class MonthSelectScreen(QMainWindow):
         self.nov.clicked.connect(lambda: self.gotobudget(self.year, "Nov"))
         self.dec.clicked.connect(lambda: self.gotobudget(self.year, "Dec"))
 
+# ----------------------------------------------------------------------
+
     def gotobudget(self, year, month):
         """Function that loads the budget screen. Takes in the respective
         year and month values to load the correct budget."""
@@ -138,7 +144,7 @@ class MonthSelectScreen(QMainWindow):
         self.old_budget = widget.currentWidget()
 
 
-# ----------------------------------------------------------------------------------------------------------
+# ==========================================================================================================
 
 class BudgetScreen(QMainWindow):
     """Class that implements the Budget Screen. Loads in the 'budget.ui'
@@ -156,9 +162,9 @@ class BudgetScreen(QMainWindow):
 
         # Connect Action menu items to respective functions
         self.newexpense.clicked.connect(self.go_newexpense)
-        # self.actionSave.triggered.connect(self.go_save)
+        self.actionSave.triggered.connect(self.go_save_month_data)
         self.actionBack.triggered.connect(go_back)
-        self.actionHome.triggered.connect(go_home)
+        self.actionHome.triggered.connect(go_back)      #TODO: Broken when set to go_home, can't open months
         # self.table.cellClicked.connect(self.go_cellclick)
 
         # Object Setups
@@ -176,6 +182,7 @@ class BudgetScreen(QMainWindow):
         else:
             pass
 
+# ----------------------------------------------------------------------
 
     def loadtable_defaults(self):
         """Function that loads all boxes with the default text.
@@ -296,14 +303,28 @@ class BudgetScreen(QMainWindow):
             total_difference.setBackground(QBrush(QColor("green")))    
         
         
+    def go_save_month_data(self):
+        """Function that writes the working month to the current year object, 
+        and then writes that year object to disk. Also updates the saved_month
+        to allow for continued work."""
+        print("[+] Attempting to save...")
 
+        # Update working month to year object and then save it to disk.
+        self.working_month.new = False
+        self.year.months[self.saved_month.name] = self.working_month
+        val = self.serializer.serialize(self.year)
 
-            
+        # Check for Errors
+        if val <= 0:
+            print("[-] Error occurred while saving.")
+            self.year.months[self.saved_month.name] = self.saved_month  # Restore old data
+        else:
+            print(f"[+] Save complete. {val} bytes written to disk at {self.serializer.file}.")
+            self.saved_month = self.working_month
 
-        
 
 # ==========================================================================================================
-#         Functions
+#         Generic Functions
 # ==========================================================================================================
 def go_back():
     """Function that implements the back feature."""
