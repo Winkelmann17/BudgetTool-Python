@@ -106,6 +106,8 @@ class MonthSelectScreen(QMainWindow):
 
         self.serializer = Serializer(year)
         self.year = self.serializer.deserialize()
+        if self.year == None:
+            self.year = Year(year)
         # Connect Action menu items to respective functions
         self.actionBack.triggered.connect(go_back)
         self.actionHome.triggered.connect(go_back)
@@ -128,7 +130,7 @@ class MonthSelectScreen(QMainWindow):
         """Function that loads the budget screen. Takes in the respective
         year and month values to load the correct budget."""
         print(f"{year}, {month}")
-        budgetscreen = BudgetScreen(self.serializer, year, month)
+        budgetscreen = BudgetScreen(self.serializer, self.year, month)
         widget.addWidget(budgetscreen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
     #     widget.currentChanged.connect(lambda: self.budget_cleanup(budgetscreen))
@@ -150,10 +152,9 @@ class BudgetScreen(QMainWindow):
         super(BudgetScreen, self).__init__()
         loadUi("rsrc/UI/budget.ui", self)
         self.serializer = serializer
-        self.year = self.serializer.deserialize()
+        self.year = year
         defaults = False
-        if self.year == None:
-            self.year = Year(year)
+
 
         self.rows = 52
         self.month = self.year.months[month]
