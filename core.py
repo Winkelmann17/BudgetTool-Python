@@ -7,7 +7,6 @@
 #           Imports
 # ==========================================================================================================
 import sys
-from time import sleep
 from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
 from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, QDialog, QTableWidget, QTableWidgetItem
@@ -214,7 +213,7 @@ class BudgetScreen(QMainWindow):
                 expense = category.expenses[exp]
                 row = self.working_month.cat_map[exp]
                 self.go_update_row(row, expense)
-
+            self.go_update_totals(cat)
 
     def go_newexpense(self):
         """Function that implements the code to perform creating new expense."""
@@ -262,24 +261,37 @@ class BudgetScreen(QMainWindow):
         self.go_update_row(row, expense_type)
 
         # Update total for the category
-        self.go_sumcells(cat)
+        self.go_update_totals(cat)
 
 
     def go_update_row(self, row, expense_type):
         """Function that updates the rows and performs the math
         necessary for proper tracking and display."""
+        planned = self.table.item(row, 0)
         actual = self.table.item(row, 1)
         difference = self.table.item(row, 2)
         diff_calc = expense_type.planned -  expense_type.actual
-        actual.setText(f"${expense_type.actual}")
-        difference.setText(f"${diff_calc}")
 
+        # Do the checks for text
+        if expense_type.planned != 0.00:
+            planned.setText(f"${expense_type.planned}")
+        else:
+            planned.setText(self.default_text)
+        if expense_type.actual != 0.00:
+            actual.setText(f"${expense_type.actual}")
+        else:
+            actual.setText(self.default_text)
+        difference.setText(f"${diff_calc}")
+        
         # TODO: Make the colors nicer to look at
         # Update the colors of the cells
         if diff_calc < 0.00:
             difference.setBackground(QBrush(QColor("red")))
-        else:
+        elif diff_calc > 0.00:
             difference.setBackground(QBrush(QColor("green")))
+        else:
+            difference.setBackground(QBrush(QColor("white")))
+            difference.setText(self.default_text)
 
 
     def go_update_type_list(self, dialog, cat):
@@ -289,13 +301,14 @@ class BudgetScreen(QMainWindow):
         dialog.typeBox.addItems(type_list.keys())    
 
 
-    def go_sumcells(self, cat):
+    def go_update_totals(self, cat):
         """Function that calculates the totals for the category."""
 
         # Get the category and update the totaks.
         category = self.working_month.categories[cat]
         category.sum_planned()
         category.sum_actual()
+        print(f"cat_planned_sum: {category.planned_total}, cat_actual_sum: {category.actual_total}")
         row = self.working_month.cat_map[cat + "_"]
 
         # Find next Total instance
@@ -307,17 +320,26 @@ class BudgetScreen(QMainWindow):
         total_actual = self.table.item(row, 1)
         total_difference = self.table.item(row, 2)
         diff_calc = category.planned_total - category.actual_total
-        total_planned.setText(f"${category.planned_total}")
-        total_actual.setText(f"${category.actual_total}")
+        if category.planned_total != 0.0:
+            total_planned.setText(f"${category.planned_total}")
+        else:
+            total_planned.setText(self.default_text)
+        if category.actual_total != 0.00:
+            total_actual.setText(f"${category.actual_total}")
+        else:
+            total_actual.setText(self.default_text)
         total_difference.setText(f"${diff_calc}")
 
         # TODO: Make the colors nicer to look at
         # Update the colors of the cells
         if diff_calc < 0.00:
             total_difference.setBackground(QBrush(QColor("red")))
+        elif diff_calc > 0.00:
+            total_difference.setBackground(QBrush(QColor("green")))
         else:
-            total_difference.setBackground(QBrush(QColor("green")))    
-        
+            total_difference.setBackground(QBrush(QColor("white")))
+            total_difference.setText(self.default_text)
+
         
     def go_save_month_data(self):
         """Function that writes the working month to the current year object, 
