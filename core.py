@@ -16,6 +16,7 @@ from objects import *
 from serializer import *
 from constants import * 
 from helper import *
+from copy import deepcopy
 import re
 
 DEBUG = True
@@ -170,17 +171,18 @@ class BudgetScreen(QMainWindow):
         # Object Setups
         self.serializer = serializer
         self.year = year
-        self.working_month = Month(month_name)
         self.saved_month = self.year.months[month_name]
 
         # If the month is completely new
         if self.saved_month.new:
+            self.working_month = Month(month_name)
             self.rows = self.default_rows
             self.loadtable_defaults()
 
         # Month is not new, and has prior data. Copy to working month
         else:
-            pass
+            self.working_month = deepcopy(self.saved_month)
+            self.load_from_file()
 
 # ----------------------------------------------------------------------
 
@@ -199,6 +201,20 @@ class BudgetScreen(QMainWindow):
         # Return the cat_map
         self.working_month.cat_map = temp
     
+
+    def load_from_file(self):
+        """Function that loads the data for the saved_month from disk
+        and displays to the table"""
+        print("[+] Loading data from stored year object...")
+
+        # Iterate through data and display it to the table.
+        for cat in self.working_month.categories.keys():
+            category = self.working_month.categories[cat]
+            for exp in category.expenses.keys():
+                expense = category.expenses[exp]
+                row = self.working_month.cat_map[exp]
+                self.go_update_row(row, expense)
+
 
     def go_newexpense(self):
         """Function that implements the code to perform creating new expense."""
