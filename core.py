@@ -103,7 +103,7 @@ class MonthSelectScreen(QMainWindow):
         super(MonthSelectScreen, self).__init__()
         
         loadUi("rsrc/UI/months.ui", self)
-
+        self.old_budget = None
         self.serializer = Serializer(year)
         self.year = self.serializer.deserialize()
         if self.year == None:
@@ -130,14 +130,13 @@ class MonthSelectScreen(QMainWindow):
         """Function that loads the budget screen. Takes in the respective
         year and month values to load the correct budget."""
         print(f"{year}, {month}")
+        if self.old_budget != None:
+            widget.removeWidget(self.old_budget)
         budgetscreen = BudgetScreen(self.serializer, self.year, month)
         widget.addWidget(budgetscreen)
         widget.setCurrentIndex(widget.currentIndex() + 1)
-    #     widget.currentChanged.connect(lambda: self.budget_cleanup(budgetscreen))
+        self.old_budget = widget.currentWidget()
 
-    # def budget_cleanup(self, screen):
-    #     del screen
-    #     print("deleted screen")
 
 # ----------------------------------------------------------------------------------------------------------
 
