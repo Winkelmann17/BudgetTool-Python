@@ -9,7 +9,7 @@
 import sys
 from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, QDialog, QTableWidget, QTableWidgetItem
+from PyQt6.QtWidgets import QMainWindow, QApplication, QStackedWidget, QDialog
 from PyQt6.QtGui import QColor, QBrush
 from objects import *
 from serializer import *
