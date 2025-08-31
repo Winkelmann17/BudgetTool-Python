@@ -1,4 +1,7 @@
 __pycache__/objects.cpython-310.pyc
 __pycache__/*
+__pycache__
 .vscode
 .vscode/*
+/data/backup/*.dat
+/data/years/*.dat
