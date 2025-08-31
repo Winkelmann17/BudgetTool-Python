@@ -9,7 +9,7 @@
 import sys
 from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QApplication, QWidget, QStackedWidget, QDialog, QTableWidget, QTableWidgetItem
+from PyQt6.QtWidgets import QMainWindow, QApplication, QStackedWidget, QDialog
 from PyQt6.QtGui import QColor, QBrush
 from objects import *
 from serializer import *
@@ -165,7 +165,8 @@ class BudgetScreen(QMainWindow):
         self.actionSave.triggered.connect(self.go_save_month_data)
         self.actionBack.triggered.connect(go_back)
         self.actionHome.triggered.connect(go_back)      #TODO: Broken when set to go_home, can't open months
-        # self.table.cellClicked.connect(self.go_cellclick)
+        self.table.itemChanged.connect(self.go_update_planned)
+        self.ignore_cell_changes = True
 
         # Object Setups
         self.serializer = serializer
@@ -196,6 +197,7 @@ class BudgetScreen(QMainWindow):
                 item = self.table.item(row, col)
                 # Put the default text in every single cell
                 item.setText(self.default_text)
+        self.ignore_cell_changes = False
         
         # Return the cat_map
         self.working_month.cat_map = temp
@@ -214,6 +216,45 @@ class BudgetScreen(QMainWindow):
                 row = self.working_month.cat_map[exp]
                 self.go_update_row(row, expense)
             self.go_update_totals(cat)
+
+        # Update cell change bool
+        self.ignore_cell_changes = False
+        
+
+    def go_update_planned(self, item):
+        """Function that updates the values in the table 
+        after a new planned value is set by the user."""
+        if self.ignore_cell_changes:
+            return
+        print(f"[+] Edit for cell found in {item.row()}, {item.column()}")
+        cell_text = item.text()
+        try:
+            amount = float(re.findall(COST_REGEX, cell_text)[0])
+        except:
+            print("[-] Bad input, setting to zero")
+            amount = 0.00
+
+        exp = self.table.verticalHeaderItem(item.row()).text()
+        print(f"Expense_type edited: {exp}")
+
+        # Get the cat and the expense type
+        cat = None
+        for key, value in TYPE_DICT.items():
+            if exp in value:
+                cat = key
+                break
+        print(f"Category: {cat}")
+        expense_type = self.working_month.categories[cat].expenses[exp]
+
+        # Set the expense type and then update cell
+        expense_type.set_planned(amount)
+        self.go_update_row(item.row(), expense_type)
+        self.go_update_totals(cat)
+    
+
+        
+
+
 
     def go_newexpense(self):
         """Function that implements the code to perform creating new expense."""
@@ -267,6 +308,8 @@ class BudgetScreen(QMainWindow):
     def go_update_row(self, row, expense_type):
         """Function that updates the rows and performs the math
         necessary for proper tracking and display."""
+        self.ignore_cell_changes = True
+
         planned = self.table.item(row, 0)
         actual = self.table.item(row, 1)
         difference = self.table.item(row, 2)
@@ -293,6 +336,9 @@ class BudgetScreen(QMainWindow):
             difference.setBackground(QBrush(QColor("white")))
             difference.setText(self.default_text)
 
+        # Change bool back
+        self.ignore_cell_changes = False
+
 
     def go_update_type_list(self, dialog, cat):
         """Function that updates the second combo box with the appropriate options, when selected."""
@@ -303,8 +349,8 @@ class BudgetScreen(QMainWindow):
 
     def go_update_totals(self, cat):
         """Function that calculates the totals for the category."""
-
-        # Get the category and update the totaks.
+        self.ignore_cell_changes = True
+        # Get the category and update the totals.
         category = self.working_month.categories[cat]
         category.sum_planned()
         category.sum_actual()
@@ -339,6 +385,9 @@ class BudgetScreen(QMainWindow):
         else:
             total_difference.setBackground(QBrush(QColor("white")))
             total_difference.setText(self.default_text)
+
+        # Update bool
+        self.ignore_cell_changes = False
 
         
     def go_save_month_data(self):
@@ -378,8 +427,6 @@ def go_home():
 # ==========================================================================================================
 #           Main
 # ==========================================================================================================
-# Setup Code
-
 # Application Run Code
 app = QApplication(sys.argv)
 welcome=MainWindow()
