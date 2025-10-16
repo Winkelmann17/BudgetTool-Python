@@ -217,6 +217,10 @@ class BudgetScreen(QMainWindow):
                 self.go_update_row(row, expense)
             self.go_update_totals(cat)
 
+        # Put the prior information
+        self.go_overview_update()
+        self.notesBox.setText(self.working_month.notes)
+
         # Update cell change bool
         self.ignore_cell_changes = False
         
@@ -265,44 +269,45 @@ class BudgetScreen(QMainWindow):
         newexpense.catBox.currentTextChanged.connect(lambda: self.go_update_type_list(newexpense, newexpense.catBox.currentText()))
         newexpense.typeBox.addItems(TYPE_DICT["Income"])        # Default
 
-        # Loop checking for valid values
-        valid = False
-        cost = 0
-        while not valid:
-            exited = newexpense.exec()
+        while True:
+            # Loop checking for valid values
+            valid = False
+            cost = 0
+            while not valid:
+                exited = newexpense.exec()
 
-            # Leave the function if cancel or the X is clicked
-            if newexpense.response_code == CANCEL or exited == 0:
-                return
-            
-            # TODO: Update handling of dates. Date regex?
-            # TODO: Add a way for the user to know that what they are entering sucks eggs
+                # Leave the function if cancel or the X is clicked
+                if newexpense.response_code == CANCEL or exited == 0:
+                    return
 
-            # OK was clicked, some checks for validity
-            cost_text = newexpense.amountBox.text()
-            if cost_text == "":
-                continue
-            cost = float(re.findall(COST_REGEX, cost_text)[0])
-            if cost < 0.00:
-                continue
-            date = newexpense.dateBox.text()
-            desc = newexpense.descBox.text()
-            # All checks passed, break the loop
-            break
+                # TODO: Update handling of dates. Date regex?
+                # TODO: Add a way for the user to know that what they are entering sucks eggs
 
-        # Gather the data from what the user entered
-        cat = newexpense.catBox.currentText()
-        exp = newexpense.typeBox.currentText()
-        expense_type = self.working_month.categories[cat].expenses[exp]
-        # Add the cost
-        expense_type.add_cost(desc, cost, date)
+                # OK was clicked, some checks for validity
+                cost_text = newexpense.amountBox.text()
+                if cost_text == "":
+                    continue
+                cost = float(re.findall(COST_REGEX, cost_text)[0])
+                if cost < 0.00:
+                    continue
+                date = newexpense.dateBox.text()
+                desc = newexpense.descBox.text()
+                # All checks passed, break the loop
+                break
 
-        # Get the specific row for the desired expense_type and update it.
-        row = self.working_month.cat_map[exp]
-        self.go_update_row(row, expense_type)
+            # Gather the data from what the user entered
+            cat = newexpense.catBox.currentText()
+            exp = newexpense.typeBox.currentText()
+            expense_type = self.working_month.categories[cat].expenses[exp]
+            # Add the cost
+            expense_type.add_cost(desc, cost, date)
 
-        # Update total for the category
-        self.go_update_totals(cat)
+            # Get the specific row for the desired expense_type and update it.
+            row = self.working_month.cat_map[exp]
+            self.go_update_row(row, expense_type)
+
+            # Update total for the category
+            self.go_update_totals(cat)
 
 
     def go_update_row(self, row, expense_type):
@@ -390,6 +395,7 @@ class BudgetScreen(QMainWindow):
         self.ignore_cell_changes = False
 
 
+
     def go_overview_update(self):
         """Function that updates the overview data in the tabs to the right of 
         of the screen."""
@@ -414,6 +420,9 @@ class BudgetScreen(QMainWindow):
                 self.working_month.planned_total += self.working_month.categories[cat].planned_total
                 self.working_month.expense_total += self.working_month.categories[cat].actual_total
             
+        # Save the notes
+        self.working_month.notes = self.notesBox.toPlainText()
+        print(self.working_month.notes)
 
         # Update working month to year object and then save it to disk.
         self.working_month.new = False

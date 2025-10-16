@@ -1645,7 +1645,7 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="notesBox">
     <property name="geometry">
      <rect>
       <x>440</x>
