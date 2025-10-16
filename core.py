@@ -1,7 +1,7 @@
 ############################################################################################################
 # Nicholas Winkelmann
 # Desc: Backend UI Code
-# Last Updated: 10 Jul 2025
+# Last Updated: 16 Oct 2025
 ############################################################################################################
 # ==========================================================================================================
 #           Imports
@@ -308,6 +308,9 @@ class BudgetScreen(QMainWindow):
 
             # Update total for the category
             self.go_update_totals(cat)
+
+            # Add the expense to the expense list
+            
 
 
     def go_update_row(self, row, expense_type):
