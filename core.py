@@ -286,7 +286,7 @@ class BudgetScreen(QMainWindow):
             if cost < 0.00:
                 continue
             date = newexpense.dateBox.text()
-
+            desc = newexpense.descBox.text()
             # All checks passed, break the loop
             break
 
@@ -295,7 +295,7 @@ class BudgetScreen(QMainWindow):
         exp = newexpense.typeBox.currentText()
         expense_type = self.working_month.categories[cat].expenses[exp]
         # Add the cost
-        expense_type.add_cost(exp, cost, date)
+        expense_type.add_cost(desc, cost, date)
 
         # Get the specific row for the desired expense_type and update it.
         row = self.working_month.cat_map[exp]
@@ -389,12 +389,31 @@ class BudgetScreen(QMainWindow):
         # Update bool
         self.ignore_cell_changes = False
 
+
+    def go_overview_update(self):
+        """Function that updates the overview data in the tabs to the right of 
+        of the screen."""
+        self.plannedBox.setText(f"Planned Total: ${self.saved_month.planned_total}")
+        self.actualBox.setText(f"Actual Total: ${self.saved_month.expense_total}")
+        self.leftoverBox.setText(f"Leftover: ${self.saved_month.planned_total - self.saved_month.expense_total}")
+
+
         
     def go_save_month_data(self):
         """Function that writes the working month to the current year object, 
         and then writes that year object to disk. Also updates the saved_month
         to allow for continued work."""
         print("[+] Attempting to save...")
+
+        # Update Month totals
+        self.working_month.income_total = self.working_month.categories["Income"].planned_total
+        self.working_month.planned_total = 0
+        self.working_month.expense_total = 0
+        for cat in CATEGORIES:
+            if cat !=  "Income":
+                self.working_month.planned_total += self.working_month.categories[cat].planned_total
+                self.working_month.expense_total += self.working_month.categories[cat].actual_total
+            
 
         # Update working month to year object and then save it to disk.
         self.working_month.new = False
@@ -408,6 +427,9 @@ class BudgetScreen(QMainWindow):
         else:
             print(f"[+] Save complete. {val} bytes written to disk at {self.serializer.file}.")
             self.saved_month = self.working_month
+        
+        # Update the overview tab
+        self.go_overview_update()
 
 
 # ==========================================================================================================

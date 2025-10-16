@@ -33,7 +33,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>-1236</y>
+       <y>0</y>
        <width>392</width>
        <height>3000</height>
       </rect>
@@ -1461,7 +1461,7 @@
       <property name="geometry">
        <rect>
         <x>80</x>
-        <y>1670</y>
+        <y>1710</y>
         <width>91</width>
         <height>24</height>
        </rect>
@@ -1490,7 +1490,7 @@
       <property name="geometry">
        <rect>
         <x>200</x>
-        <y>1670</y>
+        <y>1710</y>
         <width>91</width>
         <height>24</height>
        </rect>
@@ -1672,12 +1672,60 @@ border-color: rgb(85, 255, 255);</string>
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
-    <widget class="QWidget" name="tab">
+    <widget class="QWidget" name="overview">
      <attribute name="title">
-      <string>Planned</string>
+      <string>Overview</string>
      </attribute>
+     <widget class="QLabel" name="plannedBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Planned Total:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="actualBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Actual Total:</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="leftoverBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>141</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Leftover:</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
