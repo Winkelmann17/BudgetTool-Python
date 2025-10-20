@@ -9,8 +9,9 @@
 import sys
 from PyQt6.uic import loadUi
 from PyQt6 import QtWidgets
-from PyQt6.QtWidgets import QMainWindow, QApplication, QStackedWidget, QDialog
-from PyQt6.QtGui import QColor, QBrush
+from PyQt6.QtWidgets import QMainWindow, QApplication, QStackedWidget, QDialog, QMenu
+from PyQt6.QtGui import QColor, QBrush, QAction
+from PyQt6.QtCore import Qt, QPoint
 from objects import *
 from serializer import *
 from constants import * 
@@ -167,7 +168,9 @@ class BudgetScreen(QMainWindow):
         self.actionHome.triggered.connect(go_back)      #TODO: Broken when set to go_home, can't open months
         self.table.itemChanged.connect(self.go_update_planned)
         self.table.cellClicked.connect(self.go_update_list)
-        
+        self.expList.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.expList.customContextMenuRequested.connect(self.open_list_menu)
+
         self.ignore_cell_changes = True
 
         # Object Setups
@@ -185,6 +188,10 @@ class BudgetScreen(QMainWindow):
         else:
             self.working_month = deepcopy(self.saved_month)
             self.load_from_file()
+
+        # Memory?
+        self.last_exp = None
+        self.last_cat = None
 
 # ----------------------------------------------------------------------
 
@@ -268,11 +275,64 @@ class BudgetScreen(QMainWindow):
         if exp_type != "Total":
             # Clear for updating
             self.expList.clear()
+            self.last_exp = exp_type
 
             # Add each expense with the associated data.
             for cost in self.working_month.categories[REVERSE_TYPE_DICT[exp_type]].expenses[exp_type].costs:
                 print(f"We are in the for loop: {cost.name}")
                 self.expList.addItem(f"{cost.date} - {cost.name} - ${cost.cost}")
+        else:
+            self.last_exp = None
+
+    def open_list_menu(self, position: QPoint):
+        print("DELETE EXPENSE BRUH")
+        item = self.expList.itemAt(position)
+        if not item:
+            return  # clicked empty space, ignore
+        row = self.expList.row(item)
+        # Create the context menu
+        menu = QMenu(self)
+
+        # Define actions
+        edit_action = QAction("Edit", self)
+        delete_action = QAction("Delete", self)
+        
+
+        # Connect them to handlers
+        edit_action.triggered.connect(lambda: self.rename_item(item, row))
+        delete_action.triggered.connect(lambda: self.delete_item(item, row))
+
+        # Add to the menu
+        menu.addAction(edit_action)
+        menu.addSeparator()
+        menu.addAction(delete_action)
+
+        # Show at mouse cursor position
+        menu.exec(self.expList.viewport().mapToGlobal(position))
+
+    def edit_item(self, item, position):
+        #TODO: Make another popup instance that handles changing the information about an expense
+        print("Editing item in Expense List!")
+
+    def delete_item(self, item, index):
+        # Remove from the expense object
+        data = item.text().split(" - ")
+
+        print(f"Target position: {index}")
+        cat = self.working_month.categories[REVERSE_TYPE_DICT[self.last_exp]]
+        exp = cat.expenses[self.last_exp]
+        costs = exp.costs
+        removed = costs.pop(index)
+
+        exp.set_actual(exp.actual - removed.cost)
+
+        row = self.working_month.cat_map[self.last_exp]
+        self.go_update_row(row, exp)
+
+        # Remove from List
+        row = self.expList.row(item)
+        self.expList.takeItem(row)
+        self.go_update_totals(cat.name)
 
 
     def go_newexpense(self):
