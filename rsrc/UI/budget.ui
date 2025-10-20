@@ -1672,7 +1672,7 @@ border-color: rgb(85, 255, 255);</string>
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="overview">
      <attribute name="title">
@@ -1741,7 +1741,7 @@ border-color: rgb(85, 255, 255);</string>
      <attribute name="title">
       <string>Expense List</string>
      </attribute>
-     <widget class="QListWidget" name="list">
+     <widget class="QListWidget" name="expList">
       <property name="geometry">
        <rect>
         <x>0</x>

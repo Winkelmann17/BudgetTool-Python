@@ -166,6 +166,8 @@ class BudgetScreen(QMainWindow):
         self.actionBack.triggered.connect(go_back)
         self.actionHome.triggered.connect(go_back)      #TODO: Broken when set to go_home, can't open months
         self.table.itemChanged.connect(self.go_update_planned)
+        self.table.cellClicked.connect(self.go_update_list)
+        
         self.ignore_cell_changes = True
 
         # Object Setups
@@ -256,8 +258,21 @@ class BudgetScreen(QMainWindow):
         self.go_update_totals(cat)
     
 
-        
+    def go_update_list(self, row):
+        """Function that updates the list of expenses for each
+        expense category when clicked on."""   
+        print(f"This row was selected: {row}")
+        exp_type = self.table.verticalHeaderItem(row).text()
+        print(exp_type)
 
+        if exp_type != "Total":
+            # Clear for updating
+            self.expList.clear()
+
+            # Add each expense with the associated data.
+            for cost in self.working_month.categories[REVERSE_TYPE_DICT[exp_type]].expenses[exp_type].costs:
+                print(f"We are in the for loop: {cost.name}")
+                self.expList.addItem(f"{cost.date} - {cost.name} - ${cost.cost}")
 
 
     def go_newexpense(self):
@@ -308,8 +323,6 @@ class BudgetScreen(QMainWindow):
 
             # Update total for the category
             self.go_update_totals(cat)
-
-            # Add the expense to the expense list
             
 
 

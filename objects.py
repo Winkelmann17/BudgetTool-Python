@@ -19,6 +19,11 @@ TYPE_DICT = {
     "Insurance"         : ["Auto", "Health", "Dental"],
     "Other"             : ["Cats", "Misc"] 
 }
+REVERSE_TYPE_DICT = {
+    subitem: key
+    for key, values in TYPE_DICT.items()
+    for subitem in values
+}
 PLANNED = 0
 ACTUAL = 1
 
