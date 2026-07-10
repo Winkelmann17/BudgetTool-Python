@@ -8,5 +8,13 @@ Last Updated: 10 July 2026
 Recent Changes:
 - Dedicated File
 """
-
+# Screen paths
 BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreen.ui"
+
+# Object Data
+MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+
+PLANNED = 0
+ACTUAL = 1
+
+# EOF
