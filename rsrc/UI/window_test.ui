@@ -1,0 +1,648 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>982</width>
+    <height>636</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QFrame" name="frame_2">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>407</width>
+           <height>0</height>
+          </size>
+         </property>
+         <attribute name="horizontalHeaderCascadingSectionResizes">
+          <bool>false</bool>
+         </attribute>
+         <row>
+          <property name="text">
+           <string>_INCOME_</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Income 1</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Income 2</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Income 3</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Income 4</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Extra/Other 1</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Extra/Other 2</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Total</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>_SAVINGS_</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>New Car</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>ROTHs</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Flights</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Gifts</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Total</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>_GIVING_</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Church</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Focus</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Total</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>_HOUSING_</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Mortgage</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Water</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Electricity</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Phone</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Internet</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Total</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>_TRANSPO_</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Gas</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Maintenance</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Total</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>_FOOD_</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Groceries</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Restaurants</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Total</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>_PERSONAL_</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>N_Fun</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>V_Fun</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Subscriptions</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Total</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>_INSURANCE_</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Car</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Health</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Dental</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Vision</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Total</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>_OTHER_</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Cats</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Misc</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Total</string>
+          </property>
+         </row>
+         <column>
+          <property name="text">
+           <string>Planned</string>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Actual</string>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Difference</string>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+           </font>
+          </property>
+         </column>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Plain</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QFrame" name="frame_3">
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QTabWidget" name="tabWidget">
+            <property name="currentIndex">
+             <number>1</number>
+            </property>
+            <widget class="QWidget" name="tab_1">
+             <attribute name="title">
+              <string>Overview</string>
+             </attribute>
+            </widget>
+            <widget class="QWidget" name="tab_3">
+             <attribute name="title">
+              <string>Expense List</string>
+             </attribute>
+             <layout class="QVBoxLayout" name="verticalLayout_4">
+              <item>
+               <widget class="QListWidget" name="listWidget">
+                <item>
+                 <property name="text">
+                  <string>Forst</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Fortnite</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Balls</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>New Item</string>
+                 </property>
+                </item>
+                <item>
+                 <property name="text">
+                  <string>Epic</string>
+                 </property>
+                </item>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tab_2">
+             <attribute name="title">
+              <string>Spending Histogram</string>
+             </attribute>
+            </widget>
+            <widget class="QWidget" name="tab_0">
+             <attribute name="title">
+              <string>Spending Pie Chart</string>
+             </attribute>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="frame_4">
+         <property name="frameShape">
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Plain</enum>
+         </property>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Notes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPlainTextEdit" name="plainTextEdit"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QFrame" name="frame_5">
+            <property name="frameShape">
+             <enum>QFrame::Box</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QPushButton" name="pushButton_0">
+               <property name="text">
+                <string>Save</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_1">
+               <property name="text">
+                <string>Copy Last Month</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_2">
+               <property name="text">
+                <string>New Category</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_3">
+               <property name="text">
+                <string>Remove Category</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_5">
+               <property name="text">
+                <string>???</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>982</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionSave"/>
+    <addaction name="actionImport_from"/>
+    <addaction name="separator"/>
+    <addaction name="actionBack"/>
+    <addaction name="actionHome"/>
+   </widget>
+   <addaction name="menuOptions"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionImport">
+   <property name="text">
+    <string>Import</string>
+   </property>
+  </action>
+  <action name="actionImport_from">
+   <property name="text">
+    <string>Import from...</string>
+   </property>
+  </action>
+  <action name="actionHome">
+   <property name="text">
+    <string>Homepage</string>
+   </property>
+  </action>
+  <action name="actionBack">
+   <property name="text">
+    <string>Back to Months</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

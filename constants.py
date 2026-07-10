@@ -1,14 +1,12 @@
-# UI Files
-MAIN = "rsrc/UI/main.ui"
-CREATE_YEAR = "rsrc/UI/newYear.ui"
-CREATE_EXPENSE = "rsrc/UI/expense.ui"
+""""
+This program was written by Nicholas Winkelmann. 
+Github:
 
-# Errors
-NUM_ERROR = "You did not enter a valid number!"
+This code serves all constants used within the WinkelBudget program.
 
-# Response Codes
-OK = 0
-CANCEL = 1
+Last Updated: 10 July 2026
+Recent Changes:
+- Dedicated File
+"""
 
-# Regex
-COST_REGEX = r"(-?(?:\d+\.\d{1,2}|\d+\.|\.\d{1,2}|\d+))"
+BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreen.ui"
