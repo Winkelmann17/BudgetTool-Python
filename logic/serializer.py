@@ -30,8 +30,8 @@ class Serializer():
         self.month = month
         self.year = year
         self.filepath = f"./data/{year}/{month}.dat"
-        self.copyname = f"./data/{year}/COPY_{month}.dat"
-        self.backup_path = f"./data/backup/{year}/{month}.dat"
+        self.copypath = f"./data/{year}/COPY_{month}.dat"
+        self.backup_path = f"./data/backup/{year}/{month}"
 
     
     def serialize(self, obj):
@@ -71,4 +71,57 @@ class Serializer():
         return loaded_target
 
 
+    def open_read_close(self, name):
+        """
+        Function that opens a file, reads, writes, and closes the file.
+        """
+        # Open the file, read, and then print the contents, and close.
+        print("IN OPEN READ")
+        try:
+            size = self.file_size(name)
+            f = open(name, "rb")
+            # Account for partial reads
+            text= bytearray()
+            while len(text) < size:
+                text += f.read()
+            f.close()
+            return text
+            
+        except Exception as e:
+            print(f"Exception occurred in file opening. {e}")
+            return None
+        
+
+    def file_size(self, name):
+        # Return file size
+        try :
+            size = os.stat(name).st_size
+            return size
+        except Exception as e:
+            print(f"{e} : Error occurred finding file information.")
+
+
+    def move_to_backups(self):
+        """Function that moves old Year objects to the backup folder in order
+        to preserve their values in case anything bad occurs during saves.
+        Able to be loaded later by dragging into proper file location."""
+        date = dt.datetime.now()
+        backup_name = f"{self.backup_path}_{date.year}_{date.day}_{date.month}_{date.time()}.dat"
+        try:
+            os.rename(self.filepath, backup_name)
+            return True
+        except Exception as e:
+            print(f"{e}: Error occured when creating backup.")
+            return False
+        
+
+    def close_out(self):
+        """Function called on close out of the program. Saves copy.dat file 
+        that has stored all changes to the original file name. Then stores
+        backup."""
+        self.move_to_backups()
+        try:
+            os.rename(self.copypath, self.filepath)
+        except Exception as e:
+            print(f"{e}: Error renaming file to proper name.")
 # EOF

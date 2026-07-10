@@ -35,11 +35,15 @@ class MainWindow(QMainWindow):
         # Load the First UI Page
         loadUi(BUDGETSCREEN_UI, self)
 
+
+
+
         print(f"The month is {MONTHS[month]} and the year is {year}.")  # Delete this later
 
         self.statusbar.showMessage(f"Welcome! This is the budget for {MONTHS[month]} in {year}")
 
         self.month = Month(MONTHS[month], year) # this will be decided by UI later, placeholder for now
-        self.serializer = Serializer(month, year)
+        self.serializer = Serializer(self.month.name, self.month.year)
 
+        self.serializer.serialize(self.month)
 # EOF
