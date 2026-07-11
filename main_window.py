@@ -20,6 +20,8 @@ from constants import *
 from logic.objects import Month
 from logic.serializer import Serializer
 
+from screens.budget_screen import BudgetScreen
+
 # ===================================================================
 #           Classes
 # ===================================================================
@@ -32,18 +34,16 @@ class MainWindow(QMainWindow):
     def __init__(self, month, year):
         super().__init__()
 
-        # Load the First UI Page
-        loadUi(BUDGETSCREEN_UI, self)
+        # Load the MainWindow UI 
+        loadUi(MAINWINDOW_UI, self)
 
+        # Add the BudgetScreen UI into the stacked widget for screen changing
+        self.budget_screen = BudgetScreen(month, year)
+        self.stackedWidget.addWidget(self.budget_screen)
 
-
-
-        print(f"The month is {MONTHS[month]} and the year is {year}.")  # Delete this later
-
+        # Populate Status bar for fun
         self.statusbar.showMessage(f"Welcome! This is the budget for {MONTHS[month]} in {year}")
+        
 
-        self.month = Month(MONTHS[month], year) # this will be decided by UI later, placeholder for now
-        self.serializer = Serializer(self.month.name, self.month.year)
-
-        self.serializer.serialize(self.month)
+        #self.stackedWidget.setCurrentIndex(0)
 # EOF

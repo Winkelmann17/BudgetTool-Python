@@ -9,7 +9,8 @@ Recent Changes:
 - Dedicated File
 """
 # Screen paths
-BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreen.ui"
+MAINWINDOW_UI = "./rsrc/UI/MainWindow.ui"
+BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreenWidget.ui"
 
 # Object Data
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
