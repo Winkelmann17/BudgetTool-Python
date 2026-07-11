@@ -38,12 +38,9 @@ class MainWindow(QMainWindow):
         loadUi(MAINWINDOW_UI, self)
 
         # Add the BudgetScreen UI into the stacked widget for screen changing
-        self.budget_screen = BudgetScreen(month, year)
+        # Pass in the statusbar so it can be used
+        self.budget_screen = BudgetScreen(month, year, self.statusbar)
         self.stackedWidget.addWidget(self.budget_screen)
-
-        # Populate Status bar for fun
-        self.statusbar.showMessage(f"Welcome! This is the budget for {MONTHS[month]} in {year}")
-        
 
         #self.stackedWidget.setCurrentIndex(0)
 # EOF

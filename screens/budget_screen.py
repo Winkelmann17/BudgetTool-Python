@@ -29,16 +29,21 @@ class BudgetScreen(QWidget):
     source of the interactive code for the Budget Screen. Loaded by
     main_window.py.
     """
-    def __init__(self, month, year):
+    def __init__(self, month, year, statusbar):
         super().__init__()
 
         # Load the First UI Page
         loadUi(BUDGETSCREEN_UI, self)
+        self.statusbar = statusbar
 
         # Setup Month handler data
-        self.month = Month(MONTHS[month], year) # this will be decided by UI later, placeholder for now
-        self.serializer = Serializer(self.month.name, self.month.year)
-
+        self.old_budget = None
+        self.serializer = Serializer(month, year)
+        self.month = self.serializer.deserialize()
+        if self.month == None:
+            self.statusbar.showMessage("LIGMA! No months :((((")
+            self.month = Month(month, year)
+  
         # Connect buttons to functions
         self.pushButton_0.clicked.connect(lambda: self.serializer.serialize(self.month))
 # EOF

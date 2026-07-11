@@ -6,8 +6,8 @@ This code serves as the main entry point for WinkelBudget.
 
 Last Updated: 10 July 2026
 Recent Changes:
-- Overhauling UI
 - Simplifying code
+- Made this the main entry point of WinkelBudget
 """
 # ===================================================================
 #           Imports
