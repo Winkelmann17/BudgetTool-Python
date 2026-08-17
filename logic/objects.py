@@ -31,8 +31,8 @@ class Month():
         self.planned_total = 0
         self.rows = 48
         self.cols = 3
-        self.categories = {}
-        self.cat_map = {}
+        self.categories = self.initialize_cats()
+        self.cat_exp_listing = DEFAULT_TYPE_DICT
 
 # -------------------------------------------------------------------
     def initialize_cats(self):
@@ -41,12 +41,17 @@ class Month():
             temp[cat] = Category(cat)
         
         return temp
+
+    def initialize_catmap(self):
+        pass
 # ===================================================================
 #           Category
 # ===================================================================
 class Category():
     def __init__(self, name):
         self.name = name
+        self.planned_total = 0
+        self.actual_total = 0
         self.expenses = self.initialize_expenses()
 
 # -------------------------------------------------------------------

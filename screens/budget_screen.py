@@ -31,12 +31,13 @@ class BudgetScreen(QWidget):
     """
 
     default_text = "$ - "
+    total_text = "Total"
 
     def __init__(self, month, year, statusbar):
         super().__init__()
 
         # Load the First UI Page
-        loadUi(BUDGETSCREEN_UI, self)
+        loadUi(TEST_UI, self)
         self.statusbar = statusbar
 
         # Setup Month handler data
@@ -46,7 +47,8 @@ class BudgetScreen(QWidget):
         if self.month == None:
             self.statusbar.showMessage("LIGMA! No months :((((")
             self.month = Month(month, year)
-            self.loadtable_defaults()
+            #self.loadtable_defaults()
+        self.catmap = self.loadtable()
   
         # Connect buttons to functions
         self.saveButton.clicked.connect(lambda: self.serializer.serialize(self.month))
@@ -81,6 +83,78 @@ class BudgetScreen(QWidget):
         
         # Save the cat map for the new month
         self.month.cat_map = temp
+
+
+    def loadtable(self):
+        """Function that loads all table values from the stored data
+        within the loaded month object. Returns the category map for 
+        the working month for better data editing."""
+        temp = {}
+        row = 0
+        # Get categories from loaded month
+        for category in self.month.categories.keys():
+            # Add category row for dilineation
+            temp[category] = row
+            row_name = f"_{category.upper()}_"
+            self.budgetTable.insertRow(row)
+            self.budgetTable.setVerticalHeaderItem(row, QTableWidgetItem(row_name))
+            row += 1
+
+            expenses = self.month.cat_exp_listing[category]
+            for exp in expenses:
+                temp[exp] = row
+
+                # Setup table
+                self.budgetTable.insertRow(row)
+                self.budgetTable.setVerticalHeaderItem(row, QTableWidgetItem(exp))
+
+                planned = self.month.categories[category].expenses[exp].planned
+                actual = self.month.categories[category].expenses[exp].actual
+                diff = planned - actual
+                if planned == 0:
+                    planned_text= self.default_text
+                else:
+                    planned_text = f"${planned:.2f}"
+                if actual == 0: 
+                    actual_text = self.default_text
+                else:
+                    actual_text = f"${actual:.2f}"
+                if diff == 0:
+                    diff_text = self.default_text
+                else:
+                    diff_text = f"${diff:.2f}"
+                self.budgetTable.setItem(row, 0, QTableWidgetItem(planned_text))
+                self.budgetTable.setItem(row, 1, QTableWidgetItem(actual_text))
+                self.budgetTable.setItem(row, 2, QTableWidgetItem(diff_text))
+
+                row+= 1
+            # Add Total for Category
+            total_key = f"{category}_total"
+            temp[total_key] = row
+            self.budgetTable.insertRow(row)
+            self.budgetTable.setVerticalHeaderItem(row, QTableWidgetItem(self.total_text))
+
+            planned = self.month.categories[category].planned_total
+            actual = self.month.categories[category].actual_total
+            diff = planned - actual
+            if planned == 0:
+                planned_text= self.default_text
+            else:
+                planned_text = f"${planned:.2f}"
+            if actual == 0: 
+                actual_text = self.default_text
+            else:
+                actual_text = f"${actual:.2f}"
+            if diff == 0:
+                diff_text = self.default_text
+            else:
+                diff_text = f"${diff:.2f}"
+            self.budgetTable.setItem(row, 0, QTableWidgetItem(planned_text))
+            self.budgetTable.setItem(row, 1, QTableWidgetItem(actual_text))
+            self.budgetTable.setItem(row, 2, QTableWidgetItem(diff_text))
+            row += 1
+
+        return temp
 
 # ----------------------------------------------------------------------------
 

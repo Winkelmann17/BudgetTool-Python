@@ -11,6 +11,7 @@ Recent Changes:
 # Screen paths
 MAINWINDOW_UI = "./rsrc/UI/MainWindow.ui"
 BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreenWidget.ui"
+TEST_UI = "./rsrc/UI/TableTest.ui"
 
 # Object Data
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
