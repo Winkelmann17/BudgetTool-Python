@@ -14,6 +14,7 @@ Recent Changes:
 #           Imports
 # ===================================================================
 from PyQt6.QtWidgets import QWidget, QTableWidgetItem
+from PyQt6.QtCore import Qt
 from PyQt6.uic import loadUi
 
 from constants import *
@@ -70,19 +71,19 @@ class BudgetScreen(QWidget):
         # self.expList.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         # self.expList.customContextMenuRequested.connect(self.open_list_menu)
 # ----------------------------------------------------------------------------
-    def loadtable_defaults(self):                                   # POSSIBLE CODE REUSE FOR LOADING FROM SAVED TABLE
-        """Function that loads all boxes with the default text. 
-        Creates the months cat_map and returns it."""
-        print("[+] Loading Table Defaults and Creating Cat Map...")
-        temp = {}
-        for row in range(self.month.rows):
-            temp[self.budgetTable.verticalHeaderItem(row).text()] = row
-            for col in range(self.month.cols):
-                self.budgetTable.setItem(row, col, QTableWidgetItem(self.default_text))
-        self.ignore_cell_changes = False
+    # def loadtable_defaults(self):                                   # POSSIBLE CODE REUSE FOR LOADING FROM SAVED TABLE
+    #     """Function that loads all boxes with the default text. 
+    #     Creates the months cat_map and returns it."""
+    #     print("[+] Loading Table Defaults and Creating Cat Map...")
+    #     temp = {}
+    #     for row in range(self.month.rows):
+    #         temp[self.budgetTable.verticalHeaderItem(row).text()] = row
+    #         for col in range(self.month.cols):
+    #             self.budgetTable.setItem(row, col, QTableWidgetItem(self.default_text))
+    #     self.ignore_cell_changes = False
         
-        # Save the cat map for the new month
-        self.month.cat_map = temp
+    #     # Save the cat map for the new month
+    #     self.month.cat_map = temp
 
 
     def loadtable(self):
@@ -124,8 +125,12 @@ class BudgetScreen(QWidget):
                 else:
                     diff_text = f"${diff:.2f}"
                 self.budgetTable.setItem(row, 0, QTableWidgetItem(planned_text))
-                self.budgetTable.setItem(row, 1, QTableWidgetItem(actual_text))
-                self.budgetTable.setItem(row, 2, QTableWidgetItem(diff_text))
+                item = QTableWidgetItem(actual_text)
+                item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+                self.budgetTable.setItem(row, 1, item)
+                item = QTableWidgetItem(diff_text)
+                item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+                self.budgetTable.setItem(row, 2, item)
 
                 row+= 1
             # Add Total for Category
@@ -149,11 +154,18 @@ class BudgetScreen(QWidget):
                 diff_text = self.default_text
             else:
                 diff_text = f"${diff:.2f}"
-            self.budgetTable.setItem(row, 0, QTableWidgetItem(planned_text))
-            self.budgetTable.setItem(row, 1, QTableWidgetItem(actual_text))
-            self.budgetTable.setItem(row, 2, QTableWidgetItem(diff_text))
+            item = QTableWidgetItem(planned_text)
+            item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.budgetTable.setItem(row, 0, item)
+            item = QTableWidgetItem(actual_text)
+            item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.budgetTable.setItem(row, 1, item)
+            item = QTableWidgetItem(diff_text)
+            item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            self.budgetTable.setItem(row, 2, item)
             row += 1
 
+        # Return catmap
         return temp
 
 # ----------------------------------------------------------------------------
