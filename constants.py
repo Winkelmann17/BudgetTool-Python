@@ -30,4 +30,7 @@ DEFAULT_TYPE_DICT = {
 PLANNED = 0
 ACTUAL = 1
 
+# REGEX 
+COST_REGEX = r"(-?(?:\d+\.\d{1,2}|\d+\.|\.\d{1,2}|\d+))"
+
 # EOF

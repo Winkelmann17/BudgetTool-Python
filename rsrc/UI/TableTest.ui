@@ -331,6 +331,13 @@
              </widget>
             </item>
             <item>
+             <widget class="QPushButton" name="addExpenseButton">
+              <property name="text">
+               <string>Add Expense</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="newCategoryButton">
               <property name="text">
                <string>New Category</string>
@@ -341,13 +348,6 @@
              <widget class="QPushButton" name="removeCategoryButton">
               <property name="text">
                <string>Remove Category</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="addExpenseButton">
-              <property name="text">
-               <string>Add Expense</string>
               </property>
              </widget>
             </item>

@@ -52,15 +52,31 @@ class Category():
         self.name = name
         self.planned_total = 0
         self.actual_total = 0
-        self.expenses = self.initialize_expenses()
+        self.expenses, self.expense_list = self.initialize_expenses()
 
 # -------------------------------------------------------------------
     def initialize_expenses(self):
         temp = {}
+        temp2 = []
         for expense in DEFAULT_TYPE_DICT[self.name]:
             temp[expense] = Expense(expense)
+            temp2.append(expense)
         
-        return temp
+        return temp, temp2
+
+# -------------------------------------------------------------------
+    def sum_planned(self):
+        temp = 0.00
+        for exp in self.expense_list:
+            temp += self.expenses[exp].planned
+        self.planned_total = temp
+
+    def sum_actual(self):
+        temp = 0.00
+        for exp in self.expense_list:
+            for cost in self.expenses[exp].costs:
+                temp += cost.cost_value
+        self.actual_total = temp
 
 # ===================================================================
 #           Expense
@@ -74,7 +90,7 @@ class Expense():
         self.name = name
         self.costs = []
         self.planned = 0
-        self.actual = 0
+        self.actual = 400
         self.income = income
 
 # -------------------------------------------------------------------
