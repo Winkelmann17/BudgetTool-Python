@@ -4,15 +4,19 @@ Github:
 
 This code serves all constants used within the WinkelBudget program.
 
-Last Updated: 10 July 2026
+Last Updated: 19 August 2026
 Recent Changes:
-- Dedicated File
+- More screens, dialog response codes
 """
 # Screen paths
 MAINWINDOW_UI = "./rsrc/UI/MainWindow.ui"
 BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreenWidget.ui"
 TEST_UI = "./rsrc/UI/TableTest.ui"
 EXPENSE_POPUP_UI = "./rsrc/UI/ExpensePopUp.ui"
+
+# DIALOG
+OK = 0
+CANCEL = 1
 
 # Object Data
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]

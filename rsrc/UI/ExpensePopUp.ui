@@ -53,9 +53,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>250</y>
-        <width>191</width>
-        <height>41</height>
+        <y>240</y>
+        <width>211</width>
+        <height>51</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -66,6 +66,12 @@
       </property>
       <property name="textFormat">
        <enum>Qt::RichText</enum>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QComboBox" name="catBox">
@@ -171,14 +177,14 @@
      <widget class="QLabel" name="enterDescLabel">
       <property name="geometry">
        <rect>
-        <x>110</x>
+        <x>150</x>
         <y>190</y>
-        <width>151</width>
+        <width>101</width>
         <height>41</height>
        </rect>
       </property>
       <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-style:italic;&quot;&gt;Enter Description:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-style:italic;&quot;&gt;Description:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="textFormat">
        <enum>Qt::RichText</enum>

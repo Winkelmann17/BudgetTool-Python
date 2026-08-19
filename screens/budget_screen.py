@@ -5,7 +5,7 @@ Github:
 This code serves as the UI interaction code for the main budget 
 screen. 
 
-Last Updated: 10 July 2026
+Last Updated: 19 August 2026
 Recent Changes:
 - Overhauling UI
 - Simplifying code
@@ -19,6 +19,7 @@ from PyQt6.QtCore import Qt
 from PyQt6.uic import loadUi
 
 from constants import *
+from screens.popups import ExpensePopUp
 from logic.screenhelp import *
 from logic.objects import Month
 from logic.serializer import Serializer
@@ -216,5 +217,7 @@ class BudgetScreen(QWidget):
         self.statusbar.showMessage("Adding expense via popup...")
 
         # Run popup code
-
+        popup = ExpensePopUp(self.month)
+        popup.exec()
+        
 # EOF
