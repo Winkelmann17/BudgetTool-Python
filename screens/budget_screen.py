@@ -33,12 +33,7 @@ class BudgetScreen(QWidget):
     source of the interactive code for the Budget Screen. Loaded by
     main_window.py.
     """
-
-    default_text = "$ - "
     total_text = "Total"
-    bg_red = QColor(222, 78, 81)
-    bg_green =  QColor(118, 222, 115)
-    bg_white = QColor(255, 255, 255)
 
     def __init__(self, month, year, statusbar):
         super().__init__()
@@ -59,6 +54,7 @@ class BudgetScreen(QWidget):
         self.catmap = self.loadtable()
         # Connect buttons to functions
         self.saveButton.clicked.connect(lambda: self.serializer.serialize(self.month))
+        self.addExpenseButton.clicked.connect(self.show_expense_popup)
         # self.copyLastMonthButton.clicked.connect()
         # self.newCategoryButton.clicked.connect()
         # self.removeButton.clicked.connect()
@@ -211,4 +207,14 @@ class BudgetScreen(QWidget):
         process_cell_text(self.budgetTable, row, category.planned_total, category.actual_total)   
         # Update bool
         self.ignore_cell_changes = False  
+
+# ----------------------------------------------------------------------------
+    def show_expense_popup(self):
+        """Function that calls the add expense popup object and executes it.
+        Handles any data returned from it."""
+        # Update status bar
+        self.statusbar.showMessage("Adding expense via popup...")
+
+        # Run popup code
+
 # EOF

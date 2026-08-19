@@ -12,6 +12,7 @@ Recent Changes:
 MAINWINDOW_UI = "./rsrc/UI/MainWindow.ui"
 BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreenWidget.ui"
 TEST_UI = "./rsrc/UI/TableTest.ui"
+EXPENSE_POPUP_UI = "./rsrc/UI/ExpensePopUp.ui"
 
 # Object Data
 MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
