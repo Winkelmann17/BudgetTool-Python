@@ -74,8 +74,7 @@ class Category():
     def sum_actual(self):
         temp = 0.00
         for exp in self.expense_list:
-            for cost in self.expenses[exp].costs:
-                temp += cost.cost_value
+            temp += self.expenses[exp].actual
         self.actual_total = temp
 
 # ===================================================================
