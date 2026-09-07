@@ -5,9 +5,9 @@ Github:
 This code serves as the primary location of the main objects and 
 logic used by this program for the budget calculations.
 
-Last Updated: 10 July 2026
+Last Updated: 7 September 2026
 Recent Changes:
-- Simplifying and Reorganizing Code
+- Added an update queue for month objects
 """
 # ===================================================================
 #           Imports
@@ -25,7 +25,7 @@ class Month():
     def __init__(self, name, year):
         self.name = name
         self.year = year
-        self.notes = "Notes"
+        self.notes = ""
         self.income_total = 0
         self.expense_total = 0
         self.planned_total = 0
@@ -33,6 +33,9 @@ class Month():
         self.cols = 3
         self.categories = self.initialize_cats()
         self.cat_exp_listing = DEFAULT_TYPE_DICT
+
+        # Working variables
+        self.update_queue = []
 
 # -------------------------------------------------------------------
     def initialize_cats(self):
@@ -89,7 +92,7 @@ class Expense():
         self.name = name
         self.costs = []
         self.planned = 0
-        self.actual = 400
+        self.actual = 0
         self.income = income
 
 # -------------------------------------------------------------------

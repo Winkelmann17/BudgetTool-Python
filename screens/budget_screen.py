@@ -5,10 +5,12 @@ Github:
 This code serves as the UI interaction code for the main budget 
 screen. 
 
-Last Updated: 19 August 2026
+Last Updated: 7 September 2026
 Recent Changes:
-- Overhauling UI
-- Simplifying code
+- Reverse Catmap created
+- Popup expense functionality complete*
+- Added ExpList Tab functionality
+- Added Overview Tab functionality
 """
 # ===================================================================
 #           Imports
@@ -53,6 +55,7 @@ class BudgetScreen(QWidget):
             #self.loadtable_defaults()
         self.ignore_cell_changes = True
         self.catmap = self.loadtable()
+        self.reverse_catmap = self.build_reverse_catmap()
         # Connect buttons to functions
         self.saveButton.clicked.connect(lambda: self.serializer.serialize(self.month))
         self.addExpenseButton.clicked.connect(self.show_expense_popup)
@@ -68,7 +71,8 @@ class BudgetScreen(QWidget):
 
         # Connect events to functions
         self.budgetTable.itemChanged.connect(self.update_planned)
-        # self.budgetTable.cellClicked.connect(self.go_update_list)
+        self.budgetTable.cellClicked.connect(self.update_expense_list_tab)
+        self.budgetTable.verticalHeader().sectionClicked.connect(self.update_expense_list_tab)
 
         # Other
         # self.expList.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
@@ -78,12 +82,12 @@ class BudgetScreen(QWidget):
         """Function that loads all table values from the stored data
         within the loaded month object. Returns the category map for 
         the working month for better data editing."""
-        temp = {}
+        working_catmap = {}
         row = 0
         # Get categories from loaded month
         for category in self.month.categories.keys():
             # Add category row for dilineation
-            temp[category] = row
+            working_catmap[category] = row
             row_name = f"_{category.upper()}_"
             self.budgetTable.insertRow(row)
             self.budgetTable.setVerticalHeaderItem(row, QTableWidgetItem(row_name))
@@ -91,8 +95,7 @@ class BudgetScreen(QWidget):
 
             expenses = self.month.cat_exp_listing[category]
             for exp in expenses:
-                temp[exp] = row
-
+                working_catmap[exp] = row
                 # Insert Row to table
                 self.budgetTable.insertRow(row)
                 self.budgetTable.setVerticalHeaderItem(row, QTableWidgetItem(exp))
@@ -113,7 +116,7 @@ class BudgetScreen(QWidget):
 
             # Add Total for Category
             total_key = f"{category}_total"
-            temp[total_key] = row
+            working_catmap[total_key] = row
             self.month.categories[category].sum_planned()
             self.month.categories[category].sum_actual()
 
@@ -139,7 +142,18 @@ class BudgetScreen(QWidget):
 
         # Return catmap
         self.ignore_cell_changes = False
-        return temp
+        return working_catmap
+
+# ----------------------------------------------------------------------------
+    def build_reverse_catmap(self):
+        """Function builds a reverse dictionary that pairs expense types 
+        to their respective categories"""
+        working_reverse = {}
+        for key in self.month.cat_exp_listing.keys():
+            for exp_type in self.month.cat_exp_listing[key]:
+                working_reverse[exp_type] = key
+        print(working_reverse)
+        return working_reverse
 
 # ----------------------------------------------------------------------------
     def update_planned(self, item):
@@ -207,7 +221,24 @@ class BudgetScreen(QWidget):
         # Set the data
         process_cell_text(self.budgetTable, row, category.planned_total, category.actual_total)   
         # Update bool
-        self.ignore_cell_changes = False  
+        self.ignore_cell_changes = False
+
+# ----------------------------------------------------------------------------
+    def update_expense_list_tab(self, row):
+        """Function that populates the expense list tab on the 
+        combo box when a type is clicked on for easy viewing."""
+        # Get the row and expense type
+        print(f"This row was selected: {row}")
+        exp_type = self.budgetTable.verticalHeaderItem(row).text()
+
+        # Don't update if a "Total" is selected
+        if exp_type != "Total":
+            self.expList.clear()
+            # Add each expense with associated data
+            cat = self.reverse_catmap[exp_type]
+            for cost in self.month.categories[cat].expenses[exp_type].costs:
+                print(f"We are in the loop for: {cost.name}")
+                self.expList.addItem(f"{cost.name} - {cost.date} - ${cost.cost_value}")
 
 # ----------------------------------------------------------------------------
     def show_expense_popup(self):
@@ -219,5 +250,12 @@ class BudgetScreen(QWidget):
         # Run popup code
         popup = ExpensePopUp(self.month)
         popup.exec()
-        
+
+        # Update the screen
+        print(self.catmap)
+        print(self.month.update_queue)
+        for exp_obj in self.month.update_queue:
+            self.update_row(self.catmap[exp_obj.name], exp_obj)
+        for cat in self.month.categories.keys():
+            self.update_total(cat)
 # EOF

@@ -173,6 +173,9 @@
       <property name="text">
        <string>Clear</string>
       </property>
+      <property name="autoDefault">
+       <bool>false</bool>
+      </property>
      </widget>
      <widget class="QLabel" name="enterDescLabel">
       <property name="geometry">
@@ -272,6 +275,9 @@
       </property>
       <property name="text">
        <string>Done</string>
+      </property>
+      <property name="autoDefault">
+       <bool>false</bool>
       </property>
      </widget>
      <widget class="QLabel" name="selectCatLabel">

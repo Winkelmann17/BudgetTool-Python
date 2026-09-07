@@ -7,13 +7,266 @@
     <x>0</x>
     <y>0</y>
     <width>984</width>
-    <height>508</height>
+    <height>521</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
+   <item row="0" column="1">
+    <widget class="QFrame" name="rightFrame">
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QFrame" name="tabFrame">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="0" column="0">
+          <widget class="QTabWidget" name="tabWidget">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <widget class="QWidget" name="overviewTab">
+            <attribute name="title">
+             <string>Overview</string>
+            </attribute>
+            <widget class="QLabel" name="label_5">
+             <property name="geometry">
+              <rect>
+               <x>230</x>
+               <y>10</y>
+               <width>181</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_6">
+             <property name="geometry">
+              <rect>
+               <x>230</x>
+               <y>50</y>
+               <width>181</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_7">
+             <property name="geometry">
+              <rect>
+               <x>230</x>
+               <y>90</y>
+               <width>181</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_3">
+             <property name="geometry">
+              <rect>
+               <x>120</x>
+               <y>90</y>
+               <width>111</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Differential:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_2">
+             <property name="geometry">
+              <rect>
+               <x>70</x>
+               <y>50</y>
+               <width>161</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Actual Spending:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_4">
+             <property name="geometry">
+              <rect>
+               <x>50</x>
+               <y>130</y>
+               <width>181</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Highest Expense:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_8">
+             <property name="geometry">
+              <rect>
+               <x>210</x>
+               <y>130</y>
+               <width>201</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label">
+             <property name="geometry">
+              <rect>
+               <x>50</x>
+               <y>10</y>
+               <width>181</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Planned Spending:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="expenseListTab">
+            <attribute name="title">
+             <string>Expense List</string>
+            </attribute>
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <item>
+              <widget class="QListWidget" name="expList"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="histogramTab">
+            <attribute name="title">
+             <string>Spending Histogram</string>
+            </attribute>
+           </widget>
+           <widget class="QWidget" name="pieChartTab">
+            <attribute name="title">
+             <string>Spending Pie Chart</string>
+            </attribute>
+           </widget>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="notesButtonFrame">
+        <property name="frameShape">
+         <enum>QFrame::Box</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_2">
+         <item row="1" column="0">
+          <widget class="QPlainTextEdit" name="notesTextBox"/>
+         </item>
+         <item row="2" column="0">
+          <widget class="QFrame" name="buttonFrame">
+           <property name="frameShape">
+            <enum>QFrame::Box</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Plain</enum>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QPushButton" name="saveButton">
+              <property name="text">
+               <string>Save</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="copyLastMonthButton">
+              <property name="text">
+               <string>Copy Last Month</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="addExpenseButton">
+              <property name="text">
+               <string>Add Expense</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="newCategoryButton">
+              <property name="text">
+               <string>New Category</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="removeCategoryButton">
+              <property name="text">
+               <string>Remove Category</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="notesLabel">
+           <property name="text">
+            <string>Notes</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QFrame" name="leftFrame">
      <property name="sizePolicy">
@@ -115,247 +368,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="0" column="1">
-    <widget class="QFrame" name="rightFrame">
-     <property name="frameShape">
-      <enum>QFrame::Box</enum>
-     </property>
-     <property name="frameShadow">
-      <enum>QFrame::Plain</enum>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QFrame" name="tabFrame">
-        <property name="frameShape">
-         <enum>QFrame::Box</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QTabWidget" name="tabWidget">
-           <property name="currentIndex">
-            <number>1</number>
-           </property>
-           <widget class="QWidget" name="overviewTab">
-            <attribute name="title">
-             <string>Overview</string>
-            </attribute>
-           </widget>
-           <widget class="QWidget" name="expenseListTab">
-            <attribute name="title">
-             <string>Expense List</string>
-            </attribute>
-            <layout class="QVBoxLayout" name="verticalLayout_4">
-             <item>
-              <widget class="QListWidget" name="listWidget">
-               <item>
-                <property name="text">
-                 <string>Forst</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Fortnite</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Balls</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>New Item</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>Epic</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-           <widget class="QWidget" name="histogramTab">
-            <attribute name="title">
-             <string>Spending Histogram</string>
-            </attribute>
-           </widget>
-           <widget class="QWidget" name="pieChartTab">
-            <attribute name="title">
-             <string>Spending Pie Chart</string>
-            </attribute>
-           </widget>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QFrame" name="notesButtonFrame">
-        <property name="frameShape">
-         <enum>QFrame::Box</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="notesLabel">
-           <property name="text">
-            <string>Notes</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPlainTextEdit" name="notesTextBox"/>
-         </item>
-         <item row="2" column="0">
-          <widget class="QFrame" name="buttonFrame">
-           <property name="frameShape">
-            <enum>QFrame::Box</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Plain</enum>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
-            <item>
-             <widget class="QPushButton" name="saveButton">
-              <property name="text">
-               <string>Save</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="copyLastMonthButton">
-              <property name="text">
-               <string>Copy Last Month</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="addExpenseButton">
-              <property name="text">
-               <string>Add Expense</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="newCategoryButton">
-              <property name="text">
-               <string>New Category</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="removeCategoryButton">
-              <property name="text">
-               <string>Remove Category</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
-       </widget>
       </item>
      </layout>
     </widget>

@@ -5,9 +5,9 @@ Github:
 This code serves as the UI interaction code for popup regarding
 adding expenses to the table.
 
-Last Updated: 19 August 2026
+Last Updated: 7 September 2026
 Recent Changes:
-- Creating new Popup class for use in budget screen
+- Added a update queue for additions to the table
 """
 # ===================================================================
 #           Imports
@@ -58,6 +58,7 @@ class ExpensePopUp(QDialog):
             self.feedbackLabel.setText(error)
         else:
             expense_obj = self.month.categories[catname].expenses[expname]
+            self.month.update_queue.append(expense_obj)
             expense_obj.add_cost(name, cost, date)
             self.feedbackLabel.setText(f"New ${cost} expense added to {expname} under {catname}!")
 
