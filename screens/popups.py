@@ -8,12 +8,14 @@ adding expenses to the table.
 Last Updated: 15 September 2026
 Recent Changes:
 - Merged functionality with new month object updates
+- Patched in regex
 """
 # ===================================================================
 #           Imports
 # ===================================================================
 from PyQt6.QtWidgets import QDialog
 from PyQt6.uic import loadUi
+import re
 
 from constants import *
 # ===================================================================
@@ -50,7 +52,9 @@ class ExpensePopUp(QDialog):
         # Pull everything from the boxes
         catname = self.catBox.currentText()
         expname = self.expBox.currentText()
-        cost = round(float(self.amountBox.text()), 2)
+        amount = re.findall(COST_REGEX, self.amountBox.text())[0]
+        # cost = round(float(self.amountBox.text()), 2)
+        cost = round(float(amount), 2)
         date = self.dateBox.text()
         name = self.descBox.text()
         error = self.input_validation(catname, expname, cost, date, name)
