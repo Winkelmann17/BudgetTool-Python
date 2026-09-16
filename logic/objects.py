@@ -8,6 +8,7 @@ logic used by this program for the budget calculations.
 Last Updated: 7 September 2026
 Recent Changes:
 - Added an update queue for month objects
+- Added functionality to get a months totals
 """
 # ===================================================================
 #           Imports
@@ -45,8 +46,21 @@ class Month():
         
         return temp
 
-    def initialize_catmap(self):
-        pass
+# -------------------------------------------------------------------
+    def calculate_totals(self):
+        """Function calls all category objects and sums their 
+        totals."""
+        self.income_total = 0
+        self.planned_total = 0
+        self.expense_total = 0
+        for cat in self.categories.keys():
+            if cat != "Income":
+                self.planned_total += self.categories[cat].planned_total
+                self.expense_total += self.categories[cat].actual_total
+            else:
+                self.income_total = self.categories[cat].actual_total
+        print(f"Calculated: planned = {self.planned_total} actual = {self.expense_total}")
+            
 # ===================================================================
 #           Category
 # ===================================================================

@@ -41,7 +41,7 @@
             <attribute name="title">
              <string>Overview</string>
             </attribute>
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="overviewPlannedAmount">
              <property name="geometry">
               <rect>
                <x>230</x>
@@ -60,7 +60,7 @@
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
-            <widget class="QLabel" name="label_6">
+            <widget class="QLabel" name="overviewActualAmount">
              <property name="geometry">
               <rect>
                <x>230</x>
@@ -79,7 +79,7 @@
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
-            <widget class="QLabel" name="label_7">
+            <widget class="QLabel" name="overviewDifferentialAmount">
              <property name="geometry">
               <rect>
                <x>230</x>
@@ -98,7 +98,7 @@
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="overviewDifferential">
              <property name="geometry">
               <rect>
                <x>120</x>
@@ -111,7 +111,7 @@
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Differential:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="overviewActual">
              <property name="geometry">
               <rect>
                <x>70</x>
@@ -124,7 +124,7 @@
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Actual Spending:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
-            <widget class="QLabel" name="label_4">
+            <widget class="QLabel" name="overviewHighest">
              <property name="geometry">
               <rect>
                <x>50</x>
@@ -137,7 +137,7 @@
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Highest Expense:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
-            <widget class="QLabel" name="label_8">
+            <widget class="QLabel" name="overviewHighestData">
              <property name="geometry">
               <rect>
                <x>210</x>
@@ -156,7 +156,7 @@
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
-            <widget class="QLabel" name="label">
+            <widget class="QLabel" name="overviewPlanned">
              <property name="geometry">
               <rect>
                <x>50</x>
