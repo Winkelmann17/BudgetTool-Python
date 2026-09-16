@@ -44,9 +44,9 @@
             <widget class="QLabel" name="overviewPlannedAmount">
              <property name="geometry">
               <rect>
-               <x>230</x>
+               <x>190</x>
                <y>10</y>
-               <width>181</width>
+               <width>121</width>
                <height>41</height>
               </rect>
              </property>
@@ -63,9 +63,9 @@
             <widget class="QLabel" name="overviewActualAmount">
              <property name="geometry">
               <rect>
-               <x>230</x>
+               <x>190</x>
                <y>50</y>
-               <width>181</width>
+               <width>121</width>
                <height>41</height>
               </rect>
              </property>
@@ -82,9 +82,9 @@
             <widget class="QLabel" name="overviewDifferentialAmount">
              <property name="geometry">
               <rect>
-               <x>230</x>
+               <x>190</x>
                <y>90</y>
-               <width>181</width>
+               <width>121</width>
                <height>41</height>
               </rect>
              </property>
@@ -101,7 +101,7 @@
             <widget class="QLabel" name="overviewDifferential">
              <property name="geometry">
               <rect>
-               <x>120</x>
+               <x>10</x>
                <y>90</y>
                <width>111</width>
                <height>41</height>
@@ -114,7 +114,7 @@
             <widget class="QLabel" name="overviewActual">
              <property name="geometry">
               <rect>
-               <x>70</x>
+               <x>10</x>
                <y>50</y>
                <width>161</width>
                <height>41</height>
@@ -127,7 +127,7 @@
             <widget class="QLabel" name="overviewHighest">
              <property name="geometry">
               <rect>
-               <x>50</x>
+               <x>0</x>
                <y>130</y>
                <width>181</width>
                <height>41</height>
@@ -140,9 +140,9 @@
             <widget class="QLabel" name="overviewHighestData">
              <property name="geometry">
               <rect>
-               <x>210</x>
+               <x>190</x>
                <y>130</y>
-               <width>201</width>
+               <width>221</width>
                <height>41</height>
               </rect>
              </property>
@@ -159,7 +159,7 @@
             <widget class="QLabel" name="overviewPlanned">
              <property name="geometry">
               <rect>
-               <x>50</x>
+               <x>10</x>
                <y>10</y>
                <width>181</width>
                <height>41</height>
@@ -167,6 +167,38 @@
              </property>
              <property name="text">
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Planned Spending:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="overviewIncomeAmount">
+             <property name="geometry">
+              <rect>
+               <x>330</x>
+               <y>60</y>
+               <width>121</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::Box</enum>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="overviewDifferential_2">
+             <property name="geometry">
+              <rect>
+               <x>330</x>
+               <y>20</y>
+               <width>121</width>
+               <height>41</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt; text-decoration: underline;&quot;&gt;Total Income&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
            </widget>

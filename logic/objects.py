@@ -5,10 +5,10 @@ Github:
 This code serves as the primary location of the main objects and 
 logic used by this program for the budget calculations.
 
-Last Updated: 7 September 2026
+Last Updated: 15 September 2026
 Recent Changes:
-- Added an update queue for month objects
-- Added functionality to get a months totals
+- Updated total calculations for months
+- Added tracking for highest expense in month object
 """
 # ===================================================================
 #           Imports
@@ -30,6 +30,7 @@ class Month():
         self.income_total = 0
         self.expense_total = 0
         self.planned_total = 0
+        self.highest_cost = Cost("None", 0, "--/--/--")
         self.rows = 48
         self.cols = 3
         self.categories = self.initialize_cats()
@@ -59,8 +60,13 @@ class Month():
                 self.expense_total += self.categories[cat].actual_total
             else:
                 self.income_total = self.categories[cat].actual_total
-        print(f"Calculated: planned = {self.planned_total} actual = {self.expense_total}")
-            
+        print(f"Calculated: planned = {self.planned_total} actual = {self.expense_total} income = {self.income_total}")
+
+# -------------------------------------------------------------------
+    def set_highest_cost(self, name, cost_value, date):
+        """Setter function for highest_cost."""
+        self.highest_cost = Cost(name, cost_value, date)
+
 # ===================================================================
 #           Category
 # ===================================================================
@@ -86,12 +92,14 @@ class Category():
         temp = 0.00
         for exp in self.expense_list:
             temp += self.expenses[exp].planned
+        print(temp)
         self.planned_total = temp
 
     def sum_actual(self):
         temp = 0.00
         for exp in self.expense_list:
             temp += self.expenses[exp].actual
+        print(temp)
         self.actual_total = temp
 
 # ===================================================================

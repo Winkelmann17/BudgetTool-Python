@@ -5,9 +5,9 @@ Github:
 This code serves as the UI interaction code for popup regarding
 adding expenses to the table.
 
-Last Updated: 7 September 2026
+Last Updated: 15 September 2026
 Recent Changes:
-- Added a update queue for additions to the table
+- Merged functionality with new month object updates
 """
 # ===================================================================
 #           Imports
@@ -60,6 +60,10 @@ class ExpensePopUp(QDialog):
             expense_obj = self.month.categories[catname].expenses[expname]
             self.month.update_queue.append(expense_obj)
             expense_obj.add_cost(name, cost, date)
+            if cost > self.month.highest_cost.cost_value and catname != "Income":
+                if name == "":
+                    name = expname
+                self.month.set_highest_cost(name, cost, date)
             self.feedbackLabel.setText(f"New ${cost} expense added to {expname} under {catname}!")
 
 # -------------------------------------------------------------------

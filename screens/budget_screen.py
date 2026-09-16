@@ -5,12 +5,9 @@ Github:
 This code serves as the UI interaction code for the main budget 
 screen. 
 
-Last Updated: 7 September 2026
+Last Updated: 15 September 2026
 Recent Changes:
-- Reverse Catmap created
-- Popup expense functionality complete*
-- Added ExpList Tab functionality
-- Added Overview Tab functionality
+- Completed overview tab functionality
 """
 # ===================================================================
 #           Imports
@@ -194,10 +191,11 @@ class BudgetScreen(QWidget):
         expense_obj = self.month.categories[cat].expenses[exp]
         expense_obj.set_planned(amount)
 
+
         # Call other update functions
-        self.month.calculate_totals()
         self.update_row(item.row(), expense_obj)
         self.update_total(cat)
+        self.month.calculate_totals()
         self.update_overview_tab()
 
 # ----------------------------------------------------------------------------
@@ -252,11 +250,17 @@ class BudgetScreen(QWidget):
         planned = self.month.planned_total
         expenses = self.month.expense_total
         diff = planned - expenses
+        name = self.month.highest_cost.name
+        cost_value = self.month.highest_cost.cost_value
+        date = self.month.highest_cost.date
 
         # Display Data
+        print(f"planned = {planned}, actual {expenses}, diff = {diff}")
         self.overviewPlannedAmount.setText(f" ${planned}")
         self.overviewActualAmount.setText(f" ${expenses}")
         self.overviewDifferentialAmount.setText(f" ${diff:.2f}")
+        self.overviewIncomeAmount.setText(f" ${income}")
+        self.overviewHighestData.setText(f" {name} - {cost_value} - {date}")
 
 # ----------------------------------------------------------------------------
     def show_expense_popup(self):
@@ -272,10 +276,10 @@ class BudgetScreen(QWidget):
         # Update the screen
         print(self.catmap)
         print(self.month.update_queue)
-        self.month.calculate_totals()
         for exp_obj in self.month.update_queue:
             self.update_row(self.catmap[exp_obj.name], exp_obj)
         for cat in self.month.categories.keys():
             self.update_total(cat)
+        self.month.calculate_totals()
         self.update_overview_tab()
 # EOF
