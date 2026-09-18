@@ -53,7 +53,6 @@ class ExpensePopUp(QDialog):
         catname = self.catBox.currentText()
         expname = self.expBox.currentText()
         amount = re.findall(COST_REGEX, self.amountBox.text())[0]
-        # cost = round(float(self.amountBox.text()), 2)
         cost = round(float(amount), 2)
         date = self.dateBox.text()
         name = self.descBox.text()

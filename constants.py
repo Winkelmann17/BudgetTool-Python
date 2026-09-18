@@ -4,9 +4,9 @@ Github:
 
 This code serves all constants used within the WinkelBudget program.
 
-Last Updated: 19 August 2026
+Last Updated: 17 September 2026
 Recent Changes:
-- More screens, dialog response codes
+- Added constants for graphs
 """
 # Screen paths
 MAINWINDOW_UI = "./rsrc/UI/MainWindow.ui"
@@ -37,5 +37,10 @@ ACTUAL = 1
 
 # REGEX 
 COST_REGEX = r"(-?(?:\d+\.\d{1,2}|\d+\.|\.\d{1,2}|\d+))"
+
+# Graphs
+GRAPHTITLE = "Spending by Category"
+XAXIS = "Category"
+YAXIS = "Money Spent"
 
 # EOF
