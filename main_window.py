@@ -39,6 +39,7 @@ class MainWindow(QMainWindow):
 
         # Add the BudgetScreen UI into the stacked widget for screen changing
         # Pass in the statusbar so it can be used
+        self.setWindowTitle(f"WinkelBudget 1.0 - {month} {year}")
         self.budget_screen = BudgetScreen(month, year, self.statusbar)
         self.stackedWidget.addWidget(self.budget_screen)
 

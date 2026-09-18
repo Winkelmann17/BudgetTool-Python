@@ -44,31 +44,35 @@ def get_inputs():
         "-y", 
         "--year", 
         required=True,
+        type=int,
         help="The year that the month you wish to edit is in. [2026, 2027, etc]"
     )
 
     # Parse the args
     args = parser.parse_args()
     month : str = args.month
-    year : str = args.year
+    year : int = args.year
     total_args = len(sys.argv) - 1 # 1 is the source file, subtract that
+    print(total_args)
     
     # Check all inputs are valid via a variety of checks
     errors = []
     # Arg number checks
-    if total_args < 2:
+    if total_args < NUM_ARGS:
         errors.append("Not enough args specified. At least an image and a " \
         "-m <messagepath> or -e for extraction are required") 
-    elif total_args > 2:
+    elif total_args > NUM_ARGS:
         errors.append("Too many arguments specified.")
 
     # Check that years and months are valid
-    month = MONTH_INPUT_DICTIONARY[month.lower()]
+    month = MONTH_INPUT_DICTIONARY.get(month.lower())
     if month == None:
         errors.append("Invalid month specified, please choose a valid month.")
     if year < MIN_YEAR or year > MAX_YEAR:
         errors.append("Invalid year specified, please choose a year above 1" \
         "and below 9999")
+    else: 
+        year = int(year)
 
     # Print the erros underneath the help message. Helps make it more clear
     # what the actual problem is.
