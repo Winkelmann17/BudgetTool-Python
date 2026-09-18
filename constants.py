@@ -19,7 +19,18 @@ OK = 0
 CANCEL = 1
 
 # Object Data
-MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+MONTHS = ["January", 
+          "February", 
+          "March", 
+          "April", 
+          "May", 
+          "June", 
+          "July", 
+          "August", 
+          "September", 
+          "October", 
+          "November", 
+          "December"]
 DEFAULT_CATEGORIES = ["Income", "Savings", "Giving", "Housing", "Transportation", "Food", "Personal", "Insurance", "Other"]
 DEFAULT_TYPE_DICT = {
     "Income"            : ["Paycheck 1", "Paycheck 2", "Paycheck 3", "Paycheck 4", "Extra/Other 1", "Extra/Other 2"],

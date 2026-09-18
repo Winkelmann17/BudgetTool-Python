@@ -71,7 +71,7 @@ class BudgetScreen(QWidget):
         # Connect buttons to functions
         self.saveButton.clicked.connect(lambda: self.serializer.serialize(self.month))
         self.addExpenseButton.clicked.connect(self.show_expense_popup)
-        # self.copyLastMonthButton.clicked.connect()
+        self.copyLastMonthButton.clicked.connect(self.copy_last_month)
         # self.newCategoryButton.clicked.connect()
         # self.removeButton.clicked.connect()
         # self.futureButton.clicked.connect()
@@ -170,7 +170,7 @@ class BudgetScreen(QWidget):
 
 # ----------------------------------------------------------------------------
     def update_planned(self, item):
-        """Function that updates the planned values in teh table after
+        """Function that updates the planned values in the table after
         a new planned value is set by the user."""
         if self.ignore_cell_changes:
             return
@@ -300,9 +300,47 @@ class BudgetScreen(QWidget):
         self.piechart.create(self.month)
         self.update_overview_tab()
 
-
+# ----------------------------------------------------------------------------
     def update_notes(self):
         """Func that stores updated notes into the month object."""
         self.month.notes = self.notesTextBox.toPlainText()
 
-# EOF
+# ----------------------------------------------------------------------------
+    def copy_last_month(self):
+        index = MONTHS.index(self.month.name)
+        if index == 0:
+            prev_month = MONTHS[11]
+            year = self.year - 1
+        else:
+            prev_month = MONTHS[index - 1]
+            print(f"type of year {type(self.month.year)}")
+            year = self.month.year
+        self.import_data_from(prev_month, year)
+
+# ----------------------------------------------------------------------------
+    def import_data_from(self, month, year):
+        """Function that imports the planned values of a different month
+        into the current one, saves on time for the user having to renter 
+        everything."""
+        # Load the old month via Serializer
+        target = Serializer(month, year)
+        target_data = target.deserialize()
+        if target_data == None:
+            self.statusbar.showMessage("Chosen month to import from does not exist.")
+        else:
+            for cat in target_data.categories.keys():
+                current_expenses = self.month.cat_exp_listing[cat]
+                for exp in current_expenses:
+                    try:
+                        new_planned = target_data.categories[cat].expenses[exp].planned
+                        exp_obj = self.month.categories[cat].expenses[exp]
+                        exp_obj.set_planned(new_planned)
+                        self.update_row(self.catmap[exp], exp_obj)
+                    except Exception as e:
+                        print(f"Exception {e} occurred.")
+                        self.statusbar.showMessage(f"Error copying {exp} under the {cat} category.")
+                self.update_total(cat)
+            self.month.calculate_totals()
+            self.update_overview_tab()
+
+# EOF   
