@@ -5,9 +5,10 @@ Github:
 This code serves as the UI interaction code for the main budget 
 screen. 
 
-Last Updated: 15 September 2026
+Last Updated: 17 September 2026
 Recent Changes:
-- Completed overview tab functionality
+- Added bargraph tab functionality
+- Added pie chart tab functionality
 """
 # ===================================================================
 #           Imports
