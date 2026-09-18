@@ -57,9 +57,11 @@ class BudgetScreen(QWidget):
 
         # Graphs
         self.bargraph = BarGraph(self.month)
-        self.bargraph_layout = QVBoxLayout(self.bargraphTab)
+        self.bargraph_layout = QVBoxLayout(self.barGraphTab)
         self.bargraph_layout.addWidget(self.bargraph)
-        
+        self.piechart = PieChart(self.month)
+        self.piechart_layout = QVBoxLayout(self.pieChartTab)
+        self.piechart_layout.addWidget(self.piechart)
         # Connect buttons to functions
         self.saveButton.clicked.connect(lambda: self.serializer.serialize(self.month))
         self.addExpenseButton.clicked.connect(self.show_expense_popup)
@@ -289,5 +291,6 @@ class BudgetScreen(QWidget):
             self.update_total(cat)
         self.month.calculate_totals()
         self.bargraph.create(self.month)
+        self.piechart.create(self.month)
         self.update_overview_tab()
 # EOF

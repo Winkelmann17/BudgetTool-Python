@@ -35,7 +35,7 @@
          <item row="0" column="0">
           <widget class="QTabWidget" name="tabWidget">
            <property name="currentIndex">
-            <number>2</number>
+            <number>0</number>
            </property>
            <widget class="QWidget" name="overviewTab">
             <attribute name="title">
@@ -212,7 +212,7 @@
              </item>
             </layout>
            </widget>
-           <widget class="QWidget" name="bargraphTab">
+           <widget class="QWidget" name="barGraphTab">
             <attribute name="title">
              <string>Spending Bar Graph</string>
             </attribute>

@@ -43,5 +43,7 @@ GRAPHTITLE = "Spending by Category"
 XAXIS = "Category"
 YAXIS = "Money Spent"
 GRAPH_CATS = ["Savings", "Giving", "Housing", "Transportation", "Food", "Personal", "Insurance", "Other"]
+DISPLAY_CATS = ["Savings", "Giving", "Housing", "Trans", "Food", "Person", "Insur", "Other"]
+FORMAT = "%1.2f%%"
 
 # EOF
