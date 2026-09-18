@@ -121,7 +121,7 @@ class Serializer():
             os.mkdir(f"{self.backups_folder}/{self.month}")
 
         date = dt.datetime.now()
-        backup_name = f"{self.backups_folder}_{date.day}_{date.month}_{date.strftime('%H%M%S')}.dat"
+        backup_name = f"{self.backup_file_prefix}_{date.day}_{date.month}_{date.strftime('%H%M%S')}.dat"
         try:
             os.rename(self.filepath, backup_name)
         except FileNotFoundError as e:
