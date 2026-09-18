@@ -9,6 +9,7 @@ Last Updated: 17 September 2026
 Recent Changes:
 - Added bargraph tab functionality
 - Added pie chart tab functionality
+- Fixed bugs
 """
 # ===================================================================
 #           Imports
@@ -50,11 +51,11 @@ class BudgetScreen(QWidget):
         self.month = self.serializer.deserialize()
         if self.month == None:
             self.statusbar.showMessage("No saved month found, new month created!")
-            self.month = Month(month, year)
-            #self.loadtable_defaults()
+            self.month = Month(month, year)    
         self.ignore_cell_changes = True
         self.catmap = self.loadtable()
         self.reverse_catmap = self.build_reverse_catmap()
+        self.update_overview_tab()
 
         # Graphs
         self.bargraph = BarGraph(self.month)
@@ -63,6 +64,10 @@ class BudgetScreen(QWidget):
         self.piechart = PieChart(self.month)
         self.piechart_layout = QVBoxLayout(self.pieChartTab)
         self.piechart_layout.addWidget(self.piechart)
+
+        # Notes 
+        self.notesTextBox.setPlainText(self.month.notes)
+
         # Connect buttons to functions
         self.saveButton.clicked.connect(lambda: self.serializer.serialize(self.month))
         self.addExpenseButton.clicked.connect(self.show_expense_popup)
@@ -80,7 +85,7 @@ class BudgetScreen(QWidget):
         self.budgetTable.itemChanged.connect(self.update_planned)
         self.budgetTable.cellClicked.connect(self.update_expense_list_tab)
         self.budgetTable.verticalHeader().sectionClicked.connect(self.update_expense_list_tab)
-
+        self.notesTextBox.textChanged.connect(self.update_notes)
         # Other
         # self.expList.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
         # self.expList.customContextMenuRequested.connect(self.open_list_menu)
@@ -294,4 +299,10 @@ class BudgetScreen(QWidget):
         self.bargraph.create(self.month)
         self.piechart.create(self.month)
         self.update_overview_tab()
+
+
+    def update_notes(self):
+        """Func that stores updated notes into the month object."""
+        self.month.notes = self.notesTextBox.toPlainText()
+
 # EOF

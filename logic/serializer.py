@@ -5,9 +5,10 @@ Github:
 This code serves as the code for the Serializer class that handles 
 the writing of budget data to disk for persistence.
 
-Last Updated: 10 July 2026
+Last Updated: 18 September 2026
 Recent Changes:
-- Overhauling code and simplicity
+- Updating code to adhere to newer norms and standards
+- fixed backup directory failure errors
 """
 # ===================================================================
 #           Imports
@@ -29,9 +30,10 @@ class Serializer():
     def __init__(self, month, year="2026"):
         self.month = month
         self.year = year
+        self.folder = f"./data/{year}"
         self.filepath = f"./data/{year}/{month}.dat"
-        self.copypath = f"./data/{year}/COPY_{month}.dat"
-        self.backup_path = f"./data/backup/{year}/{month}"
+        self.backups_folder = f"./data/backups/{year}"
+        self.backup_file_prefix = f"./data/backups/{year}/{month}/backup"
 
     
     def serialize(self, obj):
@@ -42,13 +44,18 @@ class Serializer():
         # Move previous to backups (if present)
         self.move_to_backups()
 
+        # Check that a directory for the year exists
+        year_folder = os.path.isdir(self.folder)
+        if not year_folder:
+            os.mkdir(self.folder)
+
         # Load pickled contents
         contents = pickle.dumps(obj)
         if None == contents:
-            return None
-        bytes_written = 0
-
+            return 0
+        
         # Store data in file
+        bytes_written = 0
         with open(self.filepath, "wb") as f:
             bytes_written = f.write(contents)
         
@@ -105,23 +112,28 @@ class Serializer():
         """Function that moves old Year objects to the backup folder in order
         to preserve their values in case anything bad occurs during saves.
         Able to be loaded later by dragging into proper file location."""
+        # Check if year folder exists, make if not
+        year_backup = os.path.isdir(self.backups_folder)
+        if not year_backup:
+            os.mkdir(self.backups_folder)
+        month_backup = os.path.isdir(f"{self.backups_folder}/{self.month}")
+        if not month_backup:
+            os.mkdir(f"{self.backups_folder}/{self.month}")
+
         date = dt.datetime.now()
-        backup_name = f"{self.backup_path}_{date.year}_{date.day}_{date.month}_{date.time()}.dat"
+        backup_name = f"{self.backups_folder}_{date.day}_{date.month}_{date.strftime('%H%M%S')}.dat"
         try:
             os.rename(self.filepath, backup_name)
-            return True
+        except FileNotFoundError as e:
+            print(f"Original data for {self.year} {self.month} does not exist, abandoning backup.")
         except Exception as e:
             print(f"{e}: Error occured when creating backup.")
             return False
-        
+        return True
 
-    def close_out(self):
-        """Function called on close out of the program. Saves copy.dat file 
-        that has stored all changes to the original file name. Then stores
-        backup."""
-        self.move_to_backups()
-        try:
-            os.rename(self.copypath, self.filepath)
-        except Exception as e:
-            print(f"{e}: Error renaming file to proper name.")
+
+    def prune_backups():
+        """Function that prunes the backup files to the newest 5 after the 
+        program is closed"""
+        pass
 # EOF
