@@ -4,9 +4,9 @@ Github:
 
 This code serves all constants used within the WinkelBudget program.
 
-Last Updated: 17 September 2026
+Last Updated: 18 September 2026
 Recent Changes:
-- Added constants for graphs
+- Added constants for Argparse in startup
 """
 # Screen paths
 MAINWINDOW_UI = "./rsrc/UI/MainWindow.ui"
@@ -46,4 +46,65 @@ GRAPH_CATS = ["Savings", "Giving", "Housing", "Transportation", "Food", "Persona
 DISPLAY_CATS = ["Savings", "Giving", "Housing", "Trans", "Food", "Person", "Insur", "Other"]
 FORMAT = "%1.2f%%"
 
+# Argparse
+DESC = "Custom Python, QT Budget Application built by Winkelmann17."
+EPILOG = "How to use the program:\n" \
+"python WinkelBudget.py Jan 2026\n" \
+"    - Open the application for editing the month of January in the year 2026\n" \
+"python WinkelBudget.py 11 2007\n" \
+"    - Open the application for editing the month of November in 2007\n"
+VERSION = "WinkelBudget 1.0"
+RECENT_CHANGES = "Recent Changes:\n" \
+"- Complete redone codebase from ground up" \
+"- New resizable UI, graphs, and dialog box for more intuitive use"
+MONTH_INPUT_DICTIONARY = {
+    "1":"January",
+    "jan":"January",
+    "january":"January",
+
+    "2":"February",
+    "feb":"February",
+    "february":"February",
+
+    "3":"March",
+    "mar":"March",
+    "march":"March",
+
+    "4":"April",
+    "apr":"April",
+    "april":"April",
+
+    "5":"May",
+    "may":"May",
+
+    "6":"June",
+    "jun":"June",
+    "june":"June",
+
+    "7":"July",
+    "jul":"July",
+    "july":"July",
+
+    "8":"August",
+    "aug":"August",
+    "august":"August",
+
+    "9":"September",
+    "sep":"September",
+    "september":"September",
+
+    "10":"October",
+    "oct":"October",
+    "october":"October",
+
+    "11":"November",
+    "nov":"November",
+    "november":"November",
+
+    "12":"December",
+    "dec":"December",
+    "December":"December"
+}
+MIN_YEAR = 1
+MAX_YEAR = 9999
 # EOF

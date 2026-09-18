@@ -4,26 +4,97 @@ Github:
 
 This code serves as the main entry point for WinkelBudget.
 
-Last Updated: 10 July 2026
+Last Updated: 18 September 2026
 Recent Changes:
-- Simplifying code
-- Made this the main entry point of WinkelBudget
+- Added argparse functionality so commandline is garbagemensman
 """
 # ===================================================================
 #           Imports
 # ===================================================================
+import argparse
 import sys
+
 from PyQt6.QtWidgets import QApplication
 
+from constants import *
 from main_window import MainWindow
 
+# ===================================================================
+#               Functions
+# ===================================================================
+def get_inputs():
+    """Function that handles command line inputs for the specific 
+    months and years that will be used. Will be replaced with an
+    all UI solution in a future release.
+    """
+    # Parser and argument setup
+    parser = argparse.ArgumentParser(
+        prog="python WinkelBudget.py",
+        description=DESC,
+        epilog=EPILOG,
+        formatter_class=argparse.RawDescriptionHelpFormatter
+        )
+    parser.add_argument(
+        "-m",
+        "--month",
+        required=True,
+        help="The month that you wish to edit [1,2..12 OR Jan,Feb,...Dec OR January,February,...December]"
+    )
+    parser.add_argument(
+        "-y", 
+        "--year", 
+        required=True,
+        help="The year that the month you wish to edit is in. [2026, 2027, etc]"
+    )
+
+    # Parse the args
+    args = parser.parse_args()
+    month : str = args.month
+    year : str = args.year
+    total_args = len(sys.argv) - 1 # 1 is the source file, subtract that
+    
+    # Check all inputs are valid via a variety of checks
+    errors = []
+    # Arg number checks
+    if total_args < 2:
+        errors.append("Not enough args specified. At least an image and a " \
+        "-m <messagepath> or -e for extraction are required") 
+    elif total_args > 2:
+        errors.append("Too many arguments specified.")
+
+    # Check that years and months are valid
+    month = MONTH_INPUT_DICTIONARY[month.lower()]
+    if month == None:
+        errors.append("Invalid month specified, please choose a valid month.")
+    if year < MIN_YEAR or year > MAX_YEAR:
+        errors.append("Invalid year specified, please choose a year above 1" \
+        "and below 9999")
+
+    # Print the erros underneath the help message. Helps make it more clear
+    # what the actual problem is.
+    if errors:
+        parser.print_help()
+        print("\nThe following errors with your input were found:")
+        for error in errors:
+            print(f"- {error}")
+        print()
+        exit()
+
+    # All is good, return data to main
+    else:
+        return month, year
+    
 # ===================================================================
 #           Main
 # ===================================================================
 def main():
-    app = QApplication(sys.argv)
 
-    window = MainWindow(int(sys.argv[1]), int(sys.argv[2])) # Change this later
+    # Get inputs from command line
+    month, year = get_inputs()
+
+    # Start QT Application and call the MainWindow
+    app = QApplication(sys.argv)
+    window = MainWindow(month, year)
     window.show()
 
     sys.exit(app.exec())
