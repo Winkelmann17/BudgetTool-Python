@@ -15,7 +15,6 @@ Recent Changes:
 from PyQt6.QtWidgets import QWidget, QVBoxLayout
 from matplotlib.backends.backend_qtagg import FigureCanvasQTAgg as FigureCanvas
 from matplotlib.figure import Figure
-import numpy as np
 
 from constants import *
 
@@ -32,30 +31,28 @@ class BarGraph(QWidget):
         # Creating MatPlot figure
         self.figure = Figure()
         self.canvas = FigureCanvas(self.figure)
-        # Adding Figure to the Specific Tab Widget
         layout = QVBoxLayout(self)
         layout.addWidget(self.canvas)
-
+        # Adding Figure to the Specific Tab Widget
+        self.plot = self.figure.add_subplot()
         # Create the histogram
         self.create(month)
 
     def create(self, month):
-        # Create plot
-        plot = self.figure.add_subplot()
-
-        # Sort through Data Category by Category
+        # Clear plot for updating
+        self.plot.clear()
+        # Get data by category
         amounts = []
-        cats = DEFAULT_CATEGORIES
-        cats.pop()      # removing income as a cat for graph
-        for cat in cats:
-            amounts.append(month.categories[cat].actual_total)
-
-        # Make the plot
-        plot.set_title(GRAPHTITLE)
-        plot.set_xlabel(XAXIS)
-        plot.set_ylabel(YAXIS)
-
-        # Place on widget
+        for cat in GRAPH_CATS:
+                amounts.append(month.categories[cat].actual_total)
+        bars = self.plot.bar(GRAPH_CATS, amounts)
+        self.plot.bar_label(bars)
+        # Update plot metadata
+        self.plot.set_title(GRAPHTITLE)
+        self.plot.set_xlabel(XAXIS)
+        self.plot.set_ylabel(YAXIS)
+        self.plot.margins(y=0.15)
+        # Draw the new plot with updated data
         self.figure.tight_layout()
         self.canvas.draw()
 

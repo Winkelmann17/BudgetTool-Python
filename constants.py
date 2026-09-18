@@ -42,5 +42,6 @@ COST_REGEX = r"(-?(?:\d+\.\d{1,2}|\d+\.|\.\d{1,2}|\d+))"
 GRAPHTITLE = "Spending by Category"
 XAXIS = "Category"
 YAXIS = "Money Spent"
+GRAPH_CATS = ["Savings", "Giving", "Housing", "Transportation", "Food", "Personal", "Insurance", "Other"]
 
 # EOF

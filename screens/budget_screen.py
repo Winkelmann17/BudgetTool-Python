@@ -12,7 +12,7 @@ Recent Changes:
 # ===================================================================
 #           Imports
 # ===================================================================
-from PyQt6.QtWidgets import QWidget, QTableWidgetItem
+from PyQt6.QtWidgets import QWidget, QTableWidgetItem, QVBoxLayout
 from PyQt6.QtGui import QColor
 from PyQt6.QtCore import Qt
 from PyQt6.uic import loadUi
@@ -22,6 +22,7 @@ from screens.popups import ExpensePopUp
 from logic.screenhelp import *
 from logic.objects import Month
 from logic.serializer import Serializer
+from logic.graphs import BarGraph, PieChart
 
 import re
 # ===================================================================
@@ -53,6 +54,12 @@ class BudgetScreen(QWidget):
         self.ignore_cell_changes = True
         self.catmap = self.loadtable()
         self.reverse_catmap = self.build_reverse_catmap()
+
+        # Graphs
+        self.bargraph = BarGraph(self.month)
+        self.bargraph_layout = QVBoxLayout(self.bargraphTab)
+        self.bargraph_layout.addWidget(self.bargraph)
+        
         # Connect buttons to functions
         self.saveButton.clicked.connect(lambda: self.serializer.serialize(self.month))
         self.addExpenseButton.clicked.connect(self.show_expense_popup)
@@ -220,7 +227,7 @@ class BudgetScreen(QWidget):
         category.sum_actual()
         row = self.catmap[f"{cat}_total"]
         # Set the data
-        process_cell_text(self.budgetTable, row, category.planned_total, category.actual_total)   
+        process_cell_text(self.budgetTable, row, category.planned_total, category.actual_total)  
         # Update bool
         self.ignore_cell_changes = False
 
@@ -281,5 +288,6 @@ class BudgetScreen(QWidget):
         for cat in self.month.categories.keys():
             self.update_total(cat)
         self.month.calculate_totals()
+        self.bargraph.create(self.month)
         self.update_overview_tab()
 # EOF
