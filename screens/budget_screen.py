@@ -359,10 +359,10 @@ class BudgetScreen(QWidget):
         # Create the context menu
         menu = QMenu(self)
         # Define actions
-        edit_action = QAction("Edit", self)
+        edit_action = QAction("Edit <Not Implemented!>", self)
         delete_action = QAction("Delete", self)
         # Connect them to handlers
-        edit_action.triggered.connect(lambda: self.rename_item(item, row))
+        edit_action.triggered.connect(lambda: self.edit_expense(item, row))
         delete_action.triggered.connect(lambda: self.delete_expense(item, row))
         # Add to the menu
         menu.addAction(edit_action)
@@ -384,18 +384,22 @@ class BudgetScreen(QWidget):
 
 
 
-        cat = self.working_month.categories[REVERSE_TYPE_DICT[self.last_exp]]
-        exp = cat.expenses[self.last_exp]
-        costs = exp.costs
-        removed = costs.pop(index)
+        # cat = self.working_month.categories[REVERSE_TYPE_DICT[self.last_exp]]
+        # exp = cat.expenses[self.last_exp]
+        # costs = exp.costs
+        # removed = costs.pop(index)
 
-        exp.set_actual(exp.actual - removed.cost)
+        # exp.set_actual(exp.actual - removed.cost)
 
-        row = self.working_month.cat_map[self.last_exp]
-        self.go_update_row(row, exp)
+        # row = self.working_month.cat_map[self.last_exp]
+        # self.go_update_row(row, exp)
 
-        # Remove from List
-        row = self.expList.row(item)
-        self.expList.takeItem(row)
-        self.go_update_totals(cat.name)
+        # # Remove from List
+        # row = self.expList.row(item)
+        # self.expList.takeItem(row)
+        # self.go_update_totals(cat.name)
+
+# ----------------------------------------------------------------------------
+    def edit_expense(self, item, row):
+        self.statusbar.showMessage("This feature is not fully implemented yet. Sorry!")
 # EOF   

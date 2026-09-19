@@ -34,7 +34,7 @@ MONTHS = ["January",
 DEFAULT_CATEGORIES = ["Income", "Savings", "Giving", "Housing", "Transportation", "Food", "Personal", "Insurance", "Other"]
 DEFAULT_TYPE_DICT = {
     "Income"            : ["Paycheck 1", "Paycheck 2", "Paycheck 3", "Paycheck 4", "Extra/Other 1", "Extra/Other 2"],
-    "Savings"           : ["Car", "ROTHs", "Flights", "Gifts"],
+    "Savings"           : ["New Car", "ROTHs", "Flights", "Gifts"],
     "Giving"            : ["Church", "Focus"],
     "Housing"           : ["Mortgage", "Water", "Electricity", "Phone", "Internet"],
     "Transportation"    : ["Gas", "Maintenance"],
