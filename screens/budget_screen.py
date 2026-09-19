@@ -14,9 +14,9 @@ Recent Changes:
 # ===================================================================
 #           Imports
 # ===================================================================
-from PyQt6.QtWidgets import QWidget, QTableWidgetItem, QVBoxLayout
-from PyQt6.QtGui import QColor
-from PyQt6.QtCore import Qt
+from PyQt6.QtWidgets import QWidget, QTableWidgetItem, QVBoxLayout, QMenu
+from PyQt6.QtGui import QColor, QAction
+from PyQt6.QtCore import Qt, QPoint
 from PyQt6.uic import loadUi
 
 from constants import *
@@ -46,7 +46,6 @@ class BudgetScreen(QWidget):
         self.statusbar = statusbar
 
         # Setup Month handler data
-        self.old_budget = None
         self.serializer = Serializer(month, year)
         self.month = self.serializer.deserialize()
         if self.month == None:
@@ -55,6 +54,8 @@ class BudgetScreen(QWidget):
         self.ignore_cell_changes = True
         self.catmap = self.loadtable()
         self.reverse_catmap = self.build_reverse_catmap()
+        self.last_exp = None
+
         self.update_overview_tab()
 
         # Graphs
@@ -86,9 +87,10 @@ class BudgetScreen(QWidget):
         self.budgetTable.cellClicked.connect(self.update_expense_list_tab)
         self.budgetTable.verticalHeader().sectionClicked.connect(self.update_expense_list_tab)
         self.notesTextBox.textChanged.connect(self.update_notes)
-        # Other
-        # self.expList.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
-        # self.expList.customContextMenuRequested.connect(self.open_list_menu)
+
+        # Expense List Context Menu
+        self.expList.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.expList.customContextMenuRequested.connect(self.expense_list_context_menu)
 # ----------------------------------------------------------------------------
     def loadtable(self):    # TODO: New Row function, generic enough for other functions to use
         """Function that loads all table values from the stored data
@@ -246,6 +248,7 @@ class BudgetScreen(QWidget):
         # Get the row and expense type
         print(f"This row was selected: {row}")
         exp_type = self.budgetTable.verticalHeaderItem(row).text()
+        self.last_exp = exp_type
 
         # Don't update if a "Total" is selected
         if exp_type != "Total":
@@ -343,4 +346,56 @@ class BudgetScreen(QWidget):
             self.month.calculate_totals()
             self.update_overview_tab()
 
+# ----------------------------------------------------------------------------
+    def expense_list_context_menu(self, position: QPoint):
+        """Function that establishes the context menu for the expense list"""
+        print("DELETE EXPENSE BRUH")
+        # Find what item is being right-clicked
+        item = self.expList.itemAt(position)
+        if not item:
+            return  # clicked empty space, ignore
+        row = self.expList.row(item)
+
+        # Create the context menu
+        menu = QMenu(self)
+        # Define actions
+        edit_action = QAction("Edit", self)
+        delete_action = QAction("Delete", self)
+        # Connect them to handlers
+        edit_action.triggered.connect(lambda: self.rename_item(item, row))
+        delete_action.triggered.connect(lambda: self.delete_expense(item, row))
+        # Add to the menu
+        menu.addAction(edit_action)
+        menu.addSeparator()
+        menu.addAction(delete_action)
+        # Show at mouse cursor position
+        menu.exec(self.expList.viewport().mapToGlobal(position))
+
+# ----------------------------------------------------------------------------
+    def delete_expense(self, item, index):
+        """Function that implements the delete action from the expense
+        list context menu."""   
+        # Remove from the expense object
+        data = item.text().split(" - ")
+        print(f"Target position: {index}")
+
+        # Pull what category the associated expense is in
+        self.reverse_catmap[self.last_exp]
+
+
+
+        cat = self.working_month.categories[REVERSE_TYPE_DICT[self.last_exp]]
+        exp = cat.expenses[self.last_exp]
+        costs = exp.costs
+        removed = costs.pop(index)
+
+        exp.set_actual(exp.actual - removed.cost)
+
+        row = self.working_month.cat_map[self.last_exp]
+        self.go_update_row(row, exp)
+
+        # Remove from List
+        row = self.expList.row(item)
+        self.expList.takeItem(row)
+        self.go_update_totals(cat.name)
 # EOF   

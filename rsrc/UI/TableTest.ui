@@ -174,7 +174,7 @@
               <rect>
                <x>330</x>
                <y>60</y>
-               <width>121</width>
+               <width>111</width>
                <height>41</height>
               </rect>
              </property>
@@ -279,7 +279,7 @@
             <item>
              <widget class="QPushButton" name="removeCategoryButton">
               <property name="text">
-               <string>Remove Category</string>
+               <string>???</string>
               </property>
              </widget>
             </item>
