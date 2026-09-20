@@ -238,14 +238,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="newCategoryButton">
+             <widget class="QPushButton" name="editCategoryButton">
               <property name="text">
-               <string>New Category</string>
+               <string>+/- Category</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="removeCategoryButton">
+             <widget class="QPushButton" name="secretButton">
               <property name="text">
                <string>???</string>
               </property>
