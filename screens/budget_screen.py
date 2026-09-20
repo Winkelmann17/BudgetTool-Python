@@ -102,9 +102,16 @@ class BudgetScreen(QWidget):
         for category in self.month.categories.keys():
             # Add category row for dilineation
             working_catmap[category] = row
-            row_name = f"_{category.upper()}_"
             self.budgetTable.insertRow(row)
-            self.budgetTable.setVerticalHeaderItem(row, QTableWidgetItem(row_name))
+            self.budgetTable.setSpan(row, 0, 1, 3)
+            item = QTableWidgetItem(category.upper())
+            item.setFlags(item.flags() & ~Qt.ItemFlag.ItemIsEditable)
+            item.setBackground(QColor("#43AED8"))
+            item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+            self.budgetTable.setItem(row, 0, item)
+            # row_name = f"_{category.upper()}_"
+            self.budgetTable.setVerticalHeaderItem(row, QTableWidgetItem())
+
             row += 1
 
             expenses = self.month.cat_exp_listing[category]
@@ -251,7 +258,7 @@ class BudgetScreen(QWidget):
         self.last_exp = exp_type
 
         # Don't update if a "Total" is selected
-        if exp_type != "Total":
+        if exp_type != "Total" and exp_type != "":
             self.expList.clear()
             # Add each expense with associated data
             cat = self.reverse_catmap[exp_type]
@@ -392,7 +399,8 @@ class BudgetScreen(QWidget):
         self.update_total(cat)
         self.month.calculate_totals()
         self.update_overview_tab()
-
+        self.bargraph.create(self.month)
+        self.piechart.create(self.month)
 
 # ----------------------------------------------------------------------------
     def edit_expense(self, item, row):
