@@ -124,38 +124,6 @@
               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Actual Spending:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
              </property>
             </widget>
-            <widget class="QLabel" name="overviewHighest">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>130</y>
-               <width>181</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Highest Expense:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
-            <widget class="QLabel" name="overviewHighestData">
-             <property name="geometry">
-              <rect>
-               <x>190</x>
-               <y>130</y>
-               <width>221</width>
-               <height>41</height>
-              </rect>
-             </property>
-             <property name="styleSheet">
-              <string notr="true"/>
-             </property>
-             <property name="frameShape">
-              <enum>QFrame::Box</enum>
-             </property>
-             <property name="text">
-              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
-            </widget>
             <widget class="QLabel" name="overviewPlanned">
              <property name="geometry">
               <rect>

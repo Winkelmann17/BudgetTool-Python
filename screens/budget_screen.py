@@ -376,28 +376,23 @@ class BudgetScreen(QWidget):
         """Function that implements the delete action from the expense
         list context menu."""   
         # Remove from the expense object
-        data = item.text().split(" - ")
         print(f"Target position: {index}")
 
         # Pull what category the associated expense is in
-        self.reverse_catmap[self.last_exp]
+        cat = self.reverse_catmap[self.last_exp]
+        exp_obj = self.month.categories[cat].expenses[self.last_exp]
+        costs = exp_obj.costs
+        removed = costs.pop(index)
+        self.expList.takeItem(index)
+        exp_obj.set_actual(exp_obj.actual - removed.cost_value)
+        row = self.catmap[self.last_exp]
 
+        # Update UI
+        self.update_row(row, exp_obj)
+        self.update_total(cat)
+        self.month.calculate_totals()
+        self.update_overview_tab()
 
-
-        # cat = self.working_month.categories[REVERSE_TYPE_DICT[self.last_exp]]
-        # exp = cat.expenses[self.last_exp]
-        # costs = exp.costs
-        # removed = costs.pop(index)
-
-        # exp.set_actual(exp.actual - removed.cost)
-
-        # row = self.working_month.cat_map[self.last_exp]
-        # self.go_update_row(row, exp)
-
-        # # Remove from List
-        # row = self.expList.row(item)
-        # self.expList.takeItem(row)
-        # self.go_update_totals(cat.name)
 
 # ----------------------------------------------------------------------------
     def edit_expense(self, item, row):
