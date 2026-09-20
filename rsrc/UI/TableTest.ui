@@ -45,7 +45,7 @@
              <property name="geometry">
               <rect>
                <x>190</x>
-               <y>10</y>
+               <y>50</y>
                <width>121</width>
                <height>41</height>
               </rect>
@@ -64,7 +64,7 @@
              <property name="geometry">
               <rect>
                <x>190</x>
-               <y>50</y>
+               <y>90</y>
                <width>121</width>
                <height>41</height>
               </rect>
@@ -83,7 +83,7 @@
              <property name="geometry">
               <rect>
                <x>190</x>
-               <y>90</y>
+               <y>130</y>
                <width>121</width>
                <height>41</height>
               </rect>
@@ -102,7 +102,7 @@
              <property name="geometry">
               <rect>
                <x>10</x>
-               <y>90</y>
+               <y>130</y>
                <width>111</width>
                <height>41</height>
               </rect>
@@ -115,7 +115,7 @@
              <property name="geometry">
               <rect>
                <x>10</x>
-               <y>50</y>
+               <y>90</y>
                <width>161</width>
                <height>41</height>
               </rect>
@@ -128,7 +128,7 @@
              <property name="geometry">
               <rect>
                <x>10</x>
-               <y>10</y>
+               <y>50</y>
                <width>181</width>
                <height>41</height>
               </rect>
@@ -140,9 +140,9 @@
             <widget class="QLabel" name="overviewIncomeAmount">
              <property name="geometry">
               <rect>
-               <x>330</x>
-               <y>60</y>
-               <width>111</width>
+               <x>190</x>
+               <y>10</y>
+               <width>121</width>
                <height>41</height>
               </rect>
              </property>
@@ -159,8 +159,8 @@
             <widget class="QLabel" name="overviewDifferential_2">
              <property name="geometry">
               <rect>
-               <x>330</x>
-               <y>20</y>
+               <x>60</x>
+               <y>10</y>
                <width>121</width>
                <height>41</height>
               </rect>

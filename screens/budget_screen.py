@@ -268,9 +268,9 @@ class BudgetScreen(QWidget):
         planned = self.month.planned_total
         expenses = self.month.expense_total
         diff = planned - expenses
-        name = self.month.highest_cost.name
-        cost_value = self.month.highest_cost.cost_value
-        date = self.month.highest_cost.date
+        # name = self.month.highest_cost.name
+        # cost_value = self.month.highest_cost.cost_value
+        # date = self.month.highest_cost.date
 
         # Display Data
         print(f"planned = {planned}, actual {expenses}, diff = {diff}")
@@ -278,7 +278,7 @@ class BudgetScreen(QWidget):
         self.overviewActualAmount.setText(f" ${expenses}")
         self.overviewDifferentialAmount.setText(f" ${diff:.2f}")
         self.overviewIncomeAmount.setText(f" ${income}")
-        self.overviewHighestData.setText(f" {name} - {cost_value} - {date}")
+        # self.overviewHighestData.setText(f" {name} - {cost_value} - {date}")
 
 # ----------------------------------------------------------------------------
     def show_expense_popup(self):
