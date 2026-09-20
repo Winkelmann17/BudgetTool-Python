@@ -70,7 +70,7 @@ class BudgetScreen(QWidget):
         self.notesTextBox.setPlainText(self.month.notes)
 
         # Connect buttons to functions
-        self.saveButton.clicked.connect(lambda: self.serializer.serialize(self.month))
+        self.saveButton.clicked.connect(self.save_data)
         self.addExpenseButton.clicked.connect(self.show_expense_popup)
         self.copyLastMonthButton.clicked.connect(self.copy_last_month)
         # self.newCategoryButton.clicked.connect()
@@ -221,7 +221,7 @@ class BudgetScreen(QWidget):
         self.update_total(cat)
         self.month.calculate_totals()
         self.update_overview_tab()
-
+        
 # ----------------------------------------------------------------------------
     def update_row(self, row, expense):
         """Function that updates the rows and performs the math for proper
@@ -286,6 +286,7 @@ class BudgetScreen(QWidget):
         self.overviewDifferentialAmount.setText(f" ${diff:.2f}")
         self.overviewIncomeAmount.setText(f" ${income}")
         # self.overviewHighestData.setText(f" {name} - {cost_value} - {date}")
+        self.window().setWindowTitle(f"{MAINTITLE} - {self.month.name} {self.month.year} *")
 
 # ----------------------------------------------------------------------------
     def show_expense_popup(self):
@@ -405,4 +406,11 @@ class BudgetScreen(QWidget):
 # ----------------------------------------------------------------------------
     def edit_expense(self, item, row):
         self.statusbar.showMessage("This feature is not fully implemented yet. Sorry!")
+
+# ----------------------------------------------------------------------------
+    def save_data(self):
+        """Changes window title to have an asterisk when it is not saved."""
+        self.window().setWindowTitle(f"{MAINTITLE} - {self.month.name} {self.month.year}")
+        self.serializer.serialize(self.month)
+
 # EOF   

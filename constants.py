@@ -14,6 +14,9 @@ BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreenWidget.ui"
 TEST_UI = "./rsrc/UI/TableTest.ui"
 EXPENSE_POPUP_UI = "./rsrc/UI/ExpensePopUp.ui"
 
+# Window Titles
+MAINTITLE = "WinkelBudget 1.0"
+
 # DIALOG
 OK = 0
 CANCEL = 1
