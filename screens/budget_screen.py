@@ -20,7 +20,7 @@ from PyQt6.QtCore import Qt, QPoint
 from PyQt6.uic import loadUi
 
 from constants import *
-from screens.popups import ExpensePopUp
+from screens.popups import ExpensePopUp, EditCategoryPopUp
 from logic.screenhelp import *
 from logic.objects import Month
 from logic.serializer import Serializer
@@ -73,7 +73,7 @@ class BudgetScreen(QWidget):
         self.saveButton.clicked.connect(self.save_data)
         self.addExpenseButton.clicked.connect(self.show_expense_popup)
         self.copyLastMonthButton.clicked.connect(self.copy_last_month)
-        # self.newCategoryButton.clicked.connect()
+        self.editCategoryButton.clicked.connect(self.show_edit_expense_type_popup)
         # self.removeButton.clicked.connect()
         # self.futureButton.clicked.connect()
 
@@ -98,6 +98,11 @@ class BudgetScreen(QWidget):
         the working month for better data editing."""
         working_catmap = {}
         row = 0
+        self.budgetTable.setRowCount(0)
+        self.budgetTable.setHorizontalHeaderItem(0, QTableWidgetItem("Planned"))
+        self.budgetTable.setHorizontalHeaderItem(1, QTableWidgetItem("Actual"))
+        self.budgetTable.setHorizontalHeaderItem(2, QTableWidgetItem("Difference"))
+
         # Get categories from loaded month
         for category in self.month.categories.keys():
             # Add category row for dilineation
@@ -115,6 +120,7 @@ class BudgetScreen(QWidget):
             row += 1
 
             expenses = self.month.cat_exp_listing[category]
+            print(expenses)
             for exp in expenses:
                 working_catmap[exp] = row
                 # Insert Row to table
@@ -304,6 +310,7 @@ class BudgetScreen(QWidget):
         print(self.month.update_queue)
         for exp_obj in self.month.update_queue:
             self.update_row(self.catmap[exp_obj.name], exp_obj)
+        self.month.update_queue = []
         for cat in self.month.categories.keys():
             self.update_total(cat)
         self.month.calculate_totals()
@@ -412,5 +419,27 @@ class BudgetScreen(QWidget):
         """Changes window title to have an asterisk when it is not saved."""
         self.window().setWindowTitle(f"{MAINTITLE} - {self.month.name} {self.month.year}")
         self.serializer.serialize(self.month)
+
+# ----------------------------------------------------------------------------
+    def show_edit_expense_type_popup(self):
+        """Function that calls the add expense popup object and executes it.
+        Handles any data returned from it."""
+        # Update status bar
+        self.statusbar.showMessage("Editing expense type categories via popup...")
+
+        # Run popup code
+        popup = EditCategoryPopUp(self.month)
+        popup.exec()
+
+        # Update the screen
+        if popup.change_made:
+            self.ignore_cell_changes = True
+            print("YED")
+            print(self.month.categories["Income"].expenses)
+            self.budgetTable.clear()
+            self.catmap = self.loadtable()
+            self.reverse_catmap = self.build_reverse_catmap()
+            self.update_overview_tab()
+            self.ignore_cell_changes = False
 
 # EOF   

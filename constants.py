@@ -12,7 +12,8 @@ Recent Changes:
 MAINWINDOW_UI = "./rsrc/UI/MainWindow.ui"
 BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreenWidget.ui"
 TEST_UI = "./rsrc/UI/TableTest.ui"
-EXPENSE_POPUP_UI = "./rsrc/UI/ExpensePopUp.ui"
+ADD_EXPENSE_POPUP_UI = "./rsrc/UI/ExpensePopUp.ui"
+EDIT_CATEGORY_POPUP_UI = "./rsrc/UI/EditCategoryPopUp.ui"
 
 # Window Titles
 MAINTITLE = "WinkelBudget 1.0"

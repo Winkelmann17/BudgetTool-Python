@@ -102,6 +102,17 @@ class Category():
         print(temp)
         self.actual_total = temp
 
+# -------------------------------------------------------------------
+    def add_expense(self, expense):
+        self.expenses[expense] = Expense(expense)
+        self.expense_list.append(expense)
+
+# -------------------------------------------------------------------
+    def remove_expense(self, expense):
+        removed = self.expenses.pop(expense)
+        self.expense_list.remove(expense)
+        return removed
+
 # ===================================================================
 #           Expense
 # ===================================================================

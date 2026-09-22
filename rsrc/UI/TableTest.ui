@@ -245,9 +245,9 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="editExpTypeButton">
+             <widget class="QPushButton" name="editCategoryButton">
               <property name="text">
-               <string>+/- Exp Type</string>
+               <string>Edit Category</string>
               </property>
              </widget>
             </item>

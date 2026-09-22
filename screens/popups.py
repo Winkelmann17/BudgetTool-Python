@@ -5,10 +5,9 @@ Github:
 This code serves as the UI interaction code for popup regarding
 adding expenses to the table.
 
-Last Updated: 15 September 2026
+Last Updated: 20 September 2026
 Recent Changes:
-- Merged functionality with new month object updates
-- Patched in regex
+- Added new popup for editing expense categories
 """
 # ===================================================================
 #           Imports
@@ -22,16 +21,16 @@ from constants import *
 #           Expense Popup
 # ===================================================================
 class ExpensePopUp(QDialog):
-    """Class that implements the various PopUp objects. Loads in a specified
-    ui file in order to be as generic as possible. Takes in the proper UI file
-    as a parameter."""
+    """Class that implements the Expense Popup object. Handles all
+    specifications for the popup that is used to add expenses to the
+    program."""
     def __init__(self, month):
         super(ExpensePopUp, self).__init__()
         self.response_code = 0
         self.response_text = ""
         self.default_cat = "Income"
         self.month = month
-        loadUi(EXPENSE_POPUP_UI, self)
+        loadUi(ADD_EXPENSE_POPUP_UI, self)
 
         # Update Exp Dropdown
         self.update_exp_dropdown(self.default_cat)
@@ -94,5 +93,87 @@ class ExpensePopUp(QDialog):
         type_list = self.month.categories[cat].expenses
         self.expBox.clear()
         self.expBox.addItems(type_list.keys())
-        
+
+
+# ===================================================================
+#           Edit Category Type Popup
+# ===================================================================
+class EditCategoryPopUp(QDialog):
+    """Class that implements the various PopUp objects. Loads in a specified
+    ui file in order to be as generic as possible. Takes in the proper UI file
+    as a parameter."""
+    def __init__(self, month):
+        super(EditCategoryPopUp, self).__init__()
+        self.response_text = ""
+        self.default_cat = "Income"
+        self.month = month
+        self.change_made = False
+        loadUi(EDIT_CATEGORY_POPUP_UI, self)
+
+        # Drop down binding
+        self.update_exp_dropdown(self.rmCatBox.currentText())
+        self.rmCatBox.currentTextChanged.connect(lambda: self.update_exp_dropdown(self.rmCatBox.currentText()))
+
+        # Button Bindings
+        self.addButton.clicked.connect(self.handle_add)
+        self.rmButton.clicked.connect(self.handle_remove)
+        self.addClearButton.clicked.connect(self.handle_add_clear)
+        self.rmClearButton.clicked.connect(self.handle_rm_clear)
+        self.doneButton.clicked.connect(self.close)
+
+# -------------------------------------------------------------------
+    def update_exp_dropdown(self, cat):
+        """Function that updates the expense drop down box whenever
+        the text changes in the category box"""
+        type_list = self.month.categories[cat].expenses
+        self.rmExpBox.clear()
+        self.rmExpBox.addItems(type_list.keys())
+
+# -------------------------------------------------------------------
+    def handle_add_clear(self):
+        """Function clears all boxes restores the default
+        text in case the user wants to start from scratch."""
+        self.addCatBox.setCurrentIndex(0)  # Cat Box
+        self.nameBox.setText("") # nameBox
+        self.addFeedbackLabel.setText("")    # Feedback Label
+
+# -------------------------------------------------------------------
+    def handle_rm_clear(self):
+        """Function clears all boxes restores the default
+        text in case the user wants to start from scratch."""
+        self.rmCatBox.setCurrentIndex(0)  # Cat Box
+        self.rmExpBox.setCurrentIndex(0)  # Exp Box
+        self.rmFeedbackLabel.setText("")    # Feedback Label
+
+# -------------------------------------------------------------------
+    def handle_add(self):
+        """Function that handles adding the new expense type to the
+        months data."""
+        cat = self.addCatBox.currentText()
+        exp = self.nameBox.text()
+        # Add to month data
+        error = self.input_validation()
+        if error:
+            self.feedbackLabel.setText(error)
+        else:
+            self.month.categories[cat].add_expense(exp)
+            self.month.cat_exp_listing[cat].append(exp)
+        self.change_made = True
+
+# -------------------------------------------------------------------
+    def handle_remove(self):
+        """Function that hadnles removing the new expense type from
+        the months data."""
+        cat = self.rmCatBox.currentText()
+        exp = self.rmExpBox.currentText()
+        self.month.categories[cat].remove_expense(exp)
+        self.month.cat_exp_listing[cat].remove(exp)
+        self.change_made = True
+
+# -------------------------------------------------------------------
+    def input_validation(self, ):
+        """Function that handles all input validation and ensures
+        that everything is correct before attempting to modify
+        the month object."""
+        return None
 # EOF
