@@ -15,6 +15,8 @@ Recent Changes:
 # ===================================================================
 from PyQt6.QtWidgets import QMainWindow
 from PyQt6.uic import loadUi
+from datetime import datetime as dt
+import os
 
 from constants import *
 from logic.objects import Month
@@ -39,9 +41,28 @@ class MainWindow(QMainWindow):
 
         # Add the BudgetScreen UI into the stacked widget for screen changing
         # Pass in the statusbar so it can be used
+        self.year = year
+        self.month = month
+
         self.setWindowTitle(f"{MAINTITLE} - {month} {year}")
         self.budget_screen = BudgetScreen(month, year, self.statusbar)
         self.stackedWidget.addWidget(self.budget_screen)
-
         #self.stackedWidget.setCurrentIndex(0)
+
+    def closeEvent(self, event):
+        self.cleanup()
+        event.accept()
+
+    def cleanup(self):
+        # Prune backups to most recent 3
+        print("Closing")
+        folder = f"./data/backups/{self.year}/{self.month}"
+
+        # Sort the files 
+        files = os.listdir(folder)
+        files.sort()
+        remove_files = files[:-3]
+        for file in remove_files:
+            os.remove(f"{folder}/{file}")
+        
 # EOF

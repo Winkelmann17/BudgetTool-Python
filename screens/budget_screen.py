@@ -74,8 +74,6 @@ class BudgetScreen(QWidget):
         self.addExpenseButton.clicked.connect(self.show_expense_popup)
         self.copyLastMonthButton.clicked.connect(self.copy_last_month)
         self.editCategoryButton.clicked.connect(self.show_edit_expense_type_popup)
-        # self.removeButton.clicked.connect()
-        # self.futureButton.clicked.connect()
 
         # Connect menu bar options to functions
         # self.actionSave.triggered.connect(self.go_save_month_data)
