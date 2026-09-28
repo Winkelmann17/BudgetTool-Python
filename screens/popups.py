@@ -84,7 +84,16 @@ class ExpensePopUp(QDialog):
         """Function that handles all input validation and ensures
         that everything is correct before attempting to modify
         the month object."""
+        # Char limit
+        if len(name) > EXP_DESC_LEN:
+            return "Description exceeds 32 char limit. Please change."
+
+        # Ensure Positive Cost
+        if cost <= 0.00:
+            return "Cost input is zero or negative. Please change."
+
         return None
+
     
 # -------------------------------------------------------------------
     def update_exp_dropdown(self, cat):
@@ -152,13 +161,14 @@ class EditCategoryPopUp(QDialog):
         cat = self.addCatBox.currentText()
         exp = self.nameBox.text()
         # Add to month data
-        error = self.input_validation()
+        error = self.input_validation(exp)
         if error:
-            self.feedbackLabel.setText(error)
+            self.addFeedbackLabel.setText(error)
         else:
             self.month.categories[cat].add_expense(exp)
             self.month.cat_exp_listing[cat].append(exp)
-        self.change_made = True
+            self.addFeedbackLabel.setText(f"{exp} expense added under {cat}.")
+            self.change_made = True
 
 # -------------------------------------------------------------------
     def handle_remove(self):
@@ -168,12 +178,25 @@ class EditCategoryPopUp(QDialog):
         exp = self.rmExpBox.currentText()
         self.month.categories[cat].remove_expense(exp)
         self.month.cat_exp_listing[cat].remove(exp)
+        self.rmFeedbackLabel.setText(f"{exp} expense removed from {cat}.")
         self.change_made = True
 
 # -------------------------------------------------------------------
-    def input_validation(self, ):
+    def input_validation(self, exp_to_add):
         """Function that handles all input validation and ensures
         that everything is correct before attempting to modify
         the month object."""
+        # Checking length
+        if len(exp_to_add) > EXP_NAME_LEN:
+            return f"Expense name exceeds {EXP_NAME_LEN} char limit."\
+
+        # Checking for duplicat names
+        for cat in self.month.cat_exp_listing.keys():
+            for exp_name in self.month.cat_exp_listing[cat]:
+                if exp_to_add == exp_name:
+                    return "Expense name is shared with another expense. Choose another name."
+
+        # Success
         return None
+    
 # EOF
