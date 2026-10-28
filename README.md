@@ -12,7 +12,9 @@ This budget application can he,lp you keep track of your spending on a monthly b
 4. Install the dependencies by running: *pip install -r requirements.txt*
 5. Run the application with *python Winkelbudget.py*
 
-The more in-depth documentation of how to use the program can be located here:
+This application should be rather simple to understand. Simply add what you expect your income and monthly costs are, then add the actual costs via the *Add Expense* functionaliy. From here, the application will calculate insightful information and generate helpful charts and graphs to have a better insight on your monthly expenses. You will be able to fully customize the expense categories as well as save notes regarding the specific month. Remember to press the *save* button to save your budget!
+
+For a more in-depth breakdown of technical details regarding this project see my project article on my pages site here:
 
 ## Inspiration for WinkelBudget
 I wanted to make this application to give myself a tool to budget effectively with all the bells and whistles of other applications (that often require a payment). In doing so, I've also been able to grow in my ability to develop complex programs. GUI applications are not my strongsuit, and having only been exposed to Tkinter previously, learning to use QT via PyQT has been a unique learning experience. 
