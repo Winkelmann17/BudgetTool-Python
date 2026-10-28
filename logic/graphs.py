@@ -1,6 +1,6 @@
 """"
 This program was written by Nicholas Winkelmann. 
-Github:
+Github: https://github.com/Winkelmann17
 
 This code serves as the code for various helper functions that make 
 the code clearer in the screen files.

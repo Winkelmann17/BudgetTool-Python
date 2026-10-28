@@ -1,6 +1,6 @@
 """"
 This program was written by Nicholas Winkelmann. 
-Github:
+Github: https://github.com/Winkelmann17
 
 This code serves as the code for the Serializer class that handles 
 the writing of budget data to disk for persistence.

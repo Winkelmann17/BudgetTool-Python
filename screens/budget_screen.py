@@ -1,15 +1,14 @@
 """"
 This program was written by Nicholas Winkelmann. 
-Github:
+Github: https://github.com/Winkelmann17
 
 This code serves as the UI interaction code for the main budget 
 screen. 
 
-Last Updated: 17 September 2026
+Last Updated: 28 October 2026
 Recent Changes:
-- Added bargraph tab functionality
-- Added pie chart tab functionality
-- Fixed bugs
+- Added more statusbar messages
+- preparing for 1.0 release
 """
 # ===================================================================
 #           Imports
@@ -118,7 +117,7 @@ class BudgetScreen(QWidget):
             row += 1
 
             expenses = self.month.cat_exp_listing[category]
-            print(expenses)
+        
             for exp in expenses:
                 working_catmap[exp] = row
                 # Insert Row to table
@@ -178,7 +177,7 @@ class BudgetScreen(QWidget):
         for key in self.month.cat_exp_listing.keys():
             for exp_type in self.month.cat_exp_listing[key]:
                 working_reverse[exp_type] = key
-        print(working_reverse)
+        
         return working_reverse
 
 # ----------------------------------------------------------------------------
@@ -316,6 +315,8 @@ class BudgetScreen(QWidget):
         self.piechart.create(self.month)
         self.update_overview_tab()
 
+        self.statusbar.showMessage("Expenses added.")
+
 # ----------------------------------------------------------------------------
     def update_notes(self):
         """Func that stores updated notes into the month object."""
@@ -332,7 +333,7 @@ class BudgetScreen(QWidget):
             print(f"type of year {type(self.month.year)}")
             year = self.month.year
         self.import_data_from(prev_month, year)
-
+        
 # ----------------------------------------------------------------------------
     def import_data_from(self, month, year):
         """Function that imports the planned values of a different month
@@ -358,6 +359,8 @@ class BudgetScreen(QWidget):
                 self.update_total(cat)
             self.month.calculate_totals()
             self.update_overview_tab()
+
+        self.statusbar.showMessage(f"Loaded data from {month} {year}.")
 
 # ----------------------------------------------------------------------------
     def expense_list_context_menu(self, position: QPoint):
@@ -408,6 +411,8 @@ class BudgetScreen(QWidget):
         self.bargraph.create(self.month)
         self.piechart.create(self.month)
 
+        self.statusbar.showMessage(f"Expense named {exp_obj.name} removed.")
+
 # ----------------------------------------------------------------------------
     def edit_expense(self, item, row):
         self.statusbar.showMessage("This feature is not fully implemented yet. Sorry!")
@@ -417,6 +422,7 @@ class BudgetScreen(QWidget):
         """Changes window title to have an asterisk when it is not saved."""
         self.window().setWindowTitle(f"{MAINTITLE} - {self.month.name} {self.month.year}")
         self.serializer.serialize(self.month)
+        self.statusbar.showMessage("Data saved.")
 
 # ----------------------------------------------------------------------------
     def show_edit_expense_type_popup(self):
@@ -440,4 +446,5 @@ class BudgetScreen(QWidget):
             self.update_overview_tab()
             self.ignore_cell_changes = False
 
+        self.statusbar.showMessage("Categories updated.")
 # EOF   

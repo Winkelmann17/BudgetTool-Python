@@ -1,6 +1,6 @@
 """"
 This program was written by Nicholas Winkelmann. 
-Github:
+Github: https://github.com/Winkelmann17
 
 This code serves all constants used within the WinkelBudget program.
 

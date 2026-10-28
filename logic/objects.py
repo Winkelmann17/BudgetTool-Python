@@ -1,6 +1,6 @@
 """"
 This program was written by Nicholas Winkelmann. 
-Github:
+Github: https://github.com/Winkelmann17
 
 This code serves as the primary location of the main objects and 
 logic used by this program for the budget calculations.
