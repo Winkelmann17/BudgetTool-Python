@@ -39,13 +39,13 @@ DEFAULT_CATEGORIES = ["Income", "Savings", "Giving", "Housing", "Transportation"
 DEFAULT_TYPE_DICT = {
     "Income"            : ["Paycheck 1", "Paycheck 2", "Paycheck 3", "Paycheck 4", "Extra/Other 1", "Extra/Other 2"],
     "Savings"           : ["New Car", "ROTHs", "Flights", "Gifts"],
-    "Giving"            : ["Church", "Focus"],
+    "Giving"            : ["Church", "Food Bank"],
     "Housing"           : ["Mortgage", "Water", "Electricity", "Phone", "Internet"],
     "Transportation"    : ["Gas", "Maintenance"],
     "Food"              : ["Groceries", "Restaurants"],
-    "Personal"          : ["V-Fun", "N-Fun", "Subscriptions"],
+    "Personal"          : ["Fun", "Subscriptions"],
     "Insurance"         : ["Car", "Health", "Dental", "Vision"],
-    "Other"             : ["Cats", "Misc"] 
+    "Other"             : ["Pets", "Misc"] 
 }
 PLANNED = 0
 ACTUAL = 1
