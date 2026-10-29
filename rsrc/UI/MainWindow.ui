@@ -44,22 +44,22 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionSave">
    <property name="text">
-    <string>Save</string>
+    <string>Save (Not Implemented)</string>
    </property>
   </action>
   <action name="actionImport_from">
    <property name="text">
-    <string>Import from...</string>
+    <string>Import from... (Not Implemented)</string>
    </property>
   </action>
   <action name="actionGo_to_Month_Selection">
    <property name="text">
-    <string>Month Selection</string>
+    <string>Month Selection (Not Implemented)</string>
    </property>
   </action>
   <action name="actionHomepage">
    <property name="text">
-    <string>Homepage</string>
+    <string>Homepage (Not Implemented)</string>
    </property>
   </action>
  </widget>
