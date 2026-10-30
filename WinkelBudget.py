@@ -4,9 +4,9 @@ Github: https://github.com/Winkelmann17
 
 This code serves as the main entry point for WinkelBudget.
 
-Last Updated: 18 September 2026
+Last Updated: 29 October 2026
 Recent Changes:
-- Added argparse functionality so commandline is garbagemensman
+- Preparing for final release
 """
 # ===================================================================
 #           Imports
@@ -99,7 +99,7 @@ def main():
 
     # Start QT Application and call the MainWindow
     app = QApplication(sys.argv)
-    app.setStyle("windowsvista")
+    app.setStyle(STYLE)
     window = MainWindow(month, year)
     window.show()
 

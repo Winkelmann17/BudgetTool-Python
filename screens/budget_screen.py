@@ -5,10 +5,9 @@ Github: https://github.com/Winkelmann17
 This code serves as the UI interaction code for the main budget 
 screen. 
 
-Last Updated: 28 October 2026
+Last Updated: 29 October 2026
 Recent Changes:
-- Added more statusbar messages
-- preparing for 1.0 release
+- Preparing for final release
 """
 # ===================================================================
 #           Imports
@@ -72,12 +71,7 @@ class BudgetScreen(QWidget):
         self.saveButton.clicked.connect(self.save_data)
         self.addExpenseButton.clicked.connect(self.show_expense_popup)
         self.copyLastMonthButton.clicked.connect(self.copy_last_month)
-        self.editCategoryButton.clicked.connect(self.show_edit_expense_type_popup)
-
-        # Connect menu bar options to functions
-        # self.actionSave.triggered.connect(self.go_save_month_data)
-        # self.actionBack.triggered.connect(go_back)
-        # self.actionHome.triggered.connect(go_back)   
+        self.editCategoryButton.clicked.connect(self.show_edit_expense_type_popup) 
 
         # Connect events to functions
         self.budgetTable.itemChanged.connect(self.update_planned)
@@ -278,9 +272,6 @@ class BudgetScreen(QWidget):
         planned = self.month.planned_total
         expenses = self.month.expense_total
         diff = planned - expenses
-        # name = self.month.highest_cost.name
-        # cost_value = self.month.highest_cost.cost_value
-        # date = self.month.highest_cost.date
 
         # Display Data
         print(f"planned = {planned}, actual {expenses}, diff = {diff}")
@@ -288,7 +279,6 @@ class BudgetScreen(QWidget):
         self.overviewActualAmount.setText(f" ${expenses}")
         self.overviewDifferentialAmount.setText(f" ${diff:.2f}")
         self.overviewIncomeAmount.setText(f" ${income}")
-        # self.overviewHighestData.setText(f" {name} - {cost_value} - {date}")
         self.window().setWindowTitle(f"{MAINTITLE} - {self.month.name} {self.month.year} *")
 
 # ----------------------------------------------------------------------------

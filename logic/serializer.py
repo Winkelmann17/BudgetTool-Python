@@ -5,10 +5,9 @@ Github: https://github.com/Winkelmann17
 This code serves as the code for the Serializer class that handles 
 the writing of budget data to disk for persistence.
 
-Last Updated: 18 September 2026
+Last Updated: 29 October 2026
 Recent Changes:
-- Updating code to adhere to newer norms and standards
-- fixed backup directory failure errors
+- Preparing for final release
 """
 # ===================================================================
 #           Imports
@@ -131,9 +130,4 @@ class Serializer():
             return False
         return True
 
-
-    def prune_backups():
-        """Function that prunes the backup files to the newest 5 after the 
-        program is closed"""
-        pass
 # EOF

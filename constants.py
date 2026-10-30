@@ -4,9 +4,9 @@ Github: https://github.com/Winkelmann17
 
 This code serves all constants used within the WinkelBudget program.
 
-Last Updated: 18 September 2026
+Last Updated: 29 October 2026
 Recent Changes:
-- Added constants for Argparse in startup
+- Preparing for final release
 """
 # Screen paths
 MAINWINDOW_UI = "./rsrc/UI/MainWindow.ui"
@@ -17,10 +17,7 @@ EDIT_CATEGORY_POPUP_UI = "./rsrc/UI/EditCategoryPopUp.ui"
 
 # Window Titles
 MAINTITLE = "WinkelBudget 1.0"
-
-# DIALOG
-OK = 0
-CANCEL = 1
+STYLE = "windowsvista"
 
 # Object Data
 MONTHS = ["January", 
