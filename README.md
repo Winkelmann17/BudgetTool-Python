@@ -1,4 +1,4 @@
-# WinkelBudget 1.0
+# WinkelBudget 1.0.0
 **Finally reached 1.0 release!**  
   
 This budget application can help you keep track of your spending on a monthly basis. This application makes use of Python's many other capabilities to provide a unique blend of charts, graphs, and tables to give a cohesive experience.
