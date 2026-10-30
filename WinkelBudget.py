@@ -54,7 +54,6 @@ def get_inputs():
     month : str = args.month
     year : int = args.year
     total_args = len(sys.argv) - 1 # 1 is the source file, subtract that
-    print(total_args)
     
     # Check all inputs are valid via a variety of checks
     errors = []

@@ -83,7 +83,6 @@ class Serializer():
         contents = self.open_read_close(self.filepath)
         # Load the data
         try: 
-            print("IN PICKLE LOADS")
             loaded_target = pickle.loads(contents)
         except Exception as e:
             print(f"{e} : error loading or printing data.")
@@ -96,7 +95,6 @@ class Serializer():
         Function that opens a file, reads, writes, and closes the file.
         """
         # Open the file, read, and then print the contents, and close.
-        print("IN OPEN READ")
         try:
             size = self.file_size(name)
             f = open(name, "rb")

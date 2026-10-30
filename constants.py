@@ -10,8 +10,7 @@ Recent Changes:
 """
 # Screen paths
 MAINWINDOW_UI = "./rsrc/UI/MainWindow.ui"
-BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreenWidget.ui"
-TEST_UI = "./rsrc/UI/TableTest.ui"
+BUDGETSCREEN_UI = "./rsrc/UI/BudgetScreen.ui"
 ADD_EXPENSE_POPUP_UI = "./rsrc/UI/ExpensePopUp.ui"
 EDIT_CATEGORY_POPUP_UI = "./rsrc/UI/EditCategoryPopUp.ui"
 

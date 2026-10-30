@@ -40,7 +40,7 @@ class BudgetScreen(QWidget):
         super().__init__()
 
         # Load the First UI Page
-        loadUi(TEST_UI, self)
+        loadUi(BUDGETSCREEN_UI, self)
         self.statusbar = statusbar
 
         # Setup Month handler data
@@ -180,7 +180,6 @@ class BudgetScreen(QWidget):
         a new planned value is set by the user."""
         if self.ignore_cell_changes:
             return
-        print(f"[+] Edit for cell found in {item.row}, {item.column}")
 
         # Get the value and check it via regex
         cell_text = item.text()
@@ -194,7 +193,6 @@ class BudgetScreen(QWidget):
         
         # Pull the exp name
         exp = self.budgetTable.verticalHeaderItem(item.row()).text()
-        print(f"Expense_type edited: {exp}")
 
         # Get the cat and expense type
         # TODO: Have this expense type -> Category mapping done at month init
@@ -203,7 +201,7 @@ class BudgetScreen(QWidget):
             if exp in value:
                 cat = key
                 break
-        print(f"Category: {cat}")
+
         if cat == None:
             self.statusbar.showMessage(":( Invalid expense type -> category mapping.")
             return
@@ -250,7 +248,6 @@ class BudgetScreen(QWidget):
         """Function that populates the expense list tab on the 
         combo box when a type is clicked on for easy viewing."""
         # Get the row and expense type
-        print(f"This row was selected: {row}")
         exp_type = self.budgetTable.verticalHeaderItem(row).text()
         self.last_exp = exp_type
 
@@ -260,7 +257,6 @@ class BudgetScreen(QWidget):
             # Add each expense with associated data
             cat = self.reverse_catmap[exp_type]
             for cost in self.month.categories[cat].expenses[exp_type].costs:
-                print(f"We are in the loop for: {cost.name}")
                 self.expList.addItem(f"{cost.name} - {cost.date} - ${cost.cost_value}")
 
 # ----------------------------------------------------------------------------
@@ -274,7 +270,6 @@ class BudgetScreen(QWidget):
         diff = planned - expenses
 
         # Display Data
-        print(f"planned = {planned}, actual {expenses}, diff = {diff}")
         self.overviewPlannedAmount.setText(f" ${planned}")
         self.overviewActualAmount.setText(f" ${expenses}")
         self.overviewDifferentialAmount.setText(f" ${diff:.2f}")
@@ -293,8 +288,6 @@ class BudgetScreen(QWidget):
         popup.exec()
 
         # Update the screen
-        print(self.catmap)
-        print(self.month.update_queue)
         for exp_obj in self.month.update_queue:
             self.update_row(self.catmap[exp_obj.name], exp_obj)
         self.month.update_queue = []
@@ -320,7 +313,6 @@ class BudgetScreen(QWidget):
             year = self.year - 1
         else:
             prev_month = MONTHS[index - 1]
-            print(f"type of year {type(self.month.year)}")
             year = self.month.year
         self.import_data_from(prev_month, year)
         
@@ -350,12 +342,11 @@ class BudgetScreen(QWidget):
             self.month.calculate_totals()
             self.update_overview_tab()
 
-        self.statusbar.showMessage(f"Loaded data from {month} {year}.")
+            self.statusbar.showMessage(f"Loaded data from {month} {year}.")
 
 # ----------------------------------------------------------------------------
     def expense_list_context_menu(self, position: QPoint):
         """Function that establishes the context menu for the expense list"""
-        print("DELETE EXPENSE BRUH")
         # Find what item is being right-clicked
         item = self.expList.itemAt(position)
         if not item:
@@ -382,8 +373,6 @@ class BudgetScreen(QWidget):
         """Function that implements the delete action from the expense
         list context menu."""   
         # Remove from the expense object
-        print(f"Target position: {index}")
-
         # Pull what category the associated expense is in
         cat = self.reverse_catmap[self.last_exp]
         exp_obj = self.month.categories[cat].expenses[self.last_exp]
@@ -428,8 +417,6 @@ class BudgetScreen(QWidget):
         # Update the screen
         if popup.change_made:
             self.ignore_cell_changes = True
-            print("YED")
-            print(self.month.categories["Income"].expenses)
             self.budgetTable.clear()
             self.catmap = self.loadtable()
             self.reverse_catmap = self.build_reverse_catmap()

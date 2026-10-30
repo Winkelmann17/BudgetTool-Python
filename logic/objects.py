@@ -60,7 +60,7 @@ class Month():
                 self.expense_total += self.categories[cat].actual_total
             else:
                 self.income_total = self.categories[cat].actual_total
-        print(f"Calculated: planned = {self.planned_total} actual = {self.expense_total} income = {self.income_total}")
+        
 
 # -------------------------------------------------------------------
     def set_highest_cost(self, name, cost_value, date):
@@ -92,14 +92,14 @@ class Category():
         temp = 0.00
         for exp in self.expense_list:
             temp += self.expenses[exp].planned
-        print(temp)
+        
         self.planned_total = temp
 
     def sum_actual(self):
         temp = 0.00
         for exp in self.expense_list:
             temp += self.expenses[exp].actual
-        print(temp)
+        
         self.actual_total = temp
 
 # -------------------------------------------------------------------
