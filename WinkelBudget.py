@@ -15,6 +15,7 @@ import argparse
 import sys
 
 from PyQt6.QtWidgets import QApplication
+from PyQt6.QtWidgets import QApplication, QStyleFactory
 
 from constants import *
 from main_window import MainWindow
@@ -98,6 +99,7 @@ def main():
 
     # Start QT Application and call the MainWindow
     app = QApplication(sys.argv)
+    app.setStyle("windowsvista")
     window = MainWindow(month, year)
     window.show()
 
