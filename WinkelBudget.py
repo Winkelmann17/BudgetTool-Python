@@ -1,5 +1,5 @@
 """"
-This program was written by Nicholas Winkelmann. 
+This program was written by Winkelmann17. 
 Github: https://github.com/Winkelmann17
 
 This code serves as the main entry point for WinkelBudget.
