@@ -46,6 +46,6 @@ Some features that are planned for future releases are:
     - Planning to pair this with another project of mine to make adding expenses throughout the month easier. Stay tuned.
 
 ## Reporting Bugs
-I am working on the best way to receive and handle bug reports / application errors. Stay tuned.  
+Please report any bugs using the "Issues" feature on Github, and I will try my darndest to fix them in a timely manner.
 
 *Thank you for stopping by this Installation!*
