@@ -33,6 +33,19 @@ class Serializer():
         self.filepath = f"./data/{year}/{month}.dat"
         self.backups_folder = f"./data/backups/{year}"
         self.backup_file_prefix = f"./data/backups/{year}/{month}/backup"
+        
+
+    def check_folders(self):
+        """
+        Function that checks if folders exist.
+        """
+        # check ./data
+        if not os.path.exists("./data"):
+            os.mkdir("./data")
+
+        # check ./data/backups    
+        if not os.path.exists("./data/backups"):
+            os.mkdir("./data/backups")
 
     
     def serialize(self, obj):
@@ -41,6 +54,7 @@ class Serializer():
         file location provided at intitialization.
         """
         # Move previous to backups (if present)
+        self.check_folders()
         self.move_to_backups()
 
         # Check that a directory for the year exists
@@ -112,16 +126,17 @@ class Serializer():
         to preserve their values in case anything bad occurs during saves.
         Able to be loaded later by dragging into proper file location."""
         # Check if year folder exists, make if not
-        year_backup = os.path.isdir(self.backups_folder)
-        if not year_backup:
-            os.mkdir(self.backups_folder)
-        month_backup = os.path.isdir(f"{self.backups_folder}/{self.month}")
-        if not month_backup:
-            os.mkdir(f"{self.backups_folder}/{self.month}")
-
-        date = dt.datetime.now()
-        backup_name = f"{self.backup_file_prefix}_{date.day}_{date.month}_{date.strftime('%H%M%S')}.dat"
         try:
+            year_backup = os.path.isdir(self.backups_folder)
+            if not year_backup:
+                os.mkdir(self.backups_folder)
+            month_backup = os.path.isdir(f"{self.backups_folder}/{self.month}")
+            if not month_backup:
+                os.mkdir(f"{self.backups_folder}/{self.month}")
+
+            date = dt.datetime.now()
+            backup_name = f"{self.backup_file_prefix}_{date.day}_{date.month}_{date.strftime('%H%M%S')}.dat"
+
             os.rename(self.filepath, backup_name)
         except FileNotFoundError as e:
             print(f"Original data for {self.year} {self.month} does not exist, abandoning backup.")

@@ -55,14 +55,20 @@ class MainWindow(QMainWindow):
 
     def cleanup(self):
         # Prune backups to most recent 3
-        print("Closing")
-        folder = f"./data/backups/{self.year}/{self.month}"
+        try:
+            print("Closing")
+            folder = f"./data/backups/{self.year}/{self.month}"
 
-        # Sort the files 
-        files = os.listdir(folder)
-        files.sort()
-        remove_files = files[:-3]
-        for file in remove_files:
-            os.remove(f"{folder}/{file}")
+            # Sort the files 
+            files = os.listdir(folder)
+            files.sort()
+            remove_files = files[:-3]
+            for file in remove_files:
+                os.remove(f"{folder}/{file}")
+                
+        except FileNotFoundError as e:
+            print(f"Exception occurred: {e}")
+        except Exception as e:
+            print(f"Exception occurred: {e}")
         
 # EOF
